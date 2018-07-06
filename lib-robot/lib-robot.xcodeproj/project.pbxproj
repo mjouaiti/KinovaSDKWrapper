@@ -1,0 +1,339 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		613BBCCF20F0138500A864DD /* Robot-torque-control.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 613BBCCE20F0138500A864DD /* Robot-torque-control.cpp */; };
+		6196880920EFF0D100E8FEFB /* Robot-control.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 619687FB20EFF0CF00E8FEFB /* Robot-control.cpp */; };
+		6196880A20EFF0D100E8FEFB /* Robot-time.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 619687FC20EFF0CF00E8FEFB /* Robot-time.cpp */; };
+		6196880B20EFF0D100E8FEFB /* Kinova.API.EthCommandLayerUbuntu.h in Headers */ = {isa = PBXBuildFile; fileRef = 619687FD20EFF0CF00E8FEFB /* Kinova.API.EthCommandLayerUbuntu.h */; };
+		6196880C20EFF0D100E8FEFB /* Robot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 619687FE20EFF0CF00E8FEFB /* Robot.cpp */; };
+		6196880D20EFF0D100E8FEFB /* Kinova.API.EthCommLayerUbuntu.h in Headers */ = {isa = PBXBuildFile; fileRef = 619687FF20EFF0CF00E8FEFB /* Kinova.API.EthCommLayerUbuntu.h */; };
+		6196880E20EFF0D100E8FEFB /* Kinova.API.UsbCommandLayerUbuntu.h in Headers */ = {isa = PBXBuildFile; fileRef = 6196880020EFF0D000E8FEFB /* Kinova.API.UsbCommandLayerUbuntu.h */; };
+		6196880F20EFF0D100E8FEFB /* Robot-API.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6196880120EFF0D000E8FEFB /* Robot-API.cpp */; };
+		6196881020EFF0D100E8FEFB /* Robot-measure.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6196880220EFF0D000E8FEFB /* Robot-measure.cpp */; };
+		6196881120EFF0D100E8FEFB /* Robot-utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6196880320EFF0D000E8FEFB /* Robot-utils.cpp */; };
+		6196881220EFF0D100E8FEFB /* Kinova.API.CommLayerUbuntu.h in Headers */ = {isa = PBXBuildFile; fileRef = 6196880420EFF0D000E8FEFB /* Kinova.API.CommLayerUbuntu.h */; };
+		6196881320EFF0D100E8FEFB /* Robot.h in Headers */ = {isa = PBXBuildFile; fileRef = 6196880520EFF0D000E8FEFB /* Robot.h */; };
+		6196881420EFF0D100E8FEFB /* KinovaTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 6196880620EFF0D000E8FEFB /* KinovaTypes.h */; };
+		6196881520EFF0D100E8FEFB /* Robot-move.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6196880720EFF0D000E8FEFB /* Robot-move.cpp */; };
+		6196881620EFF0D100E8FEFB /* Robot-phy-parameters.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6196880820EFF0D000E8FEFB /* Robot-phy-parameters.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		613BBCCE20F0138500A864DD /* Robot-torque-control.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "Robot-torque-control.cpp"; sourceTree = SOURCE_ROOT; };
+		619687ED20EFF0AB00E8FEFB /* liblib-robot.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "liblib-robot.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		619687FB20EFF0CF00E8FEFB /* Robot-control.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "Robot-control.cpp"; path = "../../Robot-control.cpp"; sourceTree = "<group>"; };
+		619687FC20EFF0CF00E8FEFB /* Robot-time.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "Robot-time.cpp"; path = "../../Robot-time.cpp"; sourceTree = "<group>"; };
+		619687FD20EFF0CF00E8FEFB /* Kinova.API.EthCommandLayerUbuntu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Kinova.API.EthCommandLayerUbuntu.h; path = ../../Kinova.API.EthCommandLayerUbuntu.h; sourceTree = "<group>"; };
+		619687FE20EFF0CF00E8FEFB /* Robot.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Robot.cpp; path = ../../Robot.cpp; sourceTree = "<group>"; };
+		619687FF20EFF0CF00E8FEFB /* Kinova.API.EthCommLayerUbuntu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Kinova.API.EthCommLayerUbuntu.h; path = ../../Kinova.API.EthCommLayerUbuntu.h; sourceTree = "<group>"; };
+		6196880020EFF0D000E8FEFB /* Kinova.API.UsbCommandLayerUbuntu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Kinova.API.UsbCommandLayerUbuntu.h; path = ../../Kinova.API.UsbCommandLayerUbuntu.h; sourceTree = "<group>"; };
+		6196880120EFF0D000E8FEFB /* Robot-API.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "Robot-API.cpp"; path = "../../Robot-API.cpp"; sourceTree = "<group>"; };
+		6196880220EFF0D000E8FEFB /* Robot-measure.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "Robot-measure.cpp"; path = "../../Robot-measure.cpp"; sourceTree = "<group>"; };
+		6196880320EFF0D000E8FEFB /* Robot-utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "Robot-utils.cpp"; path = "../../Robot-utils.cpp"; sourceTree = "<group>"; };
+		6196880420EFF0D000E8FEFB /* Kinova.API.CommLayerUbuntu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Kinova.API.CommLayerUbuntu.h; path = ../../Kinova.API.CommLayerUbuntu.h; sourceTree = "<group>"; };
+		6196880520EFF0D000E8FEFB /* Robot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Robot.h; path = ../../Robot.h; sourceTree = "<group>"; };
+		6196880620EFF0D000E8FEFB /* KinovaTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KinovaTypes.h; path = ../../KinovaTypes.h; sourceTree = "<group>"; };
+		6196880720EFF0D000E8FEFB /* Robot-move.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "Robot-move.cpp"; path = "../../Robot-move.cpp"; sourceTree = "<group>"; };
+		6196880820EFF0D000E8FEFB /* Robot-phy-parameters.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "Robot-phy-parameters.cpp"; path = "../../Robot-phy-parameters.cpp"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		619687EA20EFF0AB00E8FEFB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		619687E420EFF0AB00E8FEFB = {
+			isa = PBXGroup;
+			children = (
+				619687EF20EFF0AB00E8FEFB /* lib-robot */,
+				619687EE20EFF0AB00E8FEFB /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		619687EE20EFF0AB00E8FEFB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				619687ED20EFF0AB00E8FEFB /* liblib-robot.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		619687EF20EFF0AB00E8FEFB /* lib-robot */ = {
+			isa = PBXGroup;
+			children = (
+				6196880420EFF0D000E8FEFB /* Kinova.API.CommLayerUbuntu.h */,
+				619687FD20EFF0CF00E8FEFB /* Kinova.API.EthCommandLayerUbuntu.h */,
+				619687FF20EFF0CF00E8FEFB /* Kinova.API.EthCommLayerUbuntu.h */,
+				6196880020EFF0D000E8FEFB /* Kinova.API.UsbCommandLayerUbuntu.h */,
+				6196880620EFF0D000E8FEFB /* KinovaTypes.h */,
+				6196880120EFF0D000E8FEFB /* Robot-API.cpp */,
+				619687FB20EFF0CF00E8FEFB /* Robot-control.cpp */,
+				613BBCCE20F0138500A864DD /* Robot-torque-control.cpp */,
+				6196880220EFF0D000E8FEFB /* Robot-measure.cpp */,
+				6196880720EFF0D000E8FEFB /* Robot-move.cpp */,
+				6196880820EFF0D000E8FEFB /* Robot-phy-parameters.cpp */,
+				619687FC20EFF0CF00E8FEFB /* Robot-time.cpp */,
+				6196880320EFF0D000E8FEFB /* Robot-utils.cpp */,
+				619687FE20EFF0CF00E8FEFB /* Robot.cpp */,
+				6196880520EFF0D000E8FEFB /* Robot.h */,
+			);
+			path = "lib-robot";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		619687EB20EFF0AB00E8FEFB /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6196881420EFF0D100E8FEFB /* KinovaTypes.h in Headers */,
+				6196880D20EFF0D100E8FEFB /* Kinova.API.EthCommLayerUbuntu.h in Headers */,
+				6196880B20EFF0D100E8FEFB /* Kinova.API.EthCommandLayerUbuntu.h in Headers */,
+				6196881320EFF0D100E8FEFB /* Robot.h in Headers */,
+				6196881220EFF0D100E8FEFB /* Kinova.API.CommLayerUbuntu.h in Headers */,
+				6196880E20EFF0D100E8FEFB /* Kinova.API.UsbCommandLayerUbuntu.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		619687EC20EFF0AB00E8FEFB /* lib-robot */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 619687F820EFF0AB00E8FEFB /* Build configuration list for PBXNativeTarget "lib-robot" */;
+			buildPhases = (
+				619687E920EFF0AB00E8FEFB /* Sources */,
+				619687EA20EFF0AB00E8FEFB /* Frameworks */,
+				619687EB20EFF0AB00E8FEFB /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "lib-robot";
+			productName = "lib-robot";
+			productReference = 619687ED20EFF0AB00E8FEFB /* liblib-robot.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		619687E520EFF0AB00E8FEFB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0940;
+				ORGANIZATIONNAME = "Melanie Jouaiti";
+				TargetAttributes = {
+					619687EC20EFF0AB00E8FEFB = {
+						CreatedOnToolsVersion = 9.4.1;
+					};
+				};
+			};
+			buildConfigurationList = 619687E820EFF0AB00E8FEFB /* Build configuration list for PBXProject "lib-robot" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 619687E420EFF0AB00E8FEFB;
+			productRefGroup = 619687EE20EFF0AB00E8FEFB /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				619687EC20EFF0AB00E8FEFB /* lib-robot */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		619687E920EFF0AB00E8FEFB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6196881620EFF0D100E8FEFB /* Robot-phy-parameters.cpp in Sources */,
+				6196881120EFF0D100E8FEFB /* Robot-utils.cpp in Sources */,
+				6196881520EFF0D100E8FEFB /* Robot-move.cpp in Sources */,
+				6196880C20EFF0D100E8FEFB /* Robot.cpp in Sources */,
+				613BBCCF20F0138500A864DD /* Robot-torque-control.cpp in Sources */,
+				6196881020EFF0D100E8FEFB /* Robot-measure.cpp in Sources */,
+				6196880F20EFF0D100E8FEFB /* Robot-API.cpp in Sources */,
+				6196880920EFF0D100E8FEFB /* Robot-control.cpp in Sources */,
+				6196880A20EFF0D100E8FEFB /* Robot-time.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		619687F620EFF0AB00E8FEFB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		619687F720EFF0AB00E8FEFB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		619687F920EFF0AB00E8FEFB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				EXECUTABLE_PREFIX = lib;
+				GCC_ENABLE_CPP_EXCEPTIONS = YES;
+				GCC_ENABLE_CPP_RTTI = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		619687FA20EFF0AB00E8FEFB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				EXECUTABLE_PREFIX = lib;
+				GCC_ENABLE_CPP_EXCEPTIONS = YES;
+				GCC_ENABLE_CPP_RTTI = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		619687E820EFF0AB00E8FEFB /* Build configuration list for PBXProject "lib-robot" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				619687F620EFF0AB00E8FEFB /* Debug */,
+				619687F720EFF0AB00E8FEFB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		619687F820EFF0AB00E8FEFB /* Build configuration list for PBXNativeTarget "lib-robot" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				619687F920EFF0AB00E8FEFB /* Debug */,
+				619687FA20EFF0AB00E8FEFB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 619687E520EFF0AB00E8FEFB /* Project object */;
+}
