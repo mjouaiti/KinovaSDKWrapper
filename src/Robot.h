@@ -5,10 +5,10 @@
 #include <chrono>
 #include <fstream>
 
-#include "KinovaTypes.h"
-#include "Kinova.API.CommLayerUbuntu.h"
-#include "Kinova.API.UsbCommandLayerUbuntu.h"
-//#include "Kinova.API.EthCommandLayerUbuntu.h"
+#include "../KinovaTypes.h"
+#include "../Kinova.API.CommLayerUbuntu.h"
+#include "../Kinova.API.UsbCommandLayerUbuntu.h"
+//#include "../Kinova.API.EthCommandLayerUbuntu.h"
 
 class Robot {
 public:

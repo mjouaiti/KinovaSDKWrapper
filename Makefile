@@ -1,11 +1,12 @@
 CXX = g++
 CPPFLAGS =
 CXXFLAGS = -std=c++11
-SOURCES = Robot.cpp Robot-API.cpp Robot-control.cpp Robot-measure.cpp \
-          Robot-move.cpp Robot-phy-parameters.cpp Robot-time.cpp Robot-utils.cpp
+SOURCES = src/Robot.cpp src/Robot-API.cpp src/Robot-control.cpp \
+	src/Robot-torque-control.cpp src/Robot-measure.cpp src/Robot-move.cpp\
+	src/Robot-phy-parameters.cpp src/Robot-time.cpp src/Robot-utils.cpp
 OBJECTS = $(SOURCES:.cpp=.o)
 HEADERS = Kinova.API.CommLayerUbuntu.h Kinova.API.UsbCommandLayerUbuntu.h \
-		  KinovaTypes.h Robot.h
+	  Kinova.API.EthCommLayerUbuntu.h Kinova.API.EthCommandLayerUbuntu.h KinovaTypes.h Robot.h
 
 AR = ar
 AROPT = rcs
