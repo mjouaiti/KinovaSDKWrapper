@@ -13,9 +13,13 @@ const double Robot::DEFAULT_P = 2.0;
 const double Robot::DEFAULT_I = 0.0;
 const double Robot::DEFAUTL_D = 0.05;
 
+/**
+ * Robot constructor
+ * @param libPath path of Kinova.API.USBCommandLayerUbuntu.so
+ * @param optionFile path of the setup file
+ */
 Robot::Robot(const std::string& libPath, const std::string& optionFile)
 {
-    //"/home/melanie/Documents/mico_handshaking/lib-robot/Kinova.API.USBCommandLayerUbuntu.so"
 	commandLayerHandle = dlopen(libPath.c_str(), RTLD_NOW|RTLD_GLOBAL);
 
 	if (commandLayerHandle == NULL) {
@@ -25,4 +29,12 @@ Robot::Robot(const std::string& libPath, const std::string& optionFile)
 	this->initializeAPI(optionFile);
 	this->initializePositionTrajectory();
 	this->initializeVelocityTrajectory();
+}
+
+/**
+ * Robot destructor
+ */
+Robot::~Robot()
+{
+    closeAPI();
 }

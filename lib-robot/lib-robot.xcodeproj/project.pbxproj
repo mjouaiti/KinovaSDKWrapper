@@ -7,40 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		613BBCCF20F0138500A864DD /* Robot-torque-control.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 613BBCCE20F0138500A864DD /* Robot-torque-control.cpp */; };
-		6196880920EFF0D100E8FEFB /* Robot-control.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 619687FB20EFF0CF00E8FEFB /* Robot-control.cpp */; };
-		6196880A20EFF0D100E8FEFB /* Robot-time.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 619687FC20EFF0CF00E8FEFB /* Robot-time.cpp */; };
-		6196880B20EFF0D100E8FEFB /* Kinova.API.EthCommandLayerUbuntu.h in Headers */ = {isa = PBXBuildFile; fileRef = 619687FD20EFF0CF00E8FEFB /* Kinova.API.EthCommandLayerUbuntu.h */; };
-		6196880C20EFF0D100E8FEFB /* Robot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 619687FE20EFF0CF00E8FEFB /* Robot.cpp */; };
-		6196880D20EFF0D100E8FEFB /* Kinova.API.EthCommLayerUbuntu.h in Headers */ = {isa = PBXBuildFile; fileRef = 619687FF20EFF0CF00E8FEFB /* Kinova.API.EthCommLayerUbuntu.h */; };
-		6196880E20EFF0D100E8FEFB /* Kinova.API.UsbCommandLayerUbuntu.h in Headers */ = {isa = PBXBuildFile; fileRef = 6196880020EFF0D000E8FEFB /* Kinova.API.UsbCommandLayerUbuntu.h */; };
-		6196880F20EFF0D100E8FEFB /* Robot-API.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6196880120EFF0D000E8FEFB /* Robot-API.cpp */; };
-		6196881020EFF0D100E8FEFB /* Robot-measure.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6196880220EFF0D000E8FEFB /* Robot-measure.cpp */; };
-		6196881120EFF0D100E8FEFB /* Robot-utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6196880320EFF0D000E8FEFB /* Robot-utils.cpp */; };
-		6196881220EFF0D100E8FEFB /* Kinova.API.CommLayerUbuntu.h in Headers */ = {isa = PBXBuildFile; fileRef = 6196880420EFF0D000E8FEFB /* Kinova.API.CommLayerUbuntu.h */; };
-		6196881320EFF0D100E8FEFB /* Robot.h in Headers */ = {isa = PBXBuildFile; fileRef = 6196880520EFF0D000E8FEFB /* Robot.h */; };
-		6196881420EFF0D100E8FEFB /* KinovaTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 6196880620EFF0D000E8FEFB /* KinovaTypes.h */; };
-		6196881520EFF0D100E8FEFB /* Robot-move.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6196880720EFF0D000E8FEFB /* Robot-move.cpp */; };
-		6196881620EFF0D100E8FEFB /* Robot-phy-parameters.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6196880820EFF0D000E8FEFB /* Robot-phy-parameters.cpp */; };
+		61C0CEC920F147B500AFD9E2 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61C0CEC820F147B500AFD9E2 /* main.cpp */; };
+		61C0CECB20F147D100AFD9E2 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61C0CECA20F147D100AFD9E2 /* main.cpp */; };
+		61C0CECD20F147E400AFD9E2 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61C0CECC20F147E400AFD9E2 /* main.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		613BBCCE20F0138500A864DD /* Robot-torque-control.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "Robot-torque-control.cpp"; sourceTree = SOURCE_ROOT; };
 		619687ED20EFF0AB00E8FEFB /* liblib-robot.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "liblib-robot.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		619687FB20EFF0CF00E8FEFB /* Robot-control.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "Robot-control.cpp"; path = "../../Robot-control.cpp"; sourceTree = "<group>"; };
-		619687FC20EFF0CF00E8FEFB /* Robot-time.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "Robot-time.cpp"; path = "../../Robot-time.cpp"; sourceTree = "<group>"; };
-		619687FD20EFF0CF00E8FEFB /* Kinova.API.EthCommandLayerUbuntu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Kinova.API.EthCommandLayerUbuntu.h; path = ../../Kinova.API.EthCommandLayerUbuntu.h; sourceTree = "<group>"; };
-		619687FE20EFF0CF00E8FEFB /* Robot.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Robot.cpp; path = ../../Robot.cpp; sourceTree = "<group>"; };
-		619687FF20EFF0CF00E8FEFB /* Kinova.API.EthCommLayerUbuntu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Kinova.API.EthCommLayerUbuntu.h; path = ../../Kinova.API.EthCommLayerUbuntu.h; sourceTree = "<group>"; };
-		6196880020EFF0D000E8FEFB /* Kinova.API.UsbCommandLayerUbuntu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Kinova.API.UsbCommandLayerUbuntu.h; path = ../../Kinova.API.UsbCommandLayerUbuntu.h; sourceTree = "<group>"; };
-		6196880120EFF0D000E8FEFB /* Robot-API.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "Robot-API.cpp"; path = "../../Robot-API.cpp"; sourceTree = "<group>"; };
-		6196880220EFF0D000E8FEFB /* Robot-measure.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "Robot-measure.cpp"; path = "../../Robot-measure.cpp"; sourceTree = "<group>"; };
-		6196880320EFF0D000E8FEFB /* Robot-utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "Robot-utils.cpp"; path = "../../Robot-utils.cpp"; sourceTree = "<group>"; };
-		6196880420EFF0D000E8FEFB /* Kinova.API.CommLayerUbuntu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Kinova.API.CommLayerUbuntu.h; path = ../../Kinova.API.CommLayerUbuntu.h; sourceTree = "<group>"; };
-		6196880520EFF0D000E8FEFB /* Robot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Robot.h; path = ../../Robot.h; sourceTree = "<group>"; };
-		6196880620EFF0D000E8FEFB /* KinovaTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KinovaTypes.h; path = ../../KinovaTypes.h; sourceTree = "<group>"; };
-		6196880720EFF0D000E8FEFB /* Robot-move.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "Robot-move.cpp"; path = "../../Robot-move.cpp"; sourceTree = "<group>"; };
-		6196880820EFF0D000E8FEFB /* Robot-phy-parameters.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "Robot-phy-parameters.cpp"; path = "../../Robot-phy-parameters.cpp"; sourceTree = "<group>"; };
+		61C0CEAE20F1292F00AFD9E2 /* src */ = {isa = PBXFileReference; lastKnownFileType = folder; name = src; path = ../../src; sourceTree = "<group>"; };
+		61C0CEAF20F1292F00AFD9E2 /* examples */ = {isa = PBXFileReference; lastKnownFileType = folder; name = examples; path = ../../examples; sourceTree = "<group>"; };
+		61C0CEC820F147B500AFD9E2 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../../examples/fingersControl/main.cpp; sourceTree = "<group>"; };
+		61C0CECA20F147D100AFD9E2 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../../examples/positionControl/main.cpp; sourceTree = "<group>"; };
+		61C0CECC20F147E400AFD9E2 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../../examples/torqueControl/main.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,21 +51,11 @@
 		619687EF20EFF0AB00E8FEFB /* lib-robot */ = {
 			isa = PBXGroup;
 			children = (
-				6196880420EFF0D000E8FEFB /* Kinova.API.CommLayerUbuntu.h */,
-				619687FD20EFF0CF00E8FEFB /* Kinova.API.EthCommandLayerUbuntu.h */,
-				619687FF20EFF0CF00E8FEFB /* Kinova.API.EthCommLayerUbuntu.h */,
-				6196880020EFF0D000E8FEFB /* Kinova.API.UsbCommandLayerUbuntu.h */,
-				6196880620EFF0D000E8FEFB /* KinovaTypes.h */,
-				6196880120EFF0D000E8FEFB /* Robot-API.cpp */,
-				619687FB20EFF0CF00E8FEFB /* Robot-control.cpp */,
-				613BBCCE20F0138500A864DD /* Robot-torque-control.cpp */,
-				6196880220EFF0D000E8FEFB /* Robot-measure.cpp */,
-				6196880720EFF0D000E8FEFB /* Robot-move.cpp */,
-				6196880820EFF0D000E8FEFB /* Robot-phy-parameters.cpp */,
-				619687FC20EFF0CF00E8FEFB /* Robot-time.cpp */,
-				6196880320EFF0D000E8FEFB /* Robot-utils.cpp */,
-				619687FE20EFF0CF00E8FEFB /* Robot.cpp */,
-				6196880520EFF0D000E8FEFB /* Robot.h */,
+				61C0CEAF20F1292F00AFD9E2 /* examples */,
+				61C0CEAE20F1292F00AFD9E2 /* src */,
+				61C0CEC820F147B500AFD9E2 /* main.cpp */,
+				61C0CECA20F147D100AFD9E2 /* main.cpp */,
+				61C0CECC20F147E400AFD9E2 /* main.cpp */,
 			);
 			path = "lib-robot";
 			sourceTree = "<group>";
@@ -99,12 +67,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6196881420EFF0D100E8FEFB /* KinovaTypes.h in Headers */,
-				6196880D20EFF0D100E8FEFB /* Kinova.API.EthCommLayerUbuntu.h in Headers */,
-				6196880B20EFF0D100E8FEFB /* Kinova.API.EthCommandLayerUbuntu.h in Headers */,
-				6196881320EFF0D100E8FEFB /* Robot.h in Headers */,
-				6196881220EFF0D100E8FEFB /* Kinova.API.CommLayerUbuntu.h in Headers */,
-				6196880E20EFF0D100E8FEFB /* Kinova.API.UsbCommandLayerUbuntu.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -164,15 +126,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6196881620EFF0D100E8FEFB /* Robot-phy-parameters.cpp in Sources */,
-				6196881120EFF0D100E8FEFB /* Robot-utils.cpp in Sources */,
-				6196881520EFF0D100E8FEFB /* Robot-move.cpp in Sources */,
-				6196880C20EFF0D100E8FEFB /* Robot.cpp in Sources */,
-				613BBCCF20F0138500A864DD /* Robot-torque-control.cpp in Sources */,
-				6196881020EFF0D100E8FEFB /* Robot-measure.cpp in Sources */,
-				6196880F20EFF0D100E8FEFB /* Robot-API.cpp in Sources */,
-				6196880920EFF0D100E8FEFB /* Robot-control.cpp in Sources */,
-				6196880A20EFF0D100E8FEFB /* Robot-time.cpp in Sources */,
+				61C0CECB20F147D100AFD9E2 /* main.cpp in Sources */,
+				61C0CEC920F147B500AFD9E2 /* main.cpp in Sources */,
+				61C0CECD20F147E400AFD9E2 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

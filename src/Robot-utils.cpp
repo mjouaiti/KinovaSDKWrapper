@@ -1,5 +1,11 @@
 #include "Robot.h"
 
+/**
+ * Get the angular value of a given joint
+ * @param actuatorNumber joint number
+ * @param overallInfo Angular informations for all joints
+ * @return joint value (double)
+ */
 double Robot::getActuatorAngularInfo(int actuatorNumber, AngularInfo overallInfo) {
     switch(actuatorNumber) {
         case 1:
@@ -25,7 +31,14 @@ double Robot::getActuatorAngularInfo(int actuatorNumber, AngularInfo overallInfo
     }
 }
 
-AngularInfo Robot::setActuatorAngularInfo(int actuatorNumber, double newValue, AngularInfo overallInfo) {
+/**
+ * Set the angular value of a given joint
+ * @param actuatorNumber joint number
+ * @param newValue new joint value
+ * @param overallInfo Angular informations for all joints
+ * @return joint information (AngularInfo)
+ */
+AngularInfo Robot::setActuatorAngularValue(int actuatorNumber, double newValue, AngularInfo overallInfo) {
     AngularInfo newInfo = overallInfo;
     newValue = (float)newValue;
     switch(actuatorNumber) {
@@ -53,10 +66,17 @@ AngularInfo Robot::setActuatorAngularInfo(int actuatorNumber, double newValue, A
     return newInfo;
 }
 
-AngularInfo Robot::setFingerAngularInfo(int fingerNumber, double newValue, AngularInfo overallInfo) {
+/**
+ * Set the angular value of a given finger
+ * @param fingerNumber finger number
+ * @param newValue new joint value
+ * @param overallInfo Angular informations for all fingers
+ * @return joint information (AngularInfo)
+ */
+AngularInfo Robot::setFingerAngularValue(int fingerNumber, double newValue, AngularInfo overallInfo) {
     AngularInfo newInfo = overallInfo;
     newValue = (float)newValue;
-    /*switch(actuatorNumber) {
+    switch(actuatorNumber) {
         case 1:
             newInfo.Finger1 = newValue;
             break;
@@ -68,10 +88,15 @@ AngularInfo Robot::setFingerAngularInfo(int fingerNumber, double newValue, Angul
             break;
         default:
             newInfo = overallInfo;
-    }*/
+    }
     return newInfo;
 }
 
+/**
+ * Converts a std::vector to Kinova data type AngularInfo
+ * @param vectorizedData vector if joint values
+ * @return joint information (AngularInfo)
+ */
 AngularInfo Robot::convertVectorToAngularInfo(std::vector<double> vectorizedData) {
     AngularInfo res;
     res.Actuator1 = (float)vectorizedData[0];
@@ -83,7 +108,12 @@ AngularInfo Robot::convertVectorToAngularInfo(std::vector<double> vectorizedData
     return res;
 }
 
-std::vector<double> Robot::convertAngularPositionToVector(AngularPosition overallData) {
+/**
+ * Converts Kinova data type AngularInfo to a std::vector
+ * @param vectorizedData AngularPosition variable
+ * @return vector of joint vakues (std::vector<double>)
+ */
+std::vector<double> Robot::convertAngularPositionToVector(AngularPosition vectorizedData) {
     std::vector<double> vectorizedData;
     vectorizedData.push_back((double)overallData.Actuators.Actuator1);
     vectorizedData.push_back((double)overallData.Actuators.Actuator2);

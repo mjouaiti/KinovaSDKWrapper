@@ -13,9 +13,11 @@
 class Robot {
 public:
     Robot(const std::string& libPath, const std::string& optionFile);
+    ~Robot();
     
     /* Robot-API.cpp */
     void closeAPI();
+    void initializeAPI();
     void initializeAPI(const std::string& optionFile);
     //EthernetConfiguration* getEthernetConfiguration();
     void programFlash(const std::string& filename);
@@ -37,9 +39,17 @@ public:
     void setSpasmFilterValues(std::vector<double>command, int activationStatus);
     void setTorqueMinMax(std::vector<double> minTorque, std::vector<double> maxTorque);
     
+    std::vector<double> runGravityZEstimationSequence(ROBOT_TYPE type);
+    void setGravityManualInputParam(std::vector<double> command);
+    void setGravityOptimalZParam(std::vector<double> command);
+    void setGravityPayload(std::vector<double> command);
+    void setGravityVector(std::vector<double> command);
+    void setGravityType(GRAVITY_TYPE type);
+    
+    /* Robot-torque-control.cpp */
     void setTorqueVibrationController(float value);
     void setTorqueSafetyFactor(float factor);
-    void setTorqueActuatorGain(float* gains);
+    void setTorqueActuatorGain(std::vector<double> gains);
     void setTorqueBrake(std::vector<double> command);
     void setTorqueCommandMax(std::vector<double> command);
     void setTorqueDampingMax(std::vector<double> command);
@@ -68,13 +78,6 @@ public:
     void setTorqueStaticFrictionMax(std::vector<double> command);
     void setTorqueVelocityLimitFilter(std::vector<double> command);
     void setSwitchThreshold(std::vector<double> command);
-    
-    std::vector<double> runGravityZEstimationSequence(ROBOT_TYPE type);
-    void setGravityManualInputParam(std::vector<double> command);
-    void setGravityOptimalZParam(std::vector<double> command);
-    void setGravityPayload(std::vector<double> command);
-    void setGravityVector(std::vector<double> command);
-    void setGravityType(GRAVITY_TYPE type);
     
     /* Robot-measures.cpp */
     void updateAll();
@@ -119,6 +122,7 @@ public:
     void setVelocity(int actuator, double newVelocity);
     void setVelocity(std::vector<double> newVelocity);
     void setFingerVelocity(int fingerNumber, double newVelocity);
+    void setFingerPosition(int fingerNumber, double newPosition);
     void setEndEffectorOffset(bool applied, std::vector<double> offset);
     
     void setJointZero(int actuatorNumber);
