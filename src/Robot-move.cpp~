@@ -43,7 +43,9 @@ void Robot::setFingerVelocity(int fingerNumber, double newVelocity)
 	    velocityTrajectory.Position.Fingers.Finger3 = newVelocity;
 	    break;
     }
+    std::cout << "Send trajectory" << std::endl;
     (*MySendBasicTrajectory)(velocityTrajectory);
+    std::cout << "Send trajectory" << std::endl;
 }
 
 /**

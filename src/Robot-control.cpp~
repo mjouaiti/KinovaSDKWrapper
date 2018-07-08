@@ -5,8 +5,7 @@
  */
 void Robot::setAngularControl() {
     //(*MySwitchTrajectoryTorque)(POSITION);
-	(*MyInitAPI)();
-	//(*MySetAngularControl)();
+	(*MySetAngularControl)();
 }
 
 /**
