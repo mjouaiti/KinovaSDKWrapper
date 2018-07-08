@@ -671,7 +671,7 @@ void Robot::initializeAPI() {
     
     
     (*MyInitAPI)();
-    (*MySetAngularControl)();
+    (*MyInitFingers)();
     std::cout << "API Initialized" << std::endl;
 }
 
