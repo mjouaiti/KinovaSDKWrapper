@@ -1,0 +1,15 @@
+GetAngularCommand
+GetAngularForceGravityFree
+GetAngularPosition
+GetAngularVelocity
+GetCartesianForce
+InitFingers
+SendAngularTorqueCommand
+SendCartesianForceCommand
+SetAngularControl
+SetTorqueControlType
+SetTorqueSafetyFactor
+SetTorqueVibration
+StartControlAPI
+StopControlAPI
+SwitchTrajectoryTorque

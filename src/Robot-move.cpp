@@ -19,7 +19,7 @@ void Robot::initializeVelocityTrajectory() {
  */
 void Robot::setVelocity(int actuatorNumber, double newVelocity)
 {
-    velocityTrajectory.Position.Actuators = setActuatorAngularInfo(actuatorNumber, newVelocity, velocityTrajectory.Position.Actuators);
+    velocityTrajectory.Position.Actuators = setActuatorAngularValue(actuatorNumber, newVelocity, velocityTrajectory.Position.Actuators);
     
     (*MySendBasicTrajectory)(velocityTrajectory);
 }
@@ -74,7 +74,7 @@ void Robot::setFingerPosition(int fingerNumber, double newPosition)
  * sends velocity command to the joints
  * @param newVelocity velocity command
  */
-void Robot::setVelocity(std::vector<double> newVelocity) {
+void Robot::setVelocity(std::vector<float> newVelocity) {
     velocityTrajectory.Position.Actuators = convertVectorToAngularInfo(newVelocity);
     
     (*MySendBasicTrajectory)(velocityTrajectory);
@@ -99,7 +99,7 @@ void Robot::initializePositionTrajectory() {
  * @param pointToSend position command
  */
 void Robot::setPosition(int actuatorNumber, double pointToSend) {
-    positionTrajectory.Position.Actuators = setActuatorAngularInfo(actuatorNumber, pointToSend, positionTrajectory.Position.Actuators);
+    positionTrajectory.Position.Actuators = setActuatorAngularValue(actuatorNumber, pointToSend, positionTrajectory.Position.Actuators);
     (*MySendAdvanceTrajectory)(positionTrajectory);
 }
 
@@ -107,7 +107,7 @@ void Robot::setPosition(int actuatorNumber, double pointToSend) {
  * send position command
  * @param pointToSend position commands
  */
-void Robot::setPosition(std::vector<double> pointToSend) {
+void Robot::setPosition(std::vector<float> pointToSend) {
     positionTrajectory.Position.Actuators = convertVectorToAngularInfo(pointToSend);
     (*MySendAdvanceTrajectory)(positionTrajectory);
 }
@@ -115,10 +115,10 @@ void Robot::setPosition(std::vector<double> pointToSend) {
 /**
  * Apply offset to a given joint
  * @param actuatorNumber joint number
- * @param deltaVector offset value
+ * @param deltaTheta offset value
  */
 void Robot::moveFromCurrentPosition(int actuatorNumber, double deltaTheta) {
-    positionTrajectory.Position.Actuators = setActuatorAngularInfo(actuatorNumber, getAngularPosition(actuatorNumber) + deltaTheta, positionTrajectory.Position.Actuators);
+    positionTrajectory.Position.Actuators = setActuatorAngularValue(actuatorNumber, getAngularPosition()[actuatorNumber] + deltaTheta, positionTrajectory.Position.Actuators);
     (*MySendAdvanceTrajectory)(positionTrajectory);
 }
 
@@ -126,10 +126,10 @@ void Robot::moveFromCurrentPosition(int actuatorNumber, double deltaTheta) {
  * Apply offset to joints
  * @param deltaVector offset vector
  */
-void Robot::moveFromCurrentPosition(std::vector<double> deltaVector) {
-    std::vector<double> vectorToSend(ACTUATORS_COUNT);
+void Robot::moveFromCurrentPosition(std::vector<float> deltaVector) {
+    std::vector<float> vectorToSend(ACTUATORS_COUNT);
     
-    std::vector<double> currentPosition = getAngularPosition();
+    std::vector<float> currentPosition = getAngularPosition();
     for (int i = 0; i < ACTUATORS_COUNT; i++) {
         vectorToSend[i] = currentPosition[i] + deltaVector[i];
     }
@@ -140,8 +140,8 @@ void Robot::moveFromCurrentPosition(std::vector<double> deltaVector) {
 
 /**
  * Sets trajectory speed limitations
- * @param speed In a cartesian context, this represents the translation velocity but in an angular context, this represents the velocity of the actuators 1, 2 and 3.
- * @param speed In a cartesian context, this represents the translation velocity but in an angular context, this represents the velocity of the actuators 4, 5 and 6.
+ * @param maxSpeed1 In a cartesian context, this represents the translation velocity but in an angular context, this represents the velocity of the actuators 1, 2 and 3.
+ * @param maxSpeed2 In a cartesian context, this represents the translation velocity but in an angular context, this represents the velocity of the actuators 4, 5 and 6.
  */
 void Robot::setPositionTrajectoryLimitations(double maxSpeed1, double maxSpeed2) {
     positionTrajectory.LimitationsActive = 1;
@@ -166,7 +166,7 @@ void Robot::setTorque(int actuator, double newTorque)
  * This function sends torque commands to the actuators. The torque command must be sent at least every 250 ms (this value can be configured). Otherwise the command will be set to zero (as a safety feature).
  * @param newTorque torqueCommand
  */
-void Robot::setTorque(std::vector<double> newTorque)
+void Robot::setTorque(std::vector<float> newTorque)
 {
     for (int i = 0; i < ACTUATORS_COUNT; i++)
     {
@@ -191,17 +191,16 @@ void Robot::setCartesianForce(int actuator, double newForce)
  * This function sends cartesian force commands to the robot. The force command must be sent at least every 250 ms (this value can be configured). Otherwise the command will be set to zero (as a safety feauture). In this first implementation, the force command is in an open loop: the torque is inserted into the following equation and the resulting torque is sent to the actuators.
  * @param newForce The force command.
  */
-void Robot::setCartesianForce(std::vector<double> newForce)
+void Robot::setCartesianForce(std::vector<float> newForce)
 {
-    CartForceCommand[i] = &newForce[0];
-    (*MySendCartesianForceCommand)(CartForceCommand);
+    (*MySendCartesianForceCommand)(&newForce[0]);
 }
 
 /**
  * This function sets the actuators damping gain. This can be used to stabilize the system in some situations. The values must be over or equal to zero and are typically within 0-2. The maximum allowed damping can be set with the function SetTorqueDampingMax(). Default parameters can be found in the torque control documentation page under the section “Default parameters”. The parameters will reset to default values every time the robotic arm is rebooted.
  * @param damping The damping for each actuator.
  */
-void Robot::setTorqueDamping(std::vector<double> damping)
+void Robot::setTorqueDamping(std::vector<float> damping)
 {
     float dampingCommand[ACTUATORS_COUNT];
     for (int i = 0; i < ACTUATORS_COUNT; i++)
@@ -218,7 +217,7 @@ void Robot::setTorqueDamping(std::vector<double> damping)
  * @param applied indicates if the offset is applied or not (0 = not applied, 1 = applied)
  * @param offset end effector's offset
  */
-void Robot::setEndEffectorOffset(bool applied, std::vector<double> offset)
+void Robot::setEndEffectorOffset(bool applied, std::vector<float> offset)
 {
     (*MySetEndEffectorOffset)(applied, offset[0], offset[1], offset[2]);
 }

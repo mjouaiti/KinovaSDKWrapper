@@ -72,7 +72,7 @@ void Robot::initializeAPI() {
     map.insert("GetControlType", (*MyGetControlType));
     map.insert("GetDevices", (*MyGetDevices));
     map.insert("GetEndEffectorOffset", (*MyGetEndEffectorOffset));
-    //map.insert("GetEthernetConfiguration", (*MyGetEthernetConfiguration));
+    map.insert("GetEthernetConfiguration", (*MyGetEthernetConfiguration));
     map.insert("GetForcesInfo", (*MyGetForcesInfo));
     map.insert("GetGeneralInformations", (*MyGetGeneralInformations));
     map.insert("GetGlobalTrajectoryInfo", (*MyGetGlobalTrajectoryInfo));
@@ -109,7 +109,7 @@ void Robot::initializeAPI() {
     map.insert("SetClientConfigurations", (*MySetClientConfigurations));
     map.insert("SetControlMapping", (*MySetControlMapping));
     map.insert("SetEndEffectorOffset", (*MySetEndEffectorOffset));
-    //map.insert("SetEthernetConfiguration", (*MySetEthernetConfiguration));
+    map.insert("SetEthernetConfiguration", (*MySetEthernetConfiguration));
     map.insert("SetFrameType", (*MySetFrameType));
     map.insert("SetGravityManualInputParam", (*MySetGravityManualInputParam));
     map.insert("SetGravityOptimalZParam", (*MySetGravityOptimalZParam));
@@ -168,13 +168,13 @@ void Robot::initializeAPI() {
     map.insert("SwitchTrajectoryTorque", (*MySwitchTrajectoryTorque));
     
     
-    for(auto mapIter: map)
+    for(auto mapIter: map.m1)
     {
-        auto mapVal = mapIter->second;
+        auto mapVal = mapIter.second;
         auto typeCastedFun = (int(*)())(mapVal.first);
-        typeCastedFun = (int (*)()) dlsym(commandLayerHandle, line.c_str());
+        typeCastedFun = (int (*)()) dlsym(commandLayerHandle, mapIter.first.c_str());
         if(typeCastedFun == NULL)
-            std::cout << "Cannot load " << line << std::endl;
+            std::cout << "Cannot load " << mapIter.first << std::endl;
     }
     
     MyCloseAPI = (int (*)()) dlsym(commandLayerHandle, "CloseAPI");
@@ -231,7 +231,7 @@ void Robot::initializeAPI(const std::string& optionFile) {
     map.insert("GetControlType", (*MyGetControlType));
     map.insert("GetDevices", (*MyGetDevices));
     map.insert("GetEndEffectorOffset", (*MyGetEndEffectorOffset));
-    //map.insert("GetEthernetConfiguration", (*MyGetEthernetConfiguration));
+    map.insert("GetEthernetConfiguration", (*MyGetEthernetConfiguration));
     map.insert("GetForcesInfo", (*MyGetForcesInfo));
     map.insert("GetGeneralInformations", (*MyGetGeneralInformations));
     map.insert("GetGlobalTrajectoryInfo", (*MyGetGlobalTrajectoryInfo));
@@ -268,7 +268,7 @@ void Robot::initializeAPI(const std::string& optionFile) {
     map.insert("SetClientConfigurations", (*MySetClientConfigurations));
     map.insert("SetControlMapping", (*MySetControlMapping));
     map.insert("SetEndEffectorOffset", (*MySetEndEffectorOffset));
-    //map.insert("SetEthernetConfiguration", (*MySetEthernetConfiguration));
+    map.insert("SetEthernetConfiguration", (*MySetEthernetConfiguration));
     map.insert("SetFrameType", (*MySetFrameType));
     map.insert("SetGravityManualInputParam", (*MySetGravityManualInputParam));
     map.insert("SetGravityOptimalZParam", (*MySetGravityOptimalZParam));
@@ -327,8 +327,8 @@ void Robot::initializeAPI(const std::string& optionFile) {
     map.insert("SwitchTrajectoryTorque", (*MySwitchTrajectoryTorque));
     
     
-    std::string filename = "", line = "";
-    std::ifstream file(filename);
+    std::string line = "";
+    std::ifstream file(optionFile);
     
     if(file.is_open())
     {
@@ -343,6 +343,8 @@ void Robot::initializeAPI(const std::string& optionFile) {
         }
         file.close();
     }
+    else
+    std::cout << "ERROR:: COULD NOT OPEN " << optionFile << " file." << std::endl;
                
 	MyCloseAPI = (int (*)()) dlsym(commandLayerHandle, "CloseAPI");
 	if (MyCloseAPI == NULL) {
@@ -365,12 +367,12 @@ void Robot::initializeAPI(const std::string& optionFile) {
     std::cout << "API Initialized" << std::endl;
 }
 
-/*EthernetConfiguration* Robot::getEthernetConfiguration()
+EthernetConfiguration* Robot::getEthernetConfiguration()
 {
     EthernetConfiguration* eConfig;
-    (*MyGetEthernetConfig)(eConfig);
+    (*MyGetEthernetConfiguration)(eConfig);
     return eConfig;
-}*/
+}
 
 /**
  * This function programs a new version of the robotical arm's firmware.
@@ -380,7 +382,7 @@ void Robot::programFlash(const std::string& filename)
 {
     std::cout << "WARNING::THIS WILL INSTALL A NEW FIRMWARE" << std::endl;
     std::cout << "Are you sure you really want to do that? (yes/no)" << std::endl;
-    std::string answer = ""
+    std::string answer = "";
     std::cin >> answer;
     while(answer != "yes" && answer != "no")
     {
@@ -392,7 +394,7 @@ void Robot::programFlash(const std::string& filename)
     else
     {
         std::cout << "Really really sure? (yes/no)" << std::endl;
-        answer = ""
+        answer = "";
         std::cin >> answer;
         while(answer != "yes" && answer != "no")
         {
@@ -422,6 +424,7 @@ std::vector<KinovaDevice> Robot::getDevices(int &result)
     {
         list.push_back(devicesList[i]);
     }
+    return list;
 }
 
 /**
@@ -450,7 +453,7 @@ void Robot::refresDevicesList()
 
 /**
  * This function sets the current active device. The active device is the device that will receive the command send by this API. If no active device is set, the first one discovered is the default active device.
- * @param device
+ * @param device to activate
  */
 void Robot::setActiveDevice(KinovaDevice device)
 {
@@ -466,10 +469,10 @@ void Robot::setClientConfigurations(ClientConfigurations clientConfigurations)
     (*MySetClientConfigurations)(clientConfigurations);
 }
 
-/*void Robot::setEthernetConfiguration(EthernetConfiguration *config)
+void Robot::setEthernetConfiguration(EthernetConfiguration *config)
 {
-    (*MySetEthernetConfiguration)();
-}*/
+    (*MySetEthernetConfiguration)(config);
+}
 
 /**
  * This function sets the MAC address of the robot.

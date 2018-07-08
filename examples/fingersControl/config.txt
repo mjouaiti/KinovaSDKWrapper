@@ -1,0 +1,5 @@
+InitFingers
+SendBasicTrajectory
+SetAngularControl
+StartControlAPI
+StopControlAPI

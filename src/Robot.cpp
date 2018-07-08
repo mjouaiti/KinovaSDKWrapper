@@ -25,8 +25,11 @@ Robot::Robot(const std::string& libPath, const std::string& optionFile)
 	if (commandLayerHandle == NULL) {
 		std::cout << "Error while loading library." << std::endl;
 	}
-
-	this->initializeAPI(optionFile);
+    
+    if(optionFile == "")
+        this->initializeAPI();
+    else
+        this->initializeAPI(optionFile);
 	this->initializePositionTrajectory();
 	this->initializeVelocityTrajectory();
 }

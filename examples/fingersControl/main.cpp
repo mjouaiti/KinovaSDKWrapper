@@ -8,6 +8,7 @@
 
 #include "../../src/Robot.h"
 
+
 int main(int argv, char** argc)
 {
     Robot robot("../../lib/Kinova.API.USBCommandLayerUbuntu.so", "config.txt");

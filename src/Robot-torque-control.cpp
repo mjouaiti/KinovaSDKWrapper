@@ -55,7 +55,7 @@ int Robot::getTrajectoryTorqueMode()
  * @param minTorque A struct that contains all angular minimum values. (Unit: [N * m])
  * @param maxTorque A struct that contains all angular maximum values. (Unit: [N * m])
  */
-void Robot::setTorqueMinMax(std::vector<double> minTorque, std::vector<double> maxTorque)
+void Robot::setTorqueMinMax(std::vector<float> minTorque, std::vector<float> maxTorque)
 {
     AngularInfo commandMin;
     AngularInfo commandMax;
@@ -98,7 +98,7 @@ void Robot::setTorqueSafetyFactor(float factor)
  * This function sets the actuators feedback gain. The parameters will reset to default values every time the robotic arm is rebooted.
  * @param gains The gain for each actuator
  */
-void Robot::setTorqueActuatorGain(std::vector<double> gains)
+void Robot::setTorqueActuatorGain(std::vector<float> gains)
 {
     (*MySetTorqueActuatorGain)(&gains[0]);
 }
@@ -107,192 +107,144 @@ void Robot::setTorqueActuatorGain(std::vector<double> gains)
  * This function sets the brake value when the velocity is near zero. The parameters will reset to default values every time the robotic arm is rebooted.
  * @param command The torque brake for each actuator
  */
-void Robot::setTorqueBrake(std::vector<double> command)
+void Robot::setTorqueBrake(std::vector<float> command)
 {
-    float* c = new float[command.size()];
-    for(unsigned int i = 0; i < command.size(); i++)
-        c[i] = command[i];
-    (*MySetTorqueBrake)(c);
+    (*MySetTorqueBrake)(&command[0]);
 }
 
 /**
  * This function sets the actuator's maximum allowed torque command. Default parameters can be found in the torque control documentation page under the section “Default parameters”. The parameters will reset to default values every time the robotic arm is rebooted.
  * @param command The torque command's maximum for each actuator
  */
-void Robot::setTorqueCommandMax(std::vector<double> command)
+void Robot::setTorqueCommandMax(std::vector<float> command)
 {
-    float* c = new float[command.size()];
-    for(unsigned int i = 0; i < command.size(); i++)
-        c[i] = command[i];
-    (*MySetTorqueCommandMax)(c);
+    (*MySetTorqueCommandMax)(&command[0]);
 }
 
 /**
  * This functions sets the maximum damping. The parameters will reset to default values every time the robotic arm is rebooted.
  * @param command The maximum damping
  */
-void Robot::setTorqueDampingMax(std::vector<double> command)
+void Robot::setTorqueDampingMax(std::vector<float> command)
 {
-    float* c = new float[command.size()];
-    for(unsigned int i = 0; i < command.size(); i++)
-        c[i] = command[i];
-    (*MySetTorqueDampingMax)(c);
+    (*MySetTorqueDampingMax)(&command[0]);
 }
 
 /**
  * This function sets the deadband on the error. The parameters will reset to default values every time the robotic arm is rebooted.
  * @param command The deadband for each actuator
  */
-void Robot::setTorqueErrorDeadband(std::vector<double> command)
+void Robot::setTorqueErrorDeadband(std::vector<float> command)
 {
-    float* c = new float[command.size()];
-    for(unsigned int i = 0; i < command.size(); i++)
-        c[i] = command[i];
-    (*MySetTorqueErrorDeadband)(c);
+    (*MySetTorqueErrorDeadband)(&command[0]);
 }
 
 /**
  * This function sets the time in ms before the actuator resends an error message if it was not cleared. The parameters will reset to default values every time the robotic arm is rebooted.
  * @param command The time for resending errors for each actuator
  */
-void Robot::setTorqueErrorResend(std::vector<double> command)
+void Robot::setTorqueErrorResend(std::vector<float> command)
 {
-    float* c = new float[command.size()];
-    for(unsigned int i = 0; i < command.size(); i++)
-        c[i] = command[i];
-    (*MySetTorqueErrorResend)(c);
+    (*MySetTorqueErrorResend)(&command[0]);
 }
 
 /**
  * This function sets the amount of current feedforward sent to the actuators. The parameters will reset to default values every time the robotic arm is rebooted.
  * @param command The current feed for each actuator
  */
-void Robot::setTorqueFeedCurrent(std::vector<double> command)
+void Robot::setTorqueFeedCurrent(std::vector<float> command)
 {
-    float* c = new float[command.size()];
-    for(unsigned int i = 0; i < command.size(); i++)
-        c[i] = command[i];
-    (*MySetTorqueFeedCurrent)(c);
+    (*MySetTorqueFeedCurrent)(&command[0]);
 }
 
 /**
  * This function sets the conversion from current to voltage gain. The parameters will reset to default values every time the robotic arm is rebooted.
  * @param command The feedforward
  */
-void Robot::setTorqueFeedCurrentVoltage(std::vector<double> command)
+void Robot::setTorqueFeedCurrentVoltage(std::vector<float> command)
 {
-    float* c = new float[command.size()];
-    for(unsigned int i = 0; i < command.size(); i++)
-        c[i] = command[i];
-    (*MySetTorqueFeedCurrentVoltage)(c);
+    (*MySetTorqueFeedCurrentVoltage)(&command[0]);
 }
 
 /**
  * This function sets the filter on the feedforward. The parameters will reset to default values every time the robotic arm is rebooted.
  * @param command The feed filter for each actuator
  */
-void Robot::setTorqueFeedFilter(std::vector<double> command)
+void Robot::setTorqueFeedFilter(std::vector<float> command)
 {
-    float* c = new float[command.size()];
-    for(unsigned int i = 0; i < command.size(); i++)
-        c[i] = command[i];
-    (*MySetTorqueFeedFilter)(c);
+    (*MySetTorqueFeedFilter)(&command[0]);
 }
 
 /**
  * This function sets the amount of velocity feedforward (back EMF) sent to the actuators. The parameters will reset to default values every time the robotic arm is rebooted.
  * @param command The velocity feed for each actuator
  */
-void Robot::setTorqueFeedVelocity(std::vector<double> command)
+void Robot::setTorqueFeedVelocity(std::vector<float> command)
 {
-    float* c = new float[command.size()];
-    for(unsigned int i = 0; i < command.size(); i++)
-        c[i] = command[i];
-    (*MySetTorqueFeedVelocity)(c);
+    (*MySetTorqueFeedVelocity)(&command[0]);
 }
 
 /**
  * This function sets the velocity feedforward under compensation gain. The parameters will reset to default values every time the robotic arm is rebooted.
  * @param command The feedforward
  */
-void Robot::setTorqueFeedVelocityUnderGain(std::vector<double> command)
+void Robot::setTorqueFeedVelocityUnderGain(std::vector<float> command)
 {
-    float* c = new float[command.size()];
-    for(unsigned int i = 0; i < command.size(); i++)
-        c[i] = command[i];
-    (*MySetTorqueFeedVelocityUnderGain)(c);
+    (*MySetTorqueFeedVelocityUnderGain)(&command[0]);
 }
 
 /**
  * This function sets the filter on the torque control effort (command-measured). The parameters will reset to default values every time the robotic arm is rebooted.
  * @param command The control effort for each actuator
  */
-void Robot::setTorqueFilterControlEffort(std::vector<double> command)
+void Robot::setTorqueFilterControlEffort(std::vector<float> command)
 {
-    float* c = new float[command.size()];
-    for(unsigned int i = 0; i < command.size(); i++)
-        c[i] = command[i];
-    (*MySetTorqueFilterControlEffort)(c);
+    (*MySetTorqueFilterControlEffort)(&command[0]);
 }
 
 /**
  * This function sets the filter on the torque error (command-measured). The parameters will reset to default values every time the robotic arm is rebooted.
  * @param command The error filter for each actuator
  */
-void Robot::setTorqueFilterError(std::vector<double> command)
+void Robot::setTorqueFilterError(std::vector<float> command)
 {
-    float* c = new float[command.size()];
-    for(unsigned int i = 0; i < command.size(); i++)
-        c[i] = command[i];
-    (*MySetTorqueFilterError)(c);
+    (*MySetTorqueFilterError)(&command[0]);
 }
 
 /**
  * This function sets the filter on the torque error (command-measured). The parameters will reset to default values every time the robotic arm is rebooted.
  * @param command The error filter for each actuator
  */
-void Robot::setTorqueFilterMeasuredTorque(std::vector<double> command)
+void Robot::setTorqueFilterMeasuredTorque(std::vector<float> command)
 {
-    float* c = new float[command.size()];
-    for(unsigned int i = 0; i < command.size(); i++)
-        c[i] = command[i];
-    (*MySetTorqueFilterMeasuredTorque)(c);
+    (*MySetTorqueFilterMeasuredTorque)(&command[0]);
 }
 
 /**
  * This function sets the filter on the estimated velocity. The parameters will reset to default values every time the robotic arm is rebooted.
  * @param command The velocity filter for each actuator
  */
-void Robot::setTorqueFilterVelocity(std::vector<double> command)
+void Robot::setTorqueFilterVelocity(std::vector<float> command)
 {
-    float* c = new float[command.size()];
-    for(unsigned int i = 0; i < command.size(); i++)
-        c[i] = command[i];
-    (*MySetTorqueFilterVelocity)(c);
+    (*MySetTorqueFilterVelocity)(&command[0]);
 }
 
 /**
  * This function sets the maximum allowed control gain. The parameters will reset to default values every time the robotic arm is rebooted.
  * @param command The maximum gain
  */
-void Robot::setTorqueGainMax(std::vector<double> command)
+void Robot::setTorqueGainMax(std::vector<float> command)
 {
-    float* c = new float[command.size()];
-    for(unsigned int i = 0; i < command.size(); i++)
-        c[i] = command[i];
-    (*MySetTorqueGainMax)(c);
+    (*MySetTorqueGainMax)(&command[0]);
 }
 
 /**
  * This function sets the amount of time over which the system sending messages to the actuators is considered non-responsive. The parameters will reset to default values every time the robotic arm is rebooted.
  * @param command The amout of time considered non-responsive
  */
-void Robot::setTorqueInactivityTimeActuator(std::vector<double> command)
+void Robot::setTorqueInactivityTimeActuator(std::vector<float> command)
 {
-    float* c = new float[command.size()];
-    for(unsigned int i = 0; i < command.size(); i++)
-        c[i] = command[i];
-    (*MySetTorqueInactivityTimeActuator)(c);
+    (*MySetTorqueInactivityTimeActuator)(&command[0]);
 }
 
 /**
@@ -317,60 +269,45 @@ void Robot::setTorqueInactivityType(int type)
  * This function sets the position limit damping gain. The parameters will reset to default values every time the robotic arm is rebooted.
  * @param command The position damping gain for each actuator
  */
-void Robot::setTorquePositionLimitDampingGain(std::vector<double> command)
+void Robot::setTorquePositionLimitDampingGain(std::vector<float> command)
 {
-    float* c = new float[command.size()];
-    for(unsigned int i = 0; i < command.size(); i++)
-        c[i] = command[i];
-    (*MySetTorquePositionLimitDampingGain)(c);
+    (*MySetTorquePositionLimitDampingGain)(&command[0]);
 }
 
 /**
  * This function sets the maximum position limit damping gain. The parameters will reset to default values every time the robotic arm is rebooted.
  * @param command The maximum position for each actuator
  */
-void Robot::setTorquePositionLimitDampingMax(std::vector<double> command)
+void Robot::setTorquePositionLimitDampingMax(std::vector<float> command)
 {
-    float* c = new float[command.size()];
-    for(unsigned int i = 0; i < command.size(); i++)
-        c[i] = command[i];
-    (*MySetTorquePositionLimitDampingMax)(c);
+    (*MySetTorquePositionLimitDampingMax)(&command[0]);
 }
 
 /**
  * This function sets the position limit repulse gain (stifness). The parameters will reset to default values every time the robotic arm is rebooted.
  * @param command The position limit repulse gain for each actuator
  */
-void Robot::setTorquePositionLimitRepulsGain(std::vector<double> command)
+void Robot::setTorquePositionLimitRepulsGain(std::vector<float> command)
 {
-    float* c = new float[command.size()];
-    for(unsigned int i = 0; i < command.size(); i++)
-        c[i] = command[i];
-    (*MySetTorquePositionLimitRepulsGain)(c);
+    (*MySetTorquePositionLimitRepulsGain)(&command[0]);
 }
 
 /**
  * This function sets the maximum position limit repulse gain (max stifness). The parameters will reset to default values every time the robotic arm is rebooted.
  * @param command The maximum position limit repulse gain for each actuator
  */
-void Robot::setTorquePositionLimitRepulsMax(std::vector<double> command)
+void Robot::setTorquePositionLimitRepulsMax(std::vector<float> command)
 {
-    float* c = new float[command.size()];
-    for(unsigned int i = 0; i < command.size(); i++)
-        c[i] = command[i];
-    (*MySetTorquePositionLimitRepulsMax)(c);
+    (*MySetTorquePositionLimitRepulsMax)(&command[0]);
 }
 
 /**
  * This function sets the torque signal rate limiter. The parameters will reset to default values every time the robotic arm is rebooted.
  * @param command the torque rate
  */
-void Robot::setTorqueRateLimiter(std::vector<double> command)
+void Robot::setTorqueRateLimiter(std::vector<float> command)
 {
-    float* c = new float[command.size()];
-    for(unsigned int i = 0; i < command.size(); i++)
-        c[i] = command[i];
-    (*MySetTorqueRateLimiter)(c);
+    (*MySetTorqueRateLimiter)(&command[0]);
 }
 
 /**
@@ -386,40 +323,34 @@ void Robot::setTorqueRobotProtection(int protectionLevel)
  * This function sets the static friction value for each actuator. The parameters will reset to default values every time the robotic arm is rebooted.
  * @param command The static friction for each actuator
  */
-void Robot::setTorqueStaticFriction(std::vector<double> command)
+void Robot::setTorqueStaticFriction(std::vector<float> command)
 {
-    float* c = new float[command.size()];
-    for(unsigned int i = 0; i < command.size(); i++)
-        c[i] = command[i];
-    (*MySetTorqueStaticFriction)(c);
+    (*MySetTorqueStaticFriction)(&command[0]);
 }
 
 /**
  * This function sets the maximum static friction value. The parameters will reset to default values every time the robotic arm is rebooted.
  * @param command The feedforward
  */
-void Robot::setTorqueStaticFrictionMax(std::vector<double> command)
+void Robot::setTorqueStaticFrictionMax(std::vector<float> command)
 {
-    float* c = new float[command.size()];
-    for(unsigned int i = 0; i < command.size(); i++)
-        c[i] = command[i];
-    (*MySetTorqueStaticFrictionMax)(c);
+    (*MySetTorqueStaticFrictionMax)(&command[0]);
 }
 
 /**
  * This function sets the filter for the estimation of the velocity used for the maximum velocity safety feature. The parameters will reset to default values every time the robotic arm is rebooted.
  * @param command The velocity filter for each actuator
  */
-void Robot::setTorqueVelocityLimitFilter(std::vector<double> command)
+void Robot::setTorqueVelocityLimitFilter(std::vector<float> command)
 {
-    (*MySetTorqueVelocityLimitFilter)(&c[0]);
+    (*MySetTorqueVelocityLimitFilter)(&command[0]);
 }
 
 /**
  * When switching from position to torque control, the controller verifies if the torque command is close to the actual measured torque (as a safety feature to prevent high velocity motions if it is not the case). This function can be used to change the threshold over which the switching to torque mode is rejected. Default parameters can be found in the torque control documentation page under the section “Default parameters”. The parameters will reset to default values every time the robotic arm is rebooted.
  * @param command The torque switch threshold of each actuator
  */
-void Robot::setSwitchThreshold(std::vector<double> command)
+void Robot::setSwitchThreshold(std::vector<float> command)
 {
-    (*MySetSwitchThreshold)(&c[0]);
+    (*MySetSwitchThreshold)(&command[0]);
 }

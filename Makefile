@@ -6,11 +6,11 @@ SOURCES = src/Robot.cpp src/Robot-API.cpp src/Robot-control.cpp \
 	src/Robot-phy-parameters.cpp src/Robot-time.cpp src/Robot-utils.cpp
 OBJECTS = $(SOURCES:.cpp=.o)
 HEADERS = Kinova.API.CommLayerUbuntu.h Kinova.API.UsbCommandLayerUbuntu.h \
-	  Kinova.API.EthCommLayerUbuntu.h Kinova.API.EthCommandLayerUbuntu.h KinovaTypes.h Robot.h
+	  Kinova.API.EthCommLayerUbuntu.h Kinova.API.EthCommandLayerUbuntu.h KinovaTypes.h src/Robot.h
 
 AR = ar
 AROPT = rcs
-LIBRARY = lib-robot.a
+LIBRARY = librobot.a
 
 all: $(SOURCES) $(HEADERS) $(LIBRARY)
 

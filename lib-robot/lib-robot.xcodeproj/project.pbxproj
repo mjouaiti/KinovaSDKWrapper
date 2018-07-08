@@ -7,18 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		61C0CEC920F147B500AFD9E2 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61C0CEC820F147B500AFD9E2 /* main.cpp */; };
-		61C0CECB20F147D100AFD9E2 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61C0CECA20F147D100AFD9E2 /* main.cpp */; };
-		61C0CECD20F147E400AFD9E2 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61C0CECC20F147E400AFD9E2 /* main.cpp */; };
+		61C0CED920F21B0500AFD9E2 /* Kinova.API.EthCommandLayerUbuntu.h in Headers */ = {isa = PBXBuildFile; fileRef = 61C0CECF20F21B0400AFD9E2 /* Kinova.API.EthCommandLayerUbuntu.h */; };
+		61C0CEDA20F21B0500AFD9E2 /* Kinova.API.EthCommLayerUbuntu.h in Headers */ = {isa = PBXBuildFile; fileRef = 61C0CED020F21B0400AFD9E2 /* Kinova.API.EthCommLayerUbuntu.h */; };
+		61C0CEDB20F21B0500AFD9E2 /* Kinova.API.UsbCommandLayerUbuntu.h in Headers */ = {isa = PBXBuildFile; fileRef = 61C0CED220F21B0400AFD9E2 /* Kinova.API.UsbCommandLayerUbuntu.h */; };
+		61C0CEDC20F21B0500AFD9E2 /* KinovaTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 61C0CED420F21B0500AFD9E2 /* KinovaTypes.h */; };
+		61C0CEDD20F21B0500AFD9E2 /* Kinova.API.CommLayerUbuntu.h in Headers */ = {isa = PBXBuildFile; fileRef = 61C0CED620F21B0500AFD9E2 /* Kinova.API.CommLayerUbuntu.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		619687ED20EFF0AB00E8FEFB /* liblib-robot.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "liblib-robot.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		61C0CEAE20F1292F00AFD9E2 /* src */ = {isa = PBXFileReference; lastKnownFileType = folder; name = src; path = ../../src; sourceTree = "<group>"; };
-		61C0CEAF20F1292F00AFD9E2 /* examples */ = {isa = PBXFileReference; lastKnownFileType = folder; name = examples; path = ../../examples; sourceTree = "<group>"; };
-		61C0CEC820F147B500AFD9E2 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../../examples/fingersControl/main.cpp; sourceTree = "<group>"; };
-		61C0CECA20F147D100AFD9E2 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../../examples/positionControl/main.cpp; sourceTree = "<group>"; };
-		61C0CECC20F147E400AFD9E2 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../../examples/torqueControl/main.cpp; sourceTree = "<group>"; };
+		61C0CECE20F21B0400AFD9E2 /* Kinova.API.CommLayerUbuntu.so */ = {isa = PBXFileReference; lastKnownFileType = file; name = Kinova.API.CommLayerUbuntu.so; path = ../Kinova.API.CommLayerUbuntu.so; sourceTree = "<group>"; };
+		61C0CECF20F21B0400AFD9E2 /* Kinova.API.EthCommandLayerUbuntu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Kinova.API.EthCommandLayerUbuntu.h; path = ../Kinova.API.EthCommandLayerUbuntu.h; sourceTree = "<group>"; };
+		61C0CED020F21B0400AFD9E2 /* Kinova.API.EthCommLayerUbuntu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Kinova.API.EthCommLayerUbuntu.h; path = ../Kinova.API.EthCommLayerUbuntu.h; sourceTree = "<group>"; };
+		61C0CED120F21B0400AFD9E2 /* Kinova.API.USBCommandLayerUbuntu.so */ = {isa = PBXFileReference; lastKnownFileType = file; name = Kinova.API.USBCommandLayerUbuntu.so; path = ../Kinova.API.USBCommandLayerUbuntu.so; sourceTree = "<group>"; };
+		61C0CED220F21B0400AFD9E2 /* Kinova.API.UsbCommandLayerUbuntu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Kinova.API.UsbCommandLayerUbuntu.h; path = ../Kinova.API.UsbCommandLayerUbuntu.h; sourceTree = "<group>"; };
+		61C0CED320F21B0500AFD9E2 /* src */ = {isa = PBXFileReference; lastKnownFileType = folder; name = src; path = ../src; sourceTree = "<group>"; };
+		61C0CED420F21B0500AFD9E2 /* KinovaTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KinovaTypes.h; path = ../KinovaTypes.h; sourceTree = "<group>"; };
+		61C0CED520F21B0500AFD9E2 /* examples */ = {isa = PBXFileReference; lastKnownFileType = folder; name = examples; path = ../examples; sourceTree = "<group>"; };
+		61C0CED620F21B0500AFD9E2 /* Kinova.API.CommLayerUbuntu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Kinova.API.CommLayerUbuntu.h; path = ../Kinova.API.CommLayerUbuntu.h; sourceTree = "<group>"; };
+		61C0CED720F21B0500AFD9E2 /* Kinova.API.EthCommandLayerUbuntu.so */ = {isa = PBXFileReference; lastKnownFileType = file; name = Kinova.API.EthCommandLayerUbuntu.so; path = ../Kinova.API.EthCommandLayerUbuntu.so; sourceTree = "<group>"; };
+		61C0CED820F21B0500AFD9E2 /* Kinova.API.EthCommLayerUbuntu.so */ = {isa = PBXFileReference; lastKnownFileType = file; name = Kinova.API.EthCommLayerUbuntu.so; path = ../Kinova.API.EthCommLayerUbuntu.so; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,8 +43,18 @@
 		619687E420EFF0AB00E8FEFB = {
 			isa = PBXGroup;
 			children = (
-				619687EF20EFF0AB00E8FEFB /* lib-robot */,
 				619687EE20EFF0AB00E8FEFB /* Products */,
+				61C0CED520F21B0500AFD9E2 /* examples */,
+				61C0CED620F21B0500AFD9E2 /* Kinova.API.CommLayerUbuntu.h */,
+				61C0CECE20F21B0400AFD9E2 /* Kinova.API.CommLayerUbuntu.so */,
+				61C0CECF20F21B0400AFD9E2 /* Kinova.API.EthCommandLayerUbuntu.h */,
+				61C0CED720F21B0500AFD9E2 /* Kinova.API.EthCommandLayerUbuntu.so */,
+				61C0CED020F21B0400AFD9E2 /* Kinova.API.EthCommLayerUbuntu.h */,
+				61C0CED820F21B0500AFD9E2 /* Kinova.API.EthCommLayerUbuntu.so */,
+				61C0CED220F21B0400AFD9E2 /* Kinova.API.UsbCommandLayerUbuntu.h */,
+				61C0CED120F21B0400AFD9E2 /* Kinova.API.USBCommandLayerUbuntu.so */,
+				61C0CED420F21B0500AFD9E2 /* KinovaTypes.h */,
+				61C0CED320F21B0500AFD9E2 /* src */,
 			);
 			sourceTree = "<group>";
 		};
@@ -48,18 +66,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		619687EF20EFF0AB00E8FEFB /* lib-robot */ = {
-			isa = PBXGroup;
-			children = (
-				61C0CEAF20F1292F00AFD9E2 /* examples */,
-				61C0CEAE20F1292F00AFD9E2 /* src */,
-				61C0CEC820F147B500AFD9E2 /* main.cpp */,
-				61C0CECA20F147D100AFD9E2 /* main.cpp */,
-				61C0CECC20F147E400AFD9E2 /* main.cpp */,
-			);
-			path = "lib-robot";
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -67,6 +73,11 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				61C0CEDC20F21B0500AFD9E2 /* KinovaTypes.h in Headers */,
+				61C0CEDD20F21B0500AFD9E2 /* Kinova.API.CommLayerUbuntu.h in Headers */,
+				61C0CEDB20F21B0500AFD9E2 /* Kinova.API.UsbCommandLayerUbuntu.h in Headers */,
+				61C0CEDA20F21B0500AFD9E2 /* Kinova.API.EthCommLayerUbuntu.h in Headers */,
+				61C0CED920F21B0500AFD9E2 /* Kinova.API.EthCommandLayerUbuntu.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -126,9 +137,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				61C0CECB20F147D100AFD9E2 /* main.cpp in Sources */,
-				61C0CEC920F147B500AFD9E2 /* main.cpp in Sources */,
-				61C0CECD20F147E400AFD9E2 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
