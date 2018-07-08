@@ -18,7 +18,7 @@ const double Robot::DEFAUTL_D = 0.05;
  * @param libPath path of Kinova.API.USBCommandLayerUbuntu.so
  * @param optionFile path of the setup file
  */
-Robot::Robot(const std::string& libPath, const std::string& optionFile)
+Robot::Robot(const std::string& libPath)
 {
 	commandLayerHandle = dlopen(libPath.c_str(), RTLD_NOW|RTLD_GLOBAL);
 
@@ -26,10 +26,7 @@ Robot::Robot(const std::string& libPath, const std::string& optionFile)
 		std::cout << "Error while loading library." << std::endl;
 	}
     
-    if(optionFile == "")
-        this->initializeAPI();
-    else
-        this->initializeAPI(optionFile);
+    this->initializeAPI();
 	this->initializePositionTrajectory();
 	this->initializeVelocityTrajectory();
 }

@@ -14,192 +14,631 @@ void Robot::closeAPI()
 	(*MyStopControlAPI)();
 	(*MyCloseAPI)();
 }
-typedef void (*voidFunctionType)(void);
-
-struct FunctionsMap{
-    
-    std::map<std::string,std::pair<voidFunctionType,std::type_index>> m1;
-    
-    template<typename T>
-    void insert(std::string s1, T f1){
-        auto tt = std::type_index(typeid(f1));
-        m1.insert(std::make_pair(s1,
-                                 std::make_pair((voidFunctionType)f1,tt)));
-    }
-    
-    template<typename T,typename... Args>
-    T searchAndCall(std::string s1, Args&&... args){
-        auto mapIter = m1.find(s1);
-        auto mapVal = mapIter->second;
-        
-        // auto typeCastedFun = reinterpret_cast<T(*)(Args ...)>(mapVal.first);
-        auto typeCastedFun = (T(*)(Args ...))(mapVal.first);
-        
-        //compare the types is equal or not
-        //assert(mapVal.second == std::type_index(typeid(typeCastedFun)));
-        return typeCastedFun(std::forward<Args>(args)...);
-    }
-};
 
 /**
  * Loads ALL the functions and initialises the API
  */
 void Robot::initializeAPI() {
-    FunctionsMap map;
-    map.insert("ActivateAutoNullSpaceMotionCartesian", (*MyActivateAutoNullSpaceMotionCartesian));
-    map.insert("ActivateCollisionAutomaticAvoidance", (*MyActivateCollisionAutomaticAvoidance));
-    map.insert("ActivateExtraProtectionPinchingWrist", (*MyActivateExtraProtectionPinchingWrist));
-    map.insert("ActivateSingularityAutomaticAvoidance", (*MyActivateSingularityAutomaticAvoidance));
-    map.insert("ClearErrorLog", (*MyClearErrorLog));
-    map.insert("EraseAllProtectionZones", (*MyEraseAllProtectionZones));
-    map.insert("EraseAllTrajectories", (*MyEraseAllTrajectories));
-    map.insert("GetActualTrajectoryInfo", (*MyGetActualTrajectoryInfo));
-    map.insert("GetActuatorAcceleration", (*MyGetActuatorAcceleration));
-    map.insert("GetAngularCurrent", (*MyGetAngularCurrent));
-    map.insert("GetAngularCurrentMotor", (*MyGetAngularCurrentMotor));
-    map.insert("GetAngularForce", (*MyGetAngularForce));
-    map.insert("GetAngularForceGravityFree", (*MyGetAngularForceGravityFree));
-    map.insert("GetAngularPosition", (*MyGetAngularPosition));
-    map.insert("GetAngularTorqueCommand", (*MyGetAngularTorqueCommand));
-    map.insert("GetAngularTorqueGravityEstimation", (*MyGetAngularTorqueGravityEstimation));
-    map.insert("GetAngularVelocity", (*MyGetAngularVelocity));
-    map.insert("GetAPIVersion", (*MyGetAPIVersion));
-    map.insert("GetCartesianCommand", (*MyGetCartesianCommand));
-    map.insert("GetCartesianForce", (*MyGetCartesianForce));
-    map.insert("GetCartesianPosition", (*MyGetCartesianPosition));
-    map.insert("GetClientConfigurations", (*MyGetClientConfigurations));
-    map.insert("GetCodeVersion", (*MyGetCodeVersion));
-    map.insert("GetControlMapping", (*MyGetControlMapping));
-    map.insert("GetControlType", (*MyGetControlType));
-    map.insert("GetDevices", (*MyGetDevices));
-    map.insert("GetEndEffectorOffset", (*MyGetEndEffectorOffset));
-    map.insert("GetEthernetConfiguration", (*MyGetEthernetConfiguration));
-    map.insert("GetForcesInfo", (*MyGetForcesInfo));
-    map.insert("GetGeneralInformations", (*MyGetGeneralInformations));
-    map.insert("GetGlobalTrajectoryInfo", (*MyGetGlobalTrajectoryInfo));
-    map.insert("GetGripperStatus", (*MyGetGripperStatus));
-    map.insert("GetPositionCurrentActuators", (*MyGetPositionCurrentActuators));
-    map.insert("GetProtectionZone", (*MyGetProtectionZone));
-    map.insert("GetQuickStatus", (*MyGetQuickStatus));
-    map.insert("GetSensorsInfo", (*MyGetSensorsInfo));
-    map.insert("GetSingularityVector", (*MyGetSingularityVector));
-    map.insert("GetSpasmFilterValues", (*MyGetSpasmFilterValues));
-    map.insert("GetSystemError", (*MyGetSystemError));
-    map.insert("GetSystemErrorCount", (*MyGetSystemErrorCount));
-    map.insert("GetTrajectoryTorqueMode", (*MyGetTrajectoryTorqueMode));
-    //map.insert("InitFingers", (*MyInitFingers));
-    map.insert("MoveHome", (*MyMoveHome));
-    map.insert("ProgramFlash", (*MyProgramFlash));
-    map.insert("RefresDevicesList", (*MyRefresDevicesList));
-    map.insert("RestoreFactoryDefault", (*MyRestoreFactoryDefault));
-    map.insert("RunGravityZEstimationSequence", (*MyRunGravityZEstimationSequence));
-    map.insert("SendAdvanceTrajectory", (*MySendAdvanceTrajectory));
-    map.insert("SendAngularTorqueCommand", (*MySendAngularTorqueCommand));
-    //map.insert("SendBasicTrajectory", (*MySendBasicTrajectory));
-    map.insert("SendCartesianForceCommand", (*MySendCartesianForceCommand));
-    map.insert("SendJoystickCommand", (*MySendJoystickCommand));
-    map.insert("SetActiveDevice", (*MySetActiveDevice));
-    map.insert("SetActuatorPID", (*MySetActuatorPID));
-    map.insert("SetActuatorPIDFilter", (*MySetActuatorPIDFilter));
-    map.insert("SetAngularControl", (*MySetAngularControl));
-    map.insert("SetAngularInertiaDamping", (*MySetAngularInertiaDamping));
-    map.insert("SetAngularTorqueMinMax", (*MySetAngularTorqueMinMax));
-    map.insert("SetCartesianControl", (*MySetCartesianControl));
-    map.insert("SetCartesianForceMinMax", (*MySetCartesianForceMinMax));
-    map.insert("SetCartesianInertiaDamping", (*MySetCartesianInertiaDamping));
-    map.insert("SetClientConfigurations", (*MySetClientConfigurations));
-    map.insert("SetControlMapping", (*MySetControlMapping));
-    map.insert("SetEndEffectorOffset", (*MySetEndEffectorOffset));
-    map.insert("SetEthernetConfiguration", (*MySetEthernetConfiguration));
-    map.insert("SetFrameType", (*MySetFrameType));
-    map.insert("SetGravityManualInputParam", (*MySetGravityManualInputParam));
-    map.insert("SetGravityOptimalZParam", (*MySetGravityOptimalZParam));
-    map.insert("SetGravityPayload", (*MySetGravityPayload));
-    map.insert("SetGravityType", (*MySetGravityType));
-    map.insert("SetGravityVector", (*MySetGravityVector));
-    map.insert("SetJointZero", (*MySetJointZero));
-    map.insert("SetLocalMACAddress", (*MySetLocalMACAddress));
-    map.insert("SetModel", (*MySetModel));
-    map.insert("SetPositionLimitDistance", (*MySetPositionLimitDistance));
-    map.insert("SetProtectionZone", (*MySetProtectionZone));
-    map.insert("SetSerialNumber", (*MySetSerialNumber));
-    map.insert("SetSpasmFilterValues", (*MySetSpasmFilterValues));
-    map.insert("SetSwitchThreshold", (*MySetSwitchThreshold));
-    map.insert("SetTorqueActuatorDamping", (*MySetTorqueActuatorDamping));
-    map.insert("SetTorqueActuatorGain", (*MySetTorqueActuatorGain));
-    map.insert("SetTorqueBrake", (*MySetTorqueBrake));
-    map.insert("SetTorqueCommandMax", (*MySetTorqueCommandMax));
-    map.insert("SetTorqueControlType", (*MySetTorqueControlType));
-    map.insert("SetTorqueDampingMax", (*MySetTorqueDampingMax));
-    map.insert("SetTorqueErrorDeadband", (*MySetTorqueErrorDeadband));
-    map.insert("SetTorqueErrorResend", (*MySetTorqueErrorResend));
-    map.insert("SetTorqueFeedCurrent", (*MySetTorqueFeedCurrent));
-    map.insert("SetTorqueFeedCurrentVoltage", (*MySetTorqueFeedCurrentVoltage));
-    map.insert("SetTorqueFeedFilter", (*MySetTorqueFeedFilter));
-    map.insert("SetTorqueFeedVelocity", (*MySetTorqueFeedVelocity));
-    map.insert("SetTorqueFeedVelocityUnderGain", (*MySetTorqueFeedVelocityUnderGain));
-    map.insert("SetTorqueFilterControlEffort", (*MySetTorqueFilterControlEffort));
-    map.insert("SetTorqueFilterError", (*MySetTorqueFilterError));
-    map.insert("SetTorqueFilterMeasuredTorque", (*MySetTorqueFilterMeasuredTorque));
-    map.insert("SetTorqueFilterVelocity", (*MySetTorqueFilterVelocity));
-    map.insert("SetTorqueGainMax", (*MySetTorqueGainMax));
-    map.insert("SetTorqueInactivityTimeActuator", (*MySetTorqueInactivityTimeActuator));
-    map.insert("SetTorqueInactivityTimeMainController", (*MySetTorqueInactivityTimeMainController));
-    map.insert("SetTorqueInactivityType", (*MySetTorqueInactivityType));
-    map.insert("SetTorquePositionLimitDampingGain", (*MySetTorquePositionLimitDampingGain));
-    map.insert("SetTorquePositionLimitDampingMax", (*MySetTorquePositionLimitDampingMax));
-    map.insert("SetTorquePositionLimitRepulsGain", (*MySetTorquePositionLimitRepulsGain));
-    map.insert("SetTorquePositionLimitRepulsMax", (*MySetTorquePositionLimitRepulsMax));
-    map.insert("SetTorqueRateLimiter", (*MySetTorqueRateLimiter));
-    map.insert("SetTorqueRobotProtection", (*MySetTorqueRobotProtection));
-    map.insert("SetTorqueSafetyFactor", (*MySetTorqueSafetyFactor));
-    map.insert("SetTorqueStaticFriction", (*MySetTorqueStaticFriction));
-    map.insert("SetTorqueStaticFrictionMax", (*MySetTorqueStaticFrictionMax));
-    map.insert("SetTorqueVelocityLimitFilter", (*MySetTorqueVelocityLimitFilter));
-    map.insert("SetTorqueVibrationController", (*MySetTorqueVibrationController));
-    map.insert("SetTorqueZero", (*MySetTorqueZero));
-    map.insert("StartCurrentLimitation", (*MyStartCurrentLimitation));
-    map.insert("StartForceControl", (*MyStartForceControl));
-    map.insert("StartRedundantJointNullSpaceMotion", (*MyStartRedundantJointNullSpaceMotion));
-    map.insert("StopControlAPI", (*MyStopControlAPI));
-    map.insert("StopCurrentLimitation", (*MyStopCurrentLimitation));
-    map.insert("StopForceControl", (*MyStopForceControl));
-    map.insert("StopRedundantJointNullSpaceMotion", (*MyStopRedundantJointNullSpaceMotion));
-    map.insert("SwitchTrajectoryTorque", (*MySwitchTrajectoryTorque));
+    MyActivateAutoNullSpaceMotionCartesian = (int (*)(int)) dlsym(commandLayerHandle, "ActivateAutoNullSpaceMotionCartesian");
+    if(MyActivateAutoNullSpaceMotionCartesian == NULL) {
+        std::cout << "Cannot load ActivateAutoNullSpaceMotionCartesian" << std::endl;
+    }
     
+    MyActivateCollisionAutomaticAvoidance = (int (*)(int)) dlsym(commandLayerHandle, "ActivateCollisionAutomaticAvoidance");
+    if(MyActivateCollisionAutomaticAvoidance == NULL) {
+        std::cout << "Cannot load ActivateCollisionAutomaticAvoidance" << std::endl;
+    }
     
-    for(auto mapIter: map.m1)
-    {
-        auto mapVal = mapIter.second;
-        auto typeCastedFun = (int(*)())(mapVal.first);
-        typeCastedFun = (int (*)()) dlsym(commandLayerHandle, mapIter.first.c_str());
-        if(typeCastedFun == NULL)
-            std::cout << "Cannot load " << mapIter.first << std::endl;
+    MyActivateExtraProtectionPinchingWrist = (int (*)(int)) dlsym(commandLayerHandle, "ActivateExtraProtectionPinchingWrist");
+    if(MyActivateExtraProtectionPinchingWrist == NULL) {
+        std::cout << "Cannot load ActivateExtraProtectionPinchingWrist" << std::endl;
+    }
+    
+    MyActivateSingularityAutomaticAvoidance = (int (*)(int)) dlsym(commandLayerHandle, "ActivateSingularityAutomaticAvoidance");
+    if(MyActivateSingularityAutomaticAvoidance == NULL) {
+        std::cout << "Cannot load ActivateSingularityAutomaticAvoidance" << std::endl;
+    }
+    
+    MyClearErrorLog = (int (*)()) dlsym(commandLayerHandle, "ClearErrorLog");
+    if(MyClearErrorLog == NULL) {
+        std::cout << "Cannot load ClearErrorLog" << std::endl;
     }
     
     MyCloseAPI = (int (*)()) dlsym(commandLayerHandle, "CloseAPI");
-    if (MyCloseAPI == NULL) {
+    if(MyCloseAPI == NULL) {
         std::cout << "Cannot load CloseAPI" << std::endl;
     }
     
-    MyStartControlAPI = (int (*)()) dlsym(commandLayerHandle, "StartControlAPI");
-    if (MyStartControlAPI == NULL) {
-        std::cout << "Cannot load StartControlAPI" << std::endl;
+    MyInitAPI = (int (*)()) dlsym(commandLayerHandle, "InitAPI");
+    if(MyInitAPI == NULL) {
+        std::cout << "Cannot load InitAPI" << std::endl;
     }
     
     MyInitFingers = (int (*)()) dlsym(commandLayerHandle, "InitFingers");
-    if (MyInitFingers == NULL) {
+    if(MyInitFingers == NULL) {
         std::cout << "Cannot load InitFingers" << std::endl;
     }
-
+    
+    MyEraseAllProtectionZones = (int (*)()) dlsym(commandLayerHandle, "EraseAllProtectionZones");
+    if(MyEraseAllProtectionZones == NULL) {
+        std::cout << "Cannot load EraseAllProtectionZones" << std::endl;
+    }
+    
+    MyEraseAllTrajectories = (int (*)()) dlsym(commandLayerHandle, "EraseAllTrajectories");
+    if(MyEraseAllTrajectories == NULL) {
+        std::cout << "Cannot load EraseAllTrajectories" << std::endl;
+    }
+    
+    MyGetActualTrajectoryInfo = (int (*)(TrajectoryPoint &)) dlsym(commandLayerHandle, "GetActualTrajectoryInfo");
+    if(MyGetActualTrajectoryInfo == NULL) {
+        std::cout << "Cannot load GetActualTrajectoryInfo" << std::endl;
+    }
+    
+    MyGetActuatorAcceleration = (int (*)(AngularAcceleration &)) dlsym(commandLayerHandle, "GetActuatorAcceleration");
+    if(MyGetActuatorAcceleration == NULL) {
+        std::cout << "Cannot load GetActuatorAcceleration" << std::endl;
+    }
+    
+    MyGetAngularCurrent = (int (*)(AngularPosition &)) dlsym(commandLayerHandle, "GetAngularCurrent");
+    if(MyGetAngularCurrent == NULL) {
+        std::cout << "Cannot load GetAngularCurrent" << std::endl;
+    }
+    
+    MyGetAngularCurrentMotor = (int (*)(AngularPosition &)) dlsym(commandLayerHandle, "GetAngularCurrentMotor");
+    if(MyGetAngularCurrentMotor == NULL) {
+        std::cout << "Cannot load GetAngularCurrentMotor" << std::endl;
+    }
+    
+    MyGetAngularForce = (int (*)(AngularPosition &)) dlsym(commandLayerHandle, "GetAngularForce");
+    if(MyGetAngularForce == NULL) {
+        std::cout << "Cannot load GetAngularForce" << std::endl;
+    }
+    
+    MyGetAngularForceGravityFree = (int (*)(AngularPosition &)) dlsym(commandLayerHandle, "GetAngularForceGravityFree");
+    if(MyGetAngularForceGravityFree == NULL) {
+        std::cout << "Cannot load GetAngularForceGravityFree" << std::endl;
+    }
+    
+    MyGetAngularPosition = (int (*)(AngularPosition &)) dlsym(commandLayerHandle, "GetAngularPosition");
+    if(MyGetAngularPosition == NULL) {
+        std::cout << "Cannot load GetAngularPosition" << std::endl;
+    }
+    
+    MyGetAngularTorqueCommand = (int (*)(float *)) dlsym(commandLayerHandle, "GetAngularTorqueCommand");
+    if(MyGetAngularTorqueCommand == NULL) {
+        std::cout << "Cannot load GetAngularTorqueCommand" << std::endl;
+    }
+    
+    MyGetAngularTorqueGravityEstimation = (int (*)(float *)) dlsym(commandLayerHandle, "GetAngularTorqueGravityEstimation");
+    if(MyGetAngularTorqueGravityEstimation == NULL) {
+        std::cout << "Cannot load GetAngularTorqueGravityEstimation" << std::endl;
+    }
+    
+    MyGetAngularVelocity = (int (*)(AngularPosition &)) dlsym(commandLayerHandle, "GetAngularVelocity");
+    if(MyGetAngularVelocity == NULL) {
+        std::cout << "Cannot load GetAngularVelocity" << std::endl;
+    }
+    
+    MyGetAPIVersion = (int (*)(std::vector<int> &)) dlsym(commandLayerHandle, "GetAPIVersion");
+    if(MyGetAPIVersion == NULL) {
+        std::cout << "Cannot load GetAPIVersion" << std::endl;
+    }
+    
+    MyGetCartesianCommand = (int (*)(CartesianPosition &)) dlsym(commandLayerHandle, "GetCartesianCommand");
+    if(MyGetCartesianCommand == NULL) {
+        std::cout << "Cannot load GetCartesianCommand" << std::endl;
+    }
+    
+    MyGetCartesianForce = (int (*)(CartesianPosition &)) dlsym(commandLayerHandle, "GetCartesianForce");
+    if(MyActivateExtraProtectionPinchingWrist == NULL) {
+        std::cout << "Cannot load GetCartesianForce" << std::endl;
+    }
+    
+    MyGetCartesianPosition = (int (*)(CartesianPosition &)) dlsym(commandLayerHandle, "GetCartesianPosition");
+    if(MyGetCartesianPosition == NULL) {
+        std::cout << "Cannot load GetCartesianPosition" << std::endl;
+    }
+    
+    MyGetClientConfigurations = (int (*)(ClientConfigurations &)) dlsym(commandLayerHandle, "GetClientConfigurations");
+    if(MyGetClientConfigurations == NULL) {
+        std::cout << "Cannot load GetClientConfigurations" << std::endl;
+    }
+    
+    MyGetClientConfigurations = (int (*)(ClientConfigurations &)) dlsym(commandLayerHandle, "GetClientConfigurations");
+    if(MyGetClientConfigurations == NULL) {
+        std::cout << "Cannot load GetClientConfigurations" << std::endl;
+    }
+    
+    MyGetControlMapping = (int (*)(ControlMappingCharts &)) dlsym(commandLayerHandle, "GetControlMapping");
+    if(MyGetControlMapping == NULL) {
+        std::cout << "Cannot load GetControlMapping" << std::endl;
+    }
+    
+    MyGetControlType = (int (*)(int &)) dlsym(commandLayerHandle, "GetControlType");
+    if(MyGetControlType == NULL) {
+        std::cout << "Cannot load GetControlType" << std::endl;
+    }
+    
+    MyGetDevices = (int (*)(KinovaDevice *, int &)) dlsym(commandLayerHandle, "GetDevices");
+    if(MyGetDevices == NULL) {
+        std::cout << "Cannot load GetDevices" << std::endl;
+    }
+    
+    MyGetEndEffectorOffset = (int (*)(unsigned int &, float &,
+                                      float &, float &)) dlsym(commandLayerHandle, "GetEndEffectorOffset");
+    if(MyGetEndEffectorOffset == NULL) {
+        std::cout << "Cannot load GetEndEffectorOffset" << std::endl;
+    }
+    
+    MyGetEthernetConfiguration = (int (*)(EthernetConfiguration *)) dlsym(commandLayerHandle, "GetEthernetConfiguration");
+    if(MyGetEthernetConfiguration == NULL) {
+        std::cout << "Cannot load GetEthernetConfiguration" << std::endl;
+    }
+    
+    MyGetForcesInfo = (int (*)(ForcesInfo &)) dlsym(commandLayerHandle, "GetForcesInfo");
+    if(MyGetForcesInfo == NULL) {
+        std::cout << "Cannot load GetForcesInfo" << std::endl;
+    }
+    
+    MyGetGeneralInformations = (int (*)(GeneralInformations &)) dlsym(commandLayerHandle, "GetGeneralInformations");
+    if(MyGetGeneralInformations == NULL) {
+        std::cout << "Cannot load GetGeneralInformations" << std::endl;
+    }
+    
+    MyGetGlobalTrajectoryInfo = (int (*)(TrajectoryFIFO &)) dlsym(commandLayerHandle, "GetGlobalTrajectoryInfo");
+    if(MyGetGlobalTrajectoryInfo == NULL) {
+        std::cout << "Cannot load GetGlobalTrajectoryInfo" << std::endl;
+    }
+    
+    MyGetGripperStatus = (int (*)(Gripper &)) dlsym(commandLayerHandle, "GetGripperStatus");
+    if(MyGetGripperStatus == NULL) {
+        std::cout << "Cannot load GetGripperStatus" << std::endl;
+    }
+    
+    MyActivateExtraProtectionPinchingWrist = (int (*)(int)) dlsym(commandLayerHandle, "ActivateExtraProtectionPinchingWrist");
+    if(MyActivateExtraProtectionPinchingWrist == NULL) {
+        std::cout << "Cannot load ActivateExtraProtectionPinchingWrist" << std::endl;
+    }
+    
+    MyGetPositionCurrentActuators = (int (*)(std::vector<float> &)) dlsym(commandLayerHandle, "GetPositionCurrentActuators");
+    if(MyGetPositionCurrentActuators == NULL) {
+        std::cout << "Cannot load GetPositionCurrentActuators" << std::endl;
+    }
+    
+    MyGetProtectionZone = (int (*)(ZoneList &)) dlsym(commandLayerHandle, "GetProtectionZone");
+    if(MyGetProtectionZone == NULL) {
+        std::cout << "Cannot load GetProtectionZone" << std::endl;
+    }
+    
+    MyGetQuickStatus = (int (*)(QuickStatus &)) dlsym(commandLayerHandle, "GetQuickStatus");
+    if(MyGetQuickStatus == NULL) {
+        std::cout << "Cannot load GetQuickStatus" << std::endl;
+    }
+    
+    MyGetSensorsInfo = (int (*)(SensorsInfo &)) dlsym(commandLayerHandle, "GetSensorsInfo");
+    if(MyGetSensorsInfo == NULL) {
+        std::cout << "Cannot load GetSensorsInfo" << std::endl;
+    }
+    
+    MyGetSingularityVector = (int (*)(SingularityVector &)) dlsym(commandLayerHandle, "GetSingularityVector");
+    if(MyGetSingularityVector == NULL) {
+        std::cout << "Cannot load GetSingularityVector" << std::endl;
+    }
+    
+    MyGetSpasmFilterValues = (int (*)(float *, int &)) dlsym(commandLayerHandle, "GetSpasmFilterValues");
+    if(MyGetSpasmFilterValues == NULL) {
+        std::cout << "Cannot load GetSpasmFilterValues" << std::endl;
+    }
+    
+    MyGetSystemError = (int (*)(unsigned int, SystemError
+                                &)) dlsym(commandLayerHandle, "GetSystemError");
+    if(MyGetSystemError == NULL) {
+        std::cout << "Cannot load GetSystemError" << std::endl;
+    }
+    
+    MyGetSystemErrorCount = (int (*)(unsigned int &)) dlsym(commandLayerHandle, "GetSystemErrorCount");
+    if(MyGetSystemErrorCount == NULL) {
+        std::cout << "Cannot load GetSystemErrorCount" << std::endl;
+    }
+    
+    MyGetTrajectoryTorqueMode = (int (*)(int &)) dlsym(commandLayerHandle, "GetTrajectoryTorqueMode");
+    if(MyGetTrajectoryTorqueMode == NULL) {
+        std::cout << "Cannot load GetTrajectoryTorqueMode" << std::endl;
+    }
+    
+    MyMoveHome = (int (*)(int &)) dlsym(commandLayerHandle, "MoveHome");
+    if(MyMoveHome == NULL) {
+        std::cout << "Cannot load MoveHome" << std::endl;
+    }
+    
+    MyProgramFlash = (int (*)(const char *)) dlsym(commandLayerHandle, "ProgramFlash");
+    if(MyProgramFlash == NULL) {
+        std::cout << "Cannot load ProgramFlash" << std::endl;
+    }
+    
+    MyRefresDevicesList = (int (*)()) dlsym(commandLayerHandle, "RefresDevicesList");
+    if(MyRefresDevicesList == NULL) {
+        std::cout << "Cannot load RefresDevicesList" << std::endl;
+    }
+    
+    MyRestoreFactoryDefault = (int (*)()) dlsym(commandLayerHandle, "RestoreFactoryDefault");
+    if(MyRestoreFactoryDefault == NULL) {
+        std::cout << "Cannot load RestoreFactoryDefault" << std::endl;
+    }
+    
+    MyRunGravityZEstimationSequence = (int (*)(ROBOT_TYPE, double *)) dlsym(commandLayerHandle, "RunGravityZEstimationSequence");
+    if(MyRunGravityZEstimationSequence == NULL) {
+        std::cout << "Cannot load RunGravityZEstimationSequence" << std::endl;
+    }
+    
+    MySendAdvanceTrajectory = (int (*)(TrajectoryPoint)) dlsym(commandLayerHandle, "SendAdvanceTrajectory");
+    if(MySendAdvanceTrajectory == NULL) {
+        std::cout << "Cannot load SendAdvanceTrajectory" << std::endl;
+    }
+    
+    MySendAngularTorqueCommand = (int (*)(float *)) dlsym(commandLayerHandle, "SendAngularTorqueCommand");
+    if(MySendAngularTorqueCommand == NULL) {
+        std::cout << "Cannot load SendAngularTorqueCommand" << std::endl;
+    }
+    
+    MySendBasicTrajectory = (int (*)(TrajectoryPoint)) dlsym(commandLayerHandle, "SendBasicTrajectory");
+    if(MySendBasicTrajectory == NULL) {
+        std::cout << "Cannot load SendBasicTrajectory" << std::endl;
+    }
+    
+    MySendCartesianForceCommand = (int (*)(float *)) dlsym(commandLayerHandle, "SendCartesianForceCommand");
+    if(MySendCartesianForceCommand == NULL) {
+        std::cout << "Cannot load SendCartesianForceCommand" << std::endl;
+    }
+    
+    MySendJoystickCommand = (int (*)(JoystickCommand)) dlsym(commandLayerHandle, "SendJoystickCommand");
+    if(MySendJoystickCommand == NULL) {
+        std::cout << "Cannot load SendJoystickCommand" << std::endl;
+    }
+    
+    MySetActiveDevice = (int (*)(KinovaDevice)) dlsym(commandLayerHandle, "SetActiveDevice");
+    if(MySetActiveDevice == NULL) {
+        std::cout << "Cannot load SetActiveDevice" << std::endl;
+    }
+    
+    MySetActuatorPIDFilter = (int (*)(int, float, float, float)) dlsym(commandLayerHandle, "SetActuatorPIDFilter");
+    if(MySetActuatorPIDFilter == NULL) {
+        std::cout << "Cannot load SetActuatorPIDFilter" << std::endl;
+    }
+    
     MySetAngularControl = (int (*)()) dlsym(commandLayerHandle, "SetAngularControl");
-    if (MySetAngularControl == NULL) {
+    if(MySetAngularControl == NULL) {
         std::cout << "Cannot load SetAngularControl" << std::endl;
     }
-
-    MyInitAPI = (int (*)()) dlsym(commandLayerHandle, "InitAPI");
-    if (MyInitAPI == NULL) {
-        std::cout << "Cannot load InitAPI" << std::endl;
+    
+    MySetAngularInertiaDamping = (int (*)(AngularInfo, AngularInfo)) dlsym(commandLayerHandle, "SetAngularInertiaDamping");
+    if(MySetAngularInertiaDamping == NULL) {
+        std::cout << "Cannot load SetAngularInertiaDamping" << std::endl;
+    }
+    
+    MySetAngularTorqueMinMax = (int (*)(AngularInfo, AngularInfo)) dlsym(commandLayerHandle, "SetAngularTorqueMinMax");
+    if(MySetAngularTorqueMinMax == NULL) {
+        std::cout << "Cannot load SetAngularTorqueMinMax" << std::endl;
+    }
+    
+    MySetCartesianControl = (int (*)()) dlsym(commandLayerHandle, "SetCartesianControl");
+    if(MySetCartesianControl == NULL) {
+        std::cout << "Cannot load SetCartesianControl" << std::endl;
+    }
+    
+    MySetCartesianForceMinMax = (int (*)(CartesianInfo, CartesianInfo)) dlsym(commandLayerHandle, "SetCartesianForceMinMax");
+    if(MySetCartesianForceMinMax == NULL) {
+        std::cout << "Cannot load SetCartesianForceMinMax" << std::endl;
+    }
+    
+    MySetCartesianInertiaDamping = (int (*)(CartesianInfo, CartesianInfo)) dlsym(commandLayerHandle, "SetCartesianInertiaDamping");
+    if(MySetCartesianInertiaDamping == NULL) {
+        std::cout << "Cannot load SetCartesianInertiaDamping" << std::endl;
+    }
+    
+    MySetClientConfigurations = (int (*)(ClientConfigurations)) dlsym(commandLayerHandle, "SetClientConfigurations");
+    if(MySetClientConfigurations == NULL) {
+        std::cout << "Cannot load SetClientConfigurations" << std::endl;
+    }
+    
+    MySetControlMapping = (int (*)(ControlMappingCharts)) dlsym(commandLayerHandle, "SetControlMapping");
+    if(MySetControlMapping == NULL) {
+        std::cout << "Cannot load SetControlMapping" << std::endl;
+    }
+    
+    MySetEndEffectorOffset = (int (*)(unsigned int, float, float, float)) dlsym(commandLayerHandle, "SetEndEffectorOffset");
+    if(MySetEndEffectorOffset == NULL) {
+        std::cout << "Cannot load SetEndEffectorOffset" << std::endl;
+    }
+    
+    MySetEthernetConfiguration = (int (*)(EthernetConfiguration *)) dlsym(commandLayerHandle, "SetEthernetConfiguration");
+    if(MySetEthernetConfiguration == NULL) {
+        std::cout << "Cannot load SetEthernetConfiguration" << std::endl;
+    }
+    
+    MySetFrameType = (int (*)(int)) dlsym(commandLayerHandle, "SetFrameType");
+    if(MySetFrameType == NULL) {
+        std::cout << "Cannot load SetFrameType" << std::endl;
+    }
+    
+    MySetGravityManualInputParam = (int (*)(float *)) dlsym(commandLayerHandle, "SetGravityManualInputParam");
+    if(MySetGravityManualInputParam == NULL) {
+        std::cout << "Cannot load SetGravityManualInputParam" << std::endl;
+    }
+    
+    MySetGravityOptimalZParam = (int (*)(float *)) dlsym(commandLayerHandle, "SetGravityOptimalZParam");
+    if(MySetGravityOptimalZParam == NULL) {
+        std::cout << "Cannot load SetGravityOptimalZParam" << std::endl;
+    }
+    
+    MySetGravityPayload = (int (*)(float *)) dlsym(commandLayerHandle, "SetGravityPayload");
+    if(MySetGravityPayload == NULL) {
+        std::cout << "Cannot load SetGravityPayload" << std::endl;
+    }
+    
+    MySetGravityType = (int (*)(GRAVITY_TYPE)) dlsym(commandLayerHandle, "SetGravityType");
+    if(MySetGravityType == NULL) {
+        std::cout << "Cannot load SetGravityType" << std::endl;
+    }
+    
+    MySetGravityVector = (int (*)(float *)) dlsym(commandLayerHandle, "SetGravityVector");
+    if(MySetGravityVector == NULL) {
+        std::cout << "Cannot load SetGravityVector" << std::endl;
+    }
+    
+    MySetJointZero = (int (*)(int)) dlsym(commandLayerHandle, "SetJointZero");
+    if(MySetJointZero == NULL) {
+        std::cout << "Cannot load SetJointZero" << std::endl;
+    }
+    
+    MySetLocalMACAddress = (int (*)(unsigned char *, char *)) dlsym(commandLayerHandle, "SetLocalMACAddress");
+    if(MySetLocalMACAddress == NULL) {
+        std::cout << "Cannot load SetLocalMACAddress" << std::endl;
+    }
+    
+    MySetModel = (int (*)(char *, char *)) dlsym(commandLayerHandle, "SetModel");
+    if(MySetModel == NULL) {
+        std::cout << "Cannot load SetModel" << std::endl;
+    }
+    
+    MySetPositionLimitDistance = (int (*)(float *)) dlsym(commandLayerHandle, "SetPositionLimitDistance");
+    if(MySetPositionLimitDistance == NULL) {
+        std::cout << "Cannot load SetPositionLimitDistance" << std::endl;
+    }
+    
+    MySetProtectionZone = (int (*)(ZoneList)) dlsym(commandLayerHandle, "SetProtectionZone");
+    if(MySetProtectionZone == NULL) {
+        std::cout << "Cannot load SetProtectionZone" << std::endl;
+    }
+    
+    MySetSerialNumber = (int (*)(char *, char *)) dlsym(commandLayerHandle, "SetSerialNumber");
+    if(MySetSerialNumber == NULL) {
+        std::cout << "Cannot load SetSerialNumber" << std::endl;
+    }
+    
+    MySetSpasmFilterValues = (int (*)(float *, int)) dlsym(commandLayerHandle, "SetSpasmFilterValues");
+    if(MySetSpasmFilterValues == NULL) {
+        std::cout << "Cannot load SetSpasmFilterValues" << std::endl;
+    }
+    
+    MySetSwitchThreshold = (int (*)(float *)) dlsym(commandLayerHandle, "SetSwitchThreshold");
+    if(MySetSwitchThreshold == NULL) {
+        std::cout << "Cannot load SetSwitchThreshold" << std::endl;
+    }
+    
+    MySetTorqueActuatorDamping = (int (*)(float *)) dlsym(commandLayerHandle, "SetTorqueActuatorDamping");
+    if(MySetActuatorPIDFilter == NULL) {
+        std::cout << "Cannot load SetTorqueActuatorDamping" << std::endl;
+    }
+    
+    MySetTorqueActuatorGain = (int (*)(float *)) dlsym(commandLayerHandle, "SetTorqueActuatorGain");
+    if(MySetTorqueActuatorGain == NULL) {
+        std::cout << "Cannot load SetTorqueActuatorGain" << std::endl;
+    }
+    
+    MySetTorqueBrake = (int (*)(float *)) dlsym(commandLayerHandle, "SetTorqueBrake");
+    if(MySetTorqueBrake == NULL) {
+        std::cout << "Cannot load SetTorqueBrake" << std::endl;
+    }
+    
+    MySetTorqueCommandMax = (int (*)(float *)) dlsym(commandLayerHandle, "SetTorqueCommandMax");
+    if(MySetTorqueCommandMax == NULL) {
+        std::cout << "Cannot load SetTorqueCommandMax" << std::endl;
+    }
+    
+    MySetTorqueControlType = (int (*)(TORQUECONTROL_TYPE)) dlsym(commandLayerHandle, "SetTorqueControlType");
+    if(MySetTorqueControlType == NULL) {
+        std::cout << "Cannot load SetTorqueControlType" << std::endl;
+    }
+    
+    MySetTorqueDampingMax = (int (*)(float *)) dlsym(commandLayerHandle, "SetTorqueDampingMax");
+    if(MySetTorqueDampingMax == NULL) {
+        std::cout << "Cannot load SetTorqueDampingMax" << std::endl;
+    }
+    
+    MySetTorqueErrorDeadband = (int (*)(float *)) dlsym(commandLayerHandle, "SetTorqueErrorDeadband");
+    if(MySetTorqueErrorDeadband == NULL) {
+        std::cout << "Cannot load SetTorqueErrorDeadband" << std::endl;
+    }
+    
+    MySetTorqueErrorResend = (int (*)(float *)) dlsym(commandLayerHandle, "SetTorqueErrorResend");
+    if(MySetTorqueErrorResend == NULL) {
+        std::cout << "Cannot load SetTorqueErrorResend" << std::endl;
+    }
+    
+    MySetTorqueFeedCurrent = (int (*)(float *)) dlsym(commandLayerHandle, "SetTorqueFeedCurrent");
+    if(MySetTorqueFeedCurrent == NULL) {
+        std::cout << "Cannot load SetTorqueFeedCurrent" << std::endl;
+    }
+    
+    MySetTorqueFeedCurrentVoltage = (int (*)(float *)) dlsym(commandLayerHandle, "SetTorqueFeedCurrentVoltage");
+    if(MySetTorqueFeedCurrentVoltage == NULL) {
+        std::cout << "Cannot load SetTorqueFeedCurrentVoltage" << std::endl;
+    }
+    
+    MySetTorqueFeedFilter = (int (*)(float *)) dlsym(commandLayerHandle, "SetTorqueFeedFilter");
+    if(MySetTorqueFeedFilter == NULL) {
+        std::cout << "Cannot load SetTorqueFeedFilter" << std::endl;
+    }
+    
+    MySetTorqueFeedVelocity = (int (*)(float *)) dlsym(commandLayerHandle, "SetTorqueFeedVelocity");
+    if(MySetTorqueFeedVelocity == NULL) {
+        std::cout << "Cannot load SetTorqueFeedVelocity" << std::endl;
+    }
+    
+    MySetTorqueFeedVelocityUnderGain = (int (*)(float *)) dlsym(commandLayerHandle, "SetTorqueFeedVelocityUnderGain");
+    if(MySetTorqueFeedVelocityUnderGain == NULL) {
+        std::cout << "Cannot load SetTorqueFeedVelocityUnderGain" << std::endl;
+    }
+    
+    MySetTorqueFilterControlEffort = (int (*)(float *)) dlsym(commandLayerHandle, "SetTorqueFilterControlEffort");
+    if(MySetTorqueFilterControlEffort == NULL) {
+        std::cout << "Cannot load SetTorqueFilterControlEffort" << std::endl;
+    }
+    
+    MySetTorqueFilterError = (int (*)(float *)) dlsym(commandLayerHandle, "SetTorqueFilterError");
+    if(MySetTorqueFilterError == NULL) {
+        std::cout << "Cannot load SetTorqueFilterError" << std::endl;
+    }
+    
+    MySetTorqueFilterMeasuredTorque = (int (*)(float *)) dlsym(commandLayerHandle, "SetTorqueFilterMeasuredTorque");
+    if(MySetTorqueFilterMeasuredTorque == NULL) {
+        std::cout << "Cannot load SetTorqueFilterMeasuredTorque" << std::endl;
+    }
+    
+    MySetTorqueFilterVelocity = (int (*)(float *)) dlsym(commandLayerHandle, "SetTorqueFilterVelocity");
+    if(MySetTorqueFilterVelocity == NULL) {
+        std::cout << "Cannot load SetTorqueFilterVelocity" << std::endl;
+    }
+    
+    MySetTorqueGainMax = (int (*)(float *)) dlsym(commandLayerHandle, "SetTorqueGainMax");
+    if(MySetTorqueGainMax == NULL) {
+        std::cout << "Cannot load SetTorqueGainMax" << std::endl;
+    }
+    
+    MySetTorqueInactivityTimeActuator = (int (*)(float *)) dlsym(commandLayerHandle, "SetTorqueInactivityTimeActuator");
+    if(MySetTorqueInactivityTimeActuator == NULL) {
+        std::cout << "Cannot load SetTorqueInactivityTimeActuator" << std::endl;
+    }
+    
+    MySetTorqueInactivityTimeMainController = (int (*)(int)) dlsym(commandLayerHandle, "SetTorqueInactivityTimeMainController");
+    if(MySetTorqueInactivityTimeMainController == NULL) {
+        std::cout << "Cannot load SetTorqueInactivityTimeMainController" << std::endl;
+    }
+    
+    MySetTorqueInactivityType = (int (*)(int)) dlsym(commandLayerHandle, "SetTorqueInactivityType");
+    if(MySetTorqueInactivityType == NULL) {
+        std::cout << "Cannot load SetTorqueInactivityType" << std::endl;
+    }
+    
+    MySetTorquePositionLimitDampingGain = (int (*)(float *)) dlsym(commandLayerHandle, "SetTorquePositionLimitDampingGain");
+    if(MySetTorquePositionLimitDampingGain == NULL) {
+        std::cout << "Cannot load SetTorquePositionLimitDampingGain" << std::endl;
+    }
+    
+    MySetTorquePositionLimitDampingMax = (int (*)(float *)) dlsym(commandLayerHandle, "SetTorquePositionLimitDampingMax");
+    if(MySetTorquePositionLimitDampingMax == NULL) {
+        std::cout << "Cannot load SetTorquePositionLimitDampingMax" << std::endl;
+    }
+    
+    MySetTorquePositionLimitRepulsGain = (int (*)(float *)) dlsym(commandLayerHandle, "SetTorquePositionLimitRepulsGain");
+    if(MySetTorquePositionLimitRepulsGain == NULL) {
+        std::cout << "Cannot load SetTorquePositionLimitRepulsGain" << std::endl;
+    }
+    
+    MySetTorquePositionLimitRepulsMax = (int (*)(float *)) dlsym(commandLayerHandle, "SetTorquePositionLimitRepulsMax");
+    if(MySetTorquePositionLimitRepulsMax == NULL) {
+        std::cout << "Cannot load SetTorquePositionLimitRepulsMax" << std::endl;
+    }
+    
+    MySetTorqueRateLimiter = (int (*)(float *)) dlsym(commandLayerHandle, "SetTorqueRateLimiter");
+    if(MySetTorqueRateLimiter == NULL) {
+        std::cout << "Cannot load SetTorqueRateLimiter" << std::endl;
+    }
+    
+    MySetTorqueRobotProtection = (int (*)(int)) dlsym(commandLayerHandle, "SetTorqueRobotProtection");
+    if(MySetTorqueRobotProtection == NULL) {
+        std::cout << "Cannot load SetTorqueRobotProtection" << std::endl;
+    }
+    
+    MySetTorqueSafetyFactor = (int (*)(float)) dlsym(commandLayerHandle, "SetTorqueSafetyFactor");
+    if(MySetTorqueSafetyFactor == NULL) {
+        std::cout << "Cannot load SetTorqueSafetyFactor" << std::endl;
+    }
+    
+    MySetTorqueStaticFriction = (int (*)(float *)) dlsym(commandLayerHandle, "SetTorqueStaticFriction");
+    if(MySetTorqueStaticFriction == NULL) {
+        std::cout << "Cannot load SetTorqueStaticFriction" << std::endl;
+    }
+    
+    MySetTorqueStaticFrictionMax = (int (*)(float *)) dlsym(commandLayerHandle, "SetTorqueStaticFrictionMax");
+    if(MySetTorqueStaticFrictionMax == NULL) {
+        std::cout << "Cannot load SetTorqueStaticFrictionMax" << std::endl;
+    }
+    
+    MySetTorqueVelocityLimitFilter = (int (*)(float *)) dlsym(commandLayerHandle, "SetTorqueVelocityLimitFilter");
+    if(MySetTorqueVelocityLimitFilter == NULL) {
+        std::cout << "Cannot load SetTorqueVelocityLimitFilter" << std::endl;
+    }
+    
+    MySetTorqueVibrationController = (int (*)(float)) dlsym(commandLayerHandle, "SetTorqueVibrationController");
+    if(MySetTorqueVibrationController == NULL) {
+        std::cout << "Cannot load SetTorqueVibrationController" << std::endl;
+    }
+    
+    MySetTorqueZero = (int (*)(int)) dlsym(commandLayerHandle, "SetTorqueZero");
+    if(MySetTorqueZero == NULL) {
+        std::cout << "Cannot load SetTorqueZero" << std::endl;
+    }
+    
+    MyStartControlAPI = (int (*)()) dlsym(commandLayerHandle, "StartControlAPI");
+    if(MyStartControlAPI == NULL) {
+        std::cout << "Cannot load StartControlAPI" << std::endl;
+    }
+    
+    MyStartCurrentLimitation = (int (*)()) dlsym(commandLayerHandle, "StartCurrentLimitation");
+    if(MyStartCurrentLimitation == NULL) {
+        std::cout << "Cannot load StartCurrentLimitation" << std::endl;
+    }
+    
+    MyStartForceControl = (int (*)()) dlsym(commandLayerHandle, "StartForceControl");
+    if(MyStartForceControl == NULL) {
+        std::cout << "Cannot load StartForceControl" << std::endl;
+    }
+    
+    MyStartRedundantJointNullSpaceMotion = (int (*)()) dlsym(commandLayerHandle, "StartRedundantJointNullSpaceMotion");
+    if(MyStartRedundantJointNullSpaceMotion == NULL) {
+        std::cout << "Cannot load StartRedundantJointNullSpaceMotion" << std::endl;
+    }
+    
+    MyStopControlAPI = (int (*)()) dlsym(commandLayerHandle, "StopControlAPI");
+    if(MyStopControlAPI == NULL) {
+        std::cout << "Cannot load StopControlAPI" << std::endl;
+    }
+    
+    MyStopCurrentLimitation = (int (*)()) dlsym(commandLayerHandle, "StopCurrentLimitation");
+    if(MyStopCurrentLimitation == NULL) {
+        std::cout << "Cannot load StopCurrentLimitation" << std::endl;
+    }
+    
+    MyStopForceControl = (int (*)()) dlsym(commandLayerHandle, "StopForceControl");
+    if(MyStopForceControl == NULL) {
+        std::cout << "Cannot load StopForceControl" << std::endl;
+    }
+    
+    MyStartControlAPI = (int (*)()) dlsym(commandLayerHandle, "StartControlAPI");
+    if(MyStartControlAPI == NULL) {
+        std::cout << "Cannot load StartControlAPI" << std::endl;
+    }
+    
+    MyStopRedundantJointNullSpaceMotion = (int (*)()) dlsym(commandLayerHandle, "StopRedundantJointNullSpaceMotion");
+    if(MyStopRedundantJointNullSpaceMotion == NULL) {
+        std::cout << "Cannot load StopRedundantJointNullSpaceMotion" << std::endl;
+    }
+    
+    MySwitchTrajectoryTorque = (int (*)(GENERALCONTROL_TYPE)) dlsym(commandLayerHandle, "SwitchTrajectoryTorque");
+    if(MySwitchTrajectoryTorque == NULL) {
+        std::cout << "Cannot load SwitchTrajectoryTorque" << std::endl;
     }
     
     for (int i = 0; i < ACTUATORS_COUNT; i++)
@@ -211,175 +650,6 @@ void Robot::initializeAPI() {
     
     (*MyInitAPI)();
     (*MySetAngularControl)();
-    std::cout << "API Initialized" << std::endl;
-}
-
-/**
- * Loads the functions and initialises the API
- * @param optionFile path of the file containing the setup
- */
-void Robot::initializeAPI(const std::string& optionFile) {
-    FunctionsMap map;
-    map.insert("ActivateAutoNullSpaceMotionCartesian", (*MyActivateAutoNullSpaceMotionCartesian));
-    map.insert("ActivateCollisionAutomaticAvoidance", (*MyActivateCollisionAutomaticAvoidance));
-    map.insert("ActivateExtraProtectionPinchingWrist", (*MyActivateExtraProtectionPinchingWrist));
-    map.insert("ActivateSingularityAutomaticAvoidance", (*MyActivateSingularityAutomaticAvoidance));
-    map.insert("ClearErrorLog", (*MyClearErrorLog));
-    map.insert("EraseAllProtectionZones", (*MyEraseAllProtectionZones));
-    map.insert("EraseAllTrajectories", (*MyEraseAllTrajectories));
-    map.insert("GetActualTrajectoryInfo", (*MyGetActualTrajectoryInfo));
-    map.insert("GetActuatorAcceleration", (*MyGetActuatorAcceleration));
-    map.insert("GetAngularCurrent", (*MyGetAngularCurrent));
-    map.insert("GetAngularCurrentMotor", (*MyGetAngularCurrentMotor));
-    map.insert("GetAngularForce", (*MyGetAngularForce));
-    map.insert("GetAngularForceGravityFree", (*MyGetAngularForceGravityFree));
-    map.insert("GetAngularPosition", (*MyGetAngularPosition));
-    map.insert("GetAngularTorqueCommand", (*MyGetAngularTorqueCommand));
-    map.insert("GetAngularTorqueGravityEstimation", (*MyGetAngularTorqueGravityEstimation));
-    map.insert("GetAngularVelocity", (*MyGetAngularVelocity));
-    map.insert("GetAPIVersion", (*MyGetAPIVersion));
-    map.insert("GetCartesianCommand", (*MyGetCartesianCommand));
-    map.insert("GetCartesianForce", (*MyGetCartesianForce));
-    map.insert("GetCartesianPosition", (*MyGetCartesianPosition));
-    map.insert("GetClientConfigurations", (*MyGetClientConfigurations));
-    map.insert("GetCodeVersion", (*MyGetCodeVersion));
-    map.insert("GetControlMapping", (*MyGetControlMapping));
-    map.insert("GetControlType", (*MyGetControlType));
-    map.insert("GetDevices", (*MyGetDevices));
-    map.insert("GetEndEffectorOffset", (*MyGetEndEffectorOffset));
-    map.insert("GetEthernetConfiguration", (*MyGetEthernetConfiguration));
-    map.insert("GetForcesInfo", (*MyGetForcesInfo));
-    map.insert("GetGeneralInformations", (*MyGetGeneralInformations));
-    map.insert("GetGlobalTrajectoryInfo", (*MyGetGlobalTrajectoryInfo));
-    map.insert("GetGripperStatus", (*MyGetGripperStatus));
-    map.insert("GetPositionCurrentActuators", (*MyGetPositionCurrentActuators));
-    map.insert("GetProtectionZone", (*MyGetProtectionZone));
-    map.insert("GetQuickStatus", (*MyGetQuickStatus));
-    map.insert("GetSensorsInfo", (*MyGetSensorsInfo));
-    map.insert("GetSingularityVector", (*MyGetSingularityVector));
-    map.insert("GetSpasmFilterValues", (*MyGetSpasmFilterValues));
-    map.insert("GetSystemError", (*MyGetSystemError));
-    map.insert("GetSystemErrorCount", (*MyGetSystemErrorCount));
-    map.insert("GetTrajectoryTorqueMode", (*MyGetTrajectoryTorqueMode));
-    map.insert("InitFingers", (*MyInitFingers));
-    map.insert("MoveHome", (*MyMoveHome));
-    map.insert("ProgramFlash", (*MyProgramFlash));
-    map.insert("RefresDevicesList", (*MyRefresDevicesList));
-    map.insert("RestoreFactoryDefault", (*MyRestoreFactoryDefault));
-    map.insert("RunGravityZEstimationSequence", (*MyRunGravityZEstimationSequence));
-    map.insert("SendAdvanceTrajectory", (*MySendAdvanceTrajectory));
-    map.insert("SendAngularTorqueCommand", (*MySendAngularTorqueCommand));
-    map.insert("SendBasicTrajectory", (*MySendBasicTrajectory));
-    map.insert("SendCartesianForceCommand", (*MySendCartesianForceCommand));
-    map.insert("SendJoystickCommand", (*MySendJoystickCommand));
-    map.insert("SetActiveDevice", (*MySetActiveDevice));
-    map.insert("SetActuatorPID", (*MySetActuatorPID));
-    map.insert("SetActuatorPIDFilter", (*MySetActuatorPIDFilter));
-    map.insert("SetAngularControl", (*MySetAngularControl));
-    map.insert("SetAngularInertiaDamping", (*MySetAngularInertiaDamping));
-    map.insert("SetAngularTorqueMinMax", (*MySetAngularTorqueMinMax));
-    map.insert("SetCartesianControl", (*MySetCartesianControl));
-    map.insert("SetCartesianForceMinMax", (*MySetCartesianForceMinMax));
-    map.insert("SetCartesianInertiaDamping", (*MySetCartesianInertiaDamping));
-    map.insert("SetClientConfigurations", (*MySetClientConfigurations));
-    map.insert("SetControlMapping", (*MySetControlMapping));
-    map.insert("SetEndEffectorOffset", (*MySetEndEffectorOffset));
-    map.insert("SetEthernetConfiguration", (*MySetEthernetConfiguration));
-    map.insert("SetFrameType", (*MySetFrameType));
-    map.insert("SetGravityManualInputParam", (*MySetGravityManualInputParam));
-    map.insert("SetGravityOptimalZParam", (*MySetGravityOptimalZParam));
-    map.insert("SetGravityPayload", (*MySetGravityPayload));
-    map.insert("SetGravityType", (*MySetGravityType));
-    map.insert("SetGravityVector", (*MySetGravityVector));
-    map.insert("SetJointZero", (*MySetJointZero));
-    map.insert("SetLocalMACAddress", (*MySetLocalMACAddress));
-    map.insert("SetModel", (*MySetModel));
-    map.insert("SetPositionLimitDistance", (*MySetPositionLimitDistance));
-    map.insert("SetProtectionZone", (*MySetProtectionZone));
-    map.insert("SetSerialNumber", (*MySetSerialNumber));
-    map.insert("SetSpasmFilterValues", (*MySetSpasmFilterValues));
-    map.insert("SetSwitchThreshold", (*MySetSwitchThreshold));
-    map.insert("SetTorqueActuatorDamping", (*MySetTorqueActuatorDamping));
-    map.insert("SetTorqueActuatorGain", (*MySetTorqueActuatorGain));
-    map.insert("SetTorqueBrake", (*MySetTorqueBrake));
-    map.insert("SetTorqueCommandMax", (*MySetTorqueCommandMax));
-    map.insert("SetTorqueControlType", (*MySetTorqueControlType));
-    map.insert("SetTorqueDampingMax", (*MySetTorqueDampingMax));
-    map.insert("SetTorqueErrorDeadband", (*MySetTorqueErrorDeadband));
-    map.insert("SetTorqueErrorResend", (*MySetTorqueErrorResend));
-    map.insert("SetTorqueFeedCurrent", (*MySetTorqueFeedCurrent));
-    map.insert("SetTorqueFeedCurrentVoltage", (*MySetTorqueFeedCurrentVoltage));
-    map.insert("SetTorqueFeedFilter", (*MySetTorqueFeedFilter));
-    map.insert("SetTorqueFeedVelocity", (*MySetTorqueFeedVelocity));
-    map.insert("SetTorqueFeedVelocityUnderGain", (*MySetTorqueFeedVelocityUnderGain));
-    map.insert("SetTorqueFilterControlEffort", (*MySetTorqueFilterControlEffort));
-    map.insert("SetTorqueFilterError", (*MySetTorqueFilterError));
-    map.insert("SetTorqueFilterMeasuredTorque", (*MySetTorqueFilterMeasuredTorque));
-    map.insert("SetTorqueFilterVelocity", (*MySetTorqueFilterVelocity));
-    map.insert("SetTorqueGainMax", (*MySetTorqueGainMax));
-    map.insert("SetTorqueInactivityTimeActuator", (*MySetTorqueInactivityTimeActuator));
-    map.insert("SetTorqueInactivityTimeMainController", (*MySetTorqueInactivityTimeMainController));
-    map.insert("SetTorqueInactivityType", (*MySetTorqueInactivityType));
-    map.insert("SetTorquePositionLimitDampingGain", (*MySetTorquePositionLimitDampingGain));
-    map.insert("SetTorquePositionLimitDampingMax", (*MySetTorquePositionLimitDampingMax));
-    map.insert("SetTorquePositionLimitRepulsGain", (*MySetTorquePositionLimitRepulsGain));
-    map.insert("SetTorquePositionLimitRepulsMax", (*MySetTorquePositionLimitRepulsMax));
-    map.insert("SetTorqueRateLimiter", (*MySetTorqueRateLimiter));
-    map.insert("SetTorqueRobotProtection", (*MySetTorqueRobotProtection));
-    map.insert("SetTorqueSafetyFactor", (*MySetTorqueSafetyFactor));
-    map.insert("SetTorqueStaticFriction", (*MySetTorqueStaticFriction));
-    map.insert("SetTorqueStaticFrictionMax", (*MySetTorqueStaticFrictionMax));
-    map.insert("SetTorqueVelocityLimitFilter", (*MySetTorqueVelocityLimitFilter));
-    map.insert("SetTorqueVibrationController", (*MySetTorqueVibrationController));
-    map.insert("SetTorqueZero", (*MySetTorqueZero));
-    map.insert("StartControlAPI", (*MyStartControlAPI));
-    map.insert("StartCurrentLimitation", (*MyStartCurrentLimitation));
-    map.insert("StartForceControl", (*MyStartForceControl));
-    map.insert("StartRedundantJointNullSpaceMotion", (*MyStartRedundantJointNullSpaceMotion));
-    map.insert("StopControlAPI", (*MyStopControlAPI));
-    map.insert("StopCurrentLimitation", (*MyStopCurrentLimitation));
-    map.insert("StopForceControl", (*MyStopForceControl));
-    map.insert("StopRedundantJointNullSpaceMotion", (*MyStopRedundantJointNullSpaceMotion));
-    map.insert("SwitchTrajectoryTorque", (*MySwitchTrajectoryTorque));
-    
-    
-    std::string line = "";
-    std::ifstream file(optionFile);
-    
-    if(file.is_open())
-    {
-        while(getline(file, line))
-        {
-            auto mapIter = map.m1.find(line);
-            auto mapVal = mapIter->second;
-            auto typeCastedFun = (int(*)())(mapVal.first);
-            typeCastedFun = (int (*)()) dlsym(commandLayerHandle, line.c_str());
-            if(typeCastedFun == NULL)
-               std::cout << "Cannot load " << line << std::endl;
-        }
-        file.close();
-    }
-    else
-    std::cout << "ERROR:: COULD NOT OPEN " << optionFile << " file." << std::endl;
-               
-	MyCloseAPI = (int (*)()) dlsym(commandLayerHandle, "CloseAPI");
-	if (MyCloseAPI == NULL) {
-		std::cout << "Cannot load CloseAPI" << std::endl;
-	}
-
-	MyInitAPI = (int (*)()) dlsym(commandLayerHandle, "InitAPI");
-	if (MyInitAPI == NULL) {
-		std::cout << "Cannot load InitAPI" << std::endl;
-	}
-
-    for (int i = 0; i < ACTUATORS_COUNT; i++)
-    {
-        CartForceCommand[i] = 0;
-        TorqueCommand[i] = 0;
-    }
-    
-    
-    (*MyInitAPI)();
     std::cout << "API Initialized" << std::endl;
 }
 

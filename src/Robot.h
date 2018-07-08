@@ -12,13 +12,12 @@
 
 class Robot {
 public:
-    Robot(const std::string& libPath, const std::string& optionFile = "");
+    Robot(const std::string& libPath);
     ~Robot();
     
     /* Robot-API.cpp */
     void closeAPI();
     void initializeAPI();
-    void initializeAPI(const std::string& optionFile);
     EthernetConfiguration* getEthernetConfiguration();
     void programFlash(const std::string& filename);
     std::vector<KinovaDevice> getDevices(int &result);

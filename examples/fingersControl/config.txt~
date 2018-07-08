@@ -1,5 +1,0 @@
-InitFingers
-SendBasicTrajectory
-SetAngularControl
-StopControlAPI
-SwitchTrajectoryTorque
