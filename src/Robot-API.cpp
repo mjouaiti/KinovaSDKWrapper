@@ -323,6 +323,12 @@ void Robot::initializeAPI() {
         std::cout << "Cannot load SetActiveDevice" << std::endl;
     }
     
+    MySetActuatorPID = (int (*)(unsigned int, float,
+                                float, float)) dlsym(commandLayerHandle, "SetActuatorPID");
+    if(MySetActuatorPID == NULL) {
+        std::cout << "Cannot load SetActuatorPID" << std::endl;
+    }
+    
     MySetActuatorPIDFilter = (int (*)(int, float, float, float)) dlsym(commandLayerHandle, "SetActuatorPIDFilter");
     if(MySetActuatorPIDFilter == NULL) {
         std::cout << "Cannot load SetActuatorPIDFilter" << std::endl;
