@@ -34,6 +34,7 @@ class Robot {
 public:
     Robot(const std::string& libPath);
     ~Robot();
+    void tryAPI();
     
     /* Robot-API.cpp */
     void closeAPI();

@@ -45,7 +45,7 @@ Robot::Robot(const std::string& libPath)
 	commandLayerHandle = dlopen(libPath.c_str(), RTLD_NOW|RTLD_GLOBAL);
 
 	if (commandLayerHandle == NULL) {
-		std::cout << "Error while loading library." << std::endl;
+        std::cout << "Error while loading library:" << libPath << std::endl;
 	}
     
     this->initializeAPI();
