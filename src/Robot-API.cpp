@@ -677,6 +677,14 @@ void Robot::initializeAPI() {
     
     
     (*MyInitAPI)();
+    int result = 0;
+    std::vector<KinovaDevice> devices = getDevices(result);
+    if(devices.size() < 1)
+    {
+        std::cerr << "No Device Connected. Check connection and make sure your device is on" << std::endl;
+        closeAPI();
+        std::exit(0);
+    }
     (*MyInitFingers)();
     std::cout << "API Initialized" << std::endl;
 }
