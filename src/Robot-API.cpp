@@ -141,7 +141,7 @@ void Robot::initializeAPI() {
         std::cout << "Cannot load GetAngularVelocity" << std::endl;
     }
     
-    MyGetAPIVersion = (int (*)(std::vector<int> &)) dlsym(commandLayerHandle, "GetAPIVersion");
+    MyGetAPIVersion = (int (*)(int Response[API_VERSION_COUNT])) dlsym(commandLayerHandle, "GetAPIVersion");
     if(MyGetAPIVersion == NULL) {
         std::cout << "Cannot load GetAPIVersion" << std::endl;
     }
@@ -169,6 +169,11 @@ void Robot::initializeAPI() {
     MyGetClientConfigurations = (int (*)(ClientConfigurations &)) dlsym(commandLayerHandle, "GetClientConfigurations");
     if(MyGetClientConfigurations == NULL) {
         std::cout << "Cannot load GetClientConfigurations" << std::endl;
+    }
+    
+    MyGetCodeVersion = (int (*)(int Response[CODE_VERSION_COUNT])) dlsym(commandLayerHandle, "GetCodeVersion");
+    if(MyGetCodeVersion == NULL) {
+        std::cout << "Cannot load GetCodeVersion" << std::endl;
     }
     
     MyGetControlMapping = (int (*)(ControlMappingCharts &)) dlsym(commandLayerHandle, "GetControlMapping");
@@ -215,16 +220,6 @@ void Robot::initializeAPI() {
     MyGetGripperStatus = (int (*)(Gripper &)) dlsym(commandLayerHandle, "GetGripperStatus");
     if(MyGetGripperStatus == NULL) {
         std::cout << "Cannot load GetGripperStatus" << std::endl;
-    }
-    
-    MyActivateExtraProtectionPinchingWrist = (int (*)(int)) dlsym(commandLayerHandle, "ActivateExtraProtectionPinchingWrist");
-    if(MyActivateExtraProtectionPinchingWrist == NULL) {
-        std::cout << "Cannot load ActivateExtraProtectionPinchingWrist" << std::endl;
-    }
-    
-    MyGetPositionCurrentActuators = (int (*)(std::vector<float> &)) dlsym(commandLayerHandle, "GetPositionCurrentActuators");
-    if(MyGetPositionCurrentActuators == NULL) {
-        std::cout << "Cannot load GetPositionCurrentActuators" << std::endl;
     }
     
     MyGetProtectionZone = (int (*)(ZoneList &)) dlsym(commandLayerHandle, "GetProtectionZone");

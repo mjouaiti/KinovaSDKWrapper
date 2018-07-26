@@ -233,12 +233,12 @@ private:
     int (*MyGetAngularTorqueCommand)(float Command[COMMAND_SIZE]);
     int (*MyGetAngularTorqueGravityEstimation)(float Command[COMMAND_SIZE]);
     int (*MyGetAngularVelocity)(AngularPosition &);
-    int (*MyGetAPIVersion)(std::vector<int> &);
+    int (*MyGetAPIVersion)(int Response[API_VERSION_COUNT]);
     int (*MyGetCartesianCommand)(CartesianPosition &);
     int (*MyGetCartesianForce)(CartesianPosition &);
     int (*MyGetCartesianPosition)(CartesianPosition &);
     int (*MyGetClientConfigurations)(ClientConfigurations &command);
-    int (*MyGetCodeVersion)(std::vector<int> &);
+    int (*MyGetCodeVersion)(int Response[CODE_VERSION_COUNT]);
     int (*MyGetControlMapping)(ControlMappingCharts &);
     int (*MyGetControlType)(int &);
     int (*MyGetDevices)(KinovaDevice devices[MAX_KINOVA_DEVICE], int &result);
@@ -248,7 +248,6 @@ private:
     int (*MyGetGeneralInformations)(GeneralInformations &);
     int (*MyGetGlobalTrajectoryInfo)(TrajectoryFIFO &);
     int (*MyGetGripperStatus)(Gripper &);
-    int (*MyGetPositionCurrentActuators)(std::vector<float> &data);
     int (*MyGetProtectionZone)(ZoneList &Response);
     int (*MyGetQuickStatus)(QuickStatus &Response);
     int (*MyGetSensorsInfo)(SensorsInfo &);
