@@ -32,6 +32,7 @@
 void Robot::initializeVelocityTrajectory() {
     velocityTrajectory.InitStruct();
     velocityTrajectory.Position.Type = ANGULAR_VELOCITY;
+    velocityTrajectory.Position.HandMode = VELOCITY_MODE;
 }
 
 /**
@@ -112,6 +113,7 @@ void Robot::initializePositionTrajectory() {
     
     positionTrajectory.Position.Actuators = angularPosition.Actuators;
     positionTrajectory.Position.Fingers = angularPosition.Fingers;
+    velocityTrajectory.Position.HandMode = POSITION_MODE;
 }
 
 /**

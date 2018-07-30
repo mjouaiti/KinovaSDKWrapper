@@ -123,7 +123,6 @@ public:
     std::vector<float> getSpasmFilterValues(int &activationStatus);
     
     /* Robot-move.cpp */
-    
     void setVelocity(int actuator, double newVelocity);
     void setVelocity(std::vector<float> newVelocity);
     void setFingerVelocity(int fingerNumber, double newVelocity);
