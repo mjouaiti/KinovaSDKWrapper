@@ -101,3 +101,8 @@ void Robot::setControlMapping(ControlMappingCharts command)
 {
     (*MySetControlMapping)(command);
 }
+
+void Robot::initFingers()
+{
+    (*MyInitFingers)();
+}
