@@ -121,6 +121,7 @@ public:
     std::vector<float> calibrateAngularPosition(int numberOfIterations);
     std::vector<float> calibrateAngularVelocity(int numberOfIterations);
     std::vector<float> getSpasmFilterValues(int &activationStatus);
+    std::string getGripperStatus();
     
     /* Robot-move.cpp */
     void setVelocity(int actuator, double newVelocity);
