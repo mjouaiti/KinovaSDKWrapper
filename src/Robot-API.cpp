@@ -680,7 +680,6 @@ void Robot::initializeAPI() {
         closeAPI();
         std::exit(0);
     }
-    (*MyInitFingers)();
     std::cout << "API Initialized" << std::endl;
 }
 
