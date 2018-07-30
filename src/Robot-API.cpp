@@ -152,7 +152,7 @@ void Robot::initializeAPI() {
     }
     
     MyGetCartesianForce = (int (*)(CartesianPosition &)) dlsym(commandLayerHandle, "GetCartesianForce");
-    if(MyActivateExtraProtectionPinchingWrist == NULL) {
+    if(MyGetCartesianForce == NULL) {
         std::cout << "Cannot load GetCartesianForce" << std::endl;
     }
     
