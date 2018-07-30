@@ -38,6 +38,11 @@ void Robot::setCartesianControl() {
 	(*MySetCartesianControl)();
 }
 
+void Robot::initFingers()
+{
+    (*MyInitFingers)();
+}
+
 /**
  * This function activates/deactivates the automatic null space (elbow) motion during Cartesian control. This function is only available for 7 dof robots.
  * @param state When state=1, protection is activated. When state=0, protection is deactivated.

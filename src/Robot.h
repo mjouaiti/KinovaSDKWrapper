@@ -149,6 +149,7 @@ public:
     void activateCollisionAutomaticAvoidance(int state);
     void activateSingularityAutomaticAvoidance(int state);
     void activateExtraProtectionPinchingWrist(int state);
+    void initFingers();
     
     void setAngularControl();
     void setCartesianControl();
