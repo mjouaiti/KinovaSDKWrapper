@@ -272,43 +272,43 @@ std::vector<float> Robot::calibrateAngularData(int (*MyGetAngularData)(AngularPo
 	return mean;
 }
 
-std::string getGripperStatus()
+std::string Robot::getGripperStatus()
 {
     Gripper gripper;
     int result = (*MyGetGripperStatus)(gripper);
-    std::string str = "";
-    str << "Gripper's model : " << gripper.Model << endl;
-    for(int i = 0; i < 3; i++)
+    std::string str = "Gripper's model : ";
+    str += std::string(gripper.Model);
+    for(int i = 0; i < 2; i++)
     {
-        str << "Finger #" << (i + 1) << endl;
-        str << "Finger #" << (i + 1) << "'s actual acceleration : " << gripper.Fingers[i].ActualAcceleration << endl;
-        str << "Finger #" << (i + 1) << "'s actual average current : " << gripper.Fingers[i].ActualAverageCurrent << endl;
-        str << "Finger #" << (i + 1) << "'s actual command : " << gripper.Fingers[i].ActualCommand << endl;
-        str << "Finger #" << (i + 1) << "'s actual current : " << gripper.Fingers[i].ActualCurrent << endl;
-        str << "Finger #" << (i + 1) << "'s actual force : " << gripper.Fingers[i].ActualForce << endl;
-        str << "Finger #" << (i + 1) << "'s actual position : " << gripper.Fingers[i].ActualPosition << endl;
-        str << "Finger #" << (i + 1) << "'s actual speed : " << gripper.Fingers[i].ActualSpeed << endl;
-        str << "Finger #" << (i + 1) << "'s actual temperature : " << gripper.Fingers[i].ActualTemperature << endl;
-        str << "Finger #" << (i + 1) << "'s code version : " << gripper.Fingers[i].CodeVersion << endl;
-        str << "Finger #" << (i + 1) << "'s communication errors : " << gripper.Fingers[i].CommunicationErrors << endl;
-        str << "Finger #" << (i + 1) << "'s cycle count : " << gripper.Fingers[i].CycleCount << endl;
-        str << "Finger #" << (i + 1) << "'s device ID : " << gripper.Fingers[i].DeviceID << endl;
-        str << "Finger #" << (i + 1) << "'s finger address : " << gripper.Fingers[i].FingerAddress << endl;
-        str << "Finger #" << (i + 1) << "'s ID : " << gripper.Fingers[i].ID << endl;
-        str << "Finger #" << (i + 1) << "'s index : " << gripper.Fingers[i].Index << endl;
-        str << "Finger #" << (i + 1) << "'s is finger connected : " << gripper.Fingers[i].IsFingerConnected << endl;
-        str << "Finger #" << (i + 1) << "'s is finger init : " << gripper.Fingers[i].IsFingerInit << endl;
-        str << "Finger #" << (i + 1) << "'s max acceleration : " << gripper.Fingers[i].MaxAcceleration << endl;
-        str << "Finger #" << (i + 1) << "'s max angle : " << gripper.Fingers[i].MaxAngle << endl;
-        str << "Finger #" << (i + 1) << "'s max current : " << gripper.Fingers[i].MaxCurrent << endl;
-        str << "Finger #" << (i + 1) << "'s max force : " << gripper.Fingers[i].MaxForce << endl;
-        str << "Finger #" << (i + 1) << "'s max speed : " << gripper.Fingers[i].MaxSpeed << endl;
-        str << "Finger #" << (i + 1) << "'s min angle : " << gripper.Fingers[i].MinAngle << endl;
-        str << "Finger #" << (i + 1) << "'s oscillator tuning value : " << gripper.Fingers[i].OscillatorTuningValue << endl;
-        str << "Finger #" << (i + 1) << "'s peak current : " << gripper.Fingers[i].PeakCurrent << endl;
-        str << "Finger #" << (i + 1) << "'s peak max temp : " << gripper.Fingers[i].PeakMaxTemp << endl;
-        str << "Finger #" << (i + 1) << "'s peak min temp : " << gripper.Fingers[i].PeakMinTemp << endl;
-        str << "Finger #" << (i + 1) << "'s run time : " << gripper.Fingers[i].RunTime << endl << endl;
+        str += "\nFinger #" + std::to_string(i + 1);
+        str += "\nFinger #" + std::to_string(i + 1) + "'s actual acceleration : " + std::to_string(gripper.Fingers[i].ActualAcceleration);
+        str += "\nFinger #" + std::to_string(i + 1) + "'s actual average current : " + std::to_string(gripper.Fingers[i].ActualAverageCurrent);
+        str += "\nFinger #" + std::to_string(i + 1) + "'s actual command : " + std::to_string(gripper.Fingers[i].ActualCommand);
+        str += "\nFinger #" + std::to_string(i + 1) + "'s actual current : " + std::to_string(gripper.Fingers[i].ActualCurrent);
+        str += "\nFinger #" + std::to_string(i + 1) + "'s actual force : " + std::to_string(gripper.Fingers[i].ActualForce);
+        str += "\nFinger #" + std::to_string(i + 1) + "'s actual position : " + std::to_string(gripper.Fingers[i].ActualPosition);
+        str += "\nFinger #" + std::to_string(i + 1) + "'s actual speed : " + std::to_string(gripper.Fingers[i].ActualSpeed);
+        str += "\nFinger #" + std::to_string(i + 1) + "'s actual temperature : " + std::to_string(gripper.Fingers[i].ActualTemperature);
+        str += "\nFinger #" + std::to_string(i + 1) + "'s code version : " + std::to_string(gripper.Fingers[i].CodeVersion);
+        str += "\nFinger #" + std::to_string(i + 1) + "'s communication errors : " + std::to_string(gripper.Fingers[i].CommunicationErrors);
+        str += "\nFinger #" + std::to_string(i + 1) + "'s cycle count : " + std::to_string(gripper.Fingers[i].CycleCount);
+        str += "\nFinger #" + std::to_string(i + 1) + "'s device ID : " + std::to_string(gripper.Fingers[i].DeviceID);
+        str += "\nFinger #" + std::to_string(i + 1) + "'s finger address : " + std::to_string(gripper.Fingers[i].FingerAddress);
+        str += "\nFinger #" + std::to_string(i + 1) + "'s ID : " + std::string(gripper.Fingers[i].ID);
+        str += "\nFinger #" + std::to_string(i + 1) + "'s index : " + std::to_string(gripper.Fingers[i].Index);
+        str += "\nFinger #" + std::to_string(i + 1) + "'s is finger connected : " + std::to_string(gripper.Fingers[i].IsFingerConnected);
+        str += "\nFinger #" + std::to_string(i + 1) + "'s is finger init : " + std::to_string(gripper.Fingers[i].IsFingerInit);
+        str += "\nFinger #" + std::to_string(i + 1) + "'s max acceleration : " + std::to_string(gripper.Fingers[i].MaxAcceleration);
+        str += "\nFinger #" + std::to_string(i + 1) + "'s max angle : " + std::to_string(gripper.Fingers[i].MaxAngle);
+        str += "\nFinger #" + std::to_string(i + 1) + "'s max current : " + std::to_string(gripper.Fingers[i].MaxCurrent);
+        str += "\nFinger #" + std::to_string(i + 1) + "'s max force : " + std::to_string(gripper.Fingers[i].MaxForce);
+        str += "\nFinger #" + std::to_string(i + 1) + "'s max speed : " + std::to_string(gripper.Fingers[i].MaxSpeed);
+        str += "\nFinger #" + std::to_string(i + 1) + "'s min angle : " + std::to_string(gripper.Fingers[i].MinAngle);
+        str += "\nFinger #" + std::to_string(i + 1) + "'s oscillator tuning value : " + std::to_string(gripper.Fingers[i].OscillatorTuningValue);
+        str += "\nFinger #" + std::to_string(i + 1) + "'s peak current : " + std::to_string(gripper.Fingers[i].PeakCurrent);
+        str += "\nFinger #" + std::to_string(i + 1) + "'s peak max temp : " + std::to_string(gripper.Fingers[i].PeakMaxTemp);
+        str += "\nFinger #" + std::to_string(i + 1) + "'s peak min temp : " + std::to_string(gripper.Fingers[i].PeakMinTemp);
+        str += "\nFinger #" + std::to_string(i + 1) + "'s run time : " + std::to_string(gripper.Fingers[i].RunTime);
     }
-
+    return str;
 }
