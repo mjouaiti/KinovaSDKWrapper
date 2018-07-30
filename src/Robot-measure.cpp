@@ -52,62 +52,6 @@ void Robot::updateTrajectoryInfo() {
 }
 
 /*----------- Get joints values ---------------*/
-
-/**
- * Gets the acceleration of each actuator
- * @return acceleration of each actuator (std::vector<std::vector<float>>)
- */
-std::vector<std::vector<float>> Robot::getActuatorAcceleration()
-{
-    AngularAcceleration data;
-    std::vector<std::vector<float>> acc;
-    data.InitStruct();
-    (*MyGetActuatorAcceleration)(data);
-    acc.push_back({data.Actuator1_X, data.Actuator1_Y, data.Actuator1_Z});
-    acc.push_back({data.Actuator2_X, data.Actuator2_Y, data.Actuator2_Z});
-    acc.push_back({data.Actuator3_X, data.Actuator3_Y, data.Actuator3_Z});
-    acc.push_back({data.Actuator4_X, data.Actuator4_Y, data.Actuator4_Z});
-    acc.push_back({data.Actuator5_X, data.Actuator5_Y, data.Actuator5_Z});
-    acc.push_back({data.Actuator6_X, data.Actuator6_Y, data.Actuator6_Z});
-    return acc;
-}
-
-/**
- * This function returns the actual torque command of each actuator.
- * @return The angular torque command(std::vector<float>)
- */
-std::vector<float> Robot::getAngularTorqueCommand()
-{
-    float result[COMMAND_SIZE];
-    (*MyGetAngularTorqueCommand)(result);
-    std::vector<float> torque(std::begin(result), std::end(result));
-    return torque;
-}
-
-/**
- * This function returns the actual estimation of the gravity torques.
- * @return The gravity torques (std::vector<float>)
- */
-std::vector<float> Robot::getAngularTorqueGravityEstimation()
-{
-    float result[GRAVITY_PARAM_SIZE];
-    (*MyGetAngularTorqueGravityEstimation)(result);
-    std::vector<float> torque(std::begin(result), std::end(result));
-    return torque;
-}
-
-/**
- * This function gets the end effector offset's parameters. The end effector's offset is a translation offset, in meters, applied to the end effector of the robotic arm.
- * @param status indicates if the offset is applied or not (0 = not applied, 1 = applied).
- * @return the offset (std::vector<float>)
- */
-std::vector<float> Robot::getEndEffectorOffset(unsigned int &status)
-{
-    float x, y, z;
-    (*MyGetEndEffectorOffset)(status, x, y, z);
-    return {x, y, z};
-}
-
 /**
  * This function returns the current that each actuator consumes on the main power supply. Unit is Amperes.
  * @return current that each actuator consumes on the main power supply (std::vector<float>)
@@ -136,16 +80,6 @@ std::vector<float> Robot::getAngularForce()
 {
     (*MyGetAngularForce)(angularForce);
 	return convertAngularPositionToVector(angularForce);
-}
-
-/**
- * This function returns the torque, without gravity, of each actuator. Unit is Newton meter [N * m].
- * @return (std::vector<float>)
- */
-std::vector<float> Robot::getAngularForceGravityFree()
-{
-    (*MyGetAngularForceGravityFree)(angularForceGravityFree);
-	return convertAngularPositionToVector(angularForceGravityFree);
 }
 
 /**
@@ -225,15 +159,6 @@ std::vector<float> Robot::calibrateAngularForce(int numberOfIterations)
 }
 
 /**
- * calibrates angular force gravity free
- * @param numberOfIterations number of iterations
- */
-std::vector<float> Robot::calibrateAngularForceGravityFree(int numberOfIterations)
-{
-	return calibrateAngularData(*MyGetAngularForceGravityFree, numberOfIterations);
-}
-
-/**
  * calibrates angular position
  * @param numberOfIterations number of iterations
  */
@@ -253,7 +178,7 @@ std::vector<float> Robot::calibrateAngularVelocity(int numberOfIterations)
 
 /**
  * Template calibration function
- * @param MyGetAngularData can be MyGetAngularVelocity, MyGetAngularPosition, MyGetAngularForceGravityFree, MyGetAngularForce, MyGetAngularCurrent, MyGetAngularCurrentMotor
+ * @param MyGetAngularData can be MyGetAngularVelocity, MyGetAngularPosition, MyGetAngularForce, MyGetAngularCurrent, MyGetAngularCurrentMotor
  * @param numberOfIterations number of iterations
  */
 std::vector<float> Robot::calibrateAngularData(int (*MyGetAngularData)(AngularPosition &), int numberOfIterations) {

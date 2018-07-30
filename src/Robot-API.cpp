@@ -41,26 +41,6 @@ void Robot::closeAPI()
  * Loads ALL the functions and initialises the API
  */
 void Robot::initializeAPI() {
-    MyActivateAutoNullSpaceMotionCartesian = (int (*)(int)) dlsym(commandLayerHandle, "ActivateAutoNullSpaceMotionCartesian");
-    if(MyActivateAutoNullSpaceMotionCartesian == NULL) {
-        std::cout << "Cannot load ActivateAutoNullSpaceMotionCartesian" << std::endl;
-    }
-    
-    MyActivateCollisionAutomaticAvoidance = (int (*)(int)) dlsym(commandLayerHandle, "ActivateCollisionAutomaticAvoidance");
-    if(MyActivateCollisionAutomaticAvoidance == NULL) {
-        std::cout << "Cannot load ActivateCollisionAutomaticAvoidance" << std::endl;
-    }
-    
-    MyActivateExtraProtectionPinchingWrist = (int (*)(int)) dlsym(commandLayerHandle, "ActivateExtraProtectionPinchingWrist");
-    if(MyActivateExtraProtectionPinchingWrist == NULL) {
-        std::cout << "Cannot load ActivateExtraProtectionPinchingWrist" << std::endl;
-    }
-    
-    MyActivateSingularityAutomaticAvoidance = (int (*)(int)) dlsym(commandLayerHandle, "ActivateSingularityAutomaticAvoidance");
-    if(MyActivateSingularityAutomaticAvoidance == NULL) {
-        std::cout << "Cannot load ActivateSingularityAutomaticAvoidance" << std::endl;
-    }
-    
     MyClearErrorLog = (int (*)()) dlsym(commandLayerHandle, "ClearErrorLog");
     if(MyClearErrorLog == NULL) {
         std::cout << "Cannot load ClearErrorLog" << std::endl;
@@ -96,11 +76,6 @@ void Robot::initializeAPI() {
         std::cout << "Cannot load GetActualTrajectoryInfo" << std::endl;
     }
     
-    MyGetActuatorAcceleration = (int (*)(AngularAcceleration &)) dlsym(commandLayerHandle, "GetActuatorAcceleration");
-    if(MyGetActuatorAcceleration == NULL) {
-        std::cout << "Cannot load GetActuatorAcceleration" << std::endl;
-    }
-    
     MyGetAngularCurrent = (int (*)(AngularPosition &)) dlsym(commandLayerHandle, "GetAngularCurrent");
     if(MyGetAngularCurrent == NULL) {
         std::cout << "Cannot load GetAngularCurrent" << std::endl;
@@ -116,24 +91,9 @@ void Robot::initializeAPI() {
         std::cout << "Cannot load GetAngularForce" << std::endl;
     }
     
-    MyGetAngularForceGravityFree = (int (*)(AngularPosition &)) dlsym(commandLayerHandle, "GetAngularForceGravityFree");
-    if(MyGetAngularForceGravityFree == NULL) {
-        std::cout << "Cannot load GetAngularForceGravityFree" << std::endl;
-    }
-    
     MyGetAngularPosition = (int (*)(AngularPosition &)) dlsym(commandLayerHandle, "GetAngularPosition");
     if(MyGetAngularPosition == NULL) {
         std::cout << "Cannot load GetAngularPosition" << std::endl;
-    }
-    
-    MyGetAngularTorqueCommand = (int (*)(float *)) dlsym(commandLayerHandle, "GetAngularTorqueCommand");
-    if(MyGetAngularTorqueCommand == NULL) {
-        std::cout << "Cannot load GetAngularTorqueCommand" << std::endl;
-    }
-    
-    MyGetAngularTorqueGravityEstimation = (int (*)(float *)) dlsym(commandLayerHandle, "GetAngularTorqueGravityEstimation");
-    if(MyGetAngularTorqueGravityEstimation == NULL) {
-        std::cout << "Cannot load GetAngularTorqueGravityEstimation" << std::endl;
     }
     
     MyGetAngularVelocity = (int (*)(AngularPosition &)) dlsym(commandLayerHandle, "GetAngularVelocity");
@@ -152,7 +112,7 @@ void Robot::initializeAPI() {
     }
     
     MyGetCartesianForce = (int (*)(CartesianPosition &)) dlsym(commandLayerHandle, "GetCartesianForce");
-    if(MyActivateExtraProtectionPinchingWrist == NULL) {
+    if(MyGetCartesianForce == NULL) {
         std::cout << "Cannot load GetCartesianForce" << std::endl;
     }
     
@@ -189,22 +149,6 @@ void Robot::initializeAPI() {
     MyGetDevices = (int (*)(KinovaDevice *, int &)) dlsym(commandLayerHandle, "GetDevices");
     if(MyGetDevices == NULL) {
         std::cout << "Cannot load GetDevices" << std::endl;
-    }
-    
-    MyGetEndEffectorOffset = (int (*)(unsigned int &, float &,
-                                      float &, float &)) dlsym(commandLayerHandle, "GetEndEffectorOffset");
-    if(MyGetEndEffectorOffset == NULL) {
-        std::cout << "Cannot load GetEndEffectorOffset" << std::endl;
-    }
-    
-    MyGetEthernetConfiguration = (int (*)(EthernetConfiguration *)) dlsym(commandLayerHandle, "GetEthernetConfiguration");
-    if(MyGetEthernetConfiguration == NULL) {
-        std::cout << "Cannot load GetEthernetConfiguration" << std::endl;
-    }
-    
-    MyGetForcesInfo = (int (*)(ForcesInfo &)) dlsym(commandLayerHandle, "GetForcesInfo");
-    if(MyGetForcesInfo == NULL) {
-        std::cout << "Cannot load GetForcesInfo" << std::endl;
     }
     
     MyGetGeneralInformations = (int (*)(GeneralInformations &)) dlsym(commandLayerHandle, "GetGeneralInformations");
@@ -258,11 +202,6 @@ void Robot::initializeAPI() {
         std::cout << "Cannot load GetSystemErrorCount" << std::endl;
     }
     
-    MyGetTrajectoryTorqueMode = (int (*)(int &)) dlsym(commandLayerHandle, "GetTrajectoryTorqueMode");
-    if(MyGetTrajectoryTorqueMode == NULL) {
-        std::cout << "Cannot load GetTrajectoryTorqueMode" << std::endl;
-    }
-    
     MyMoveHome = (int (*)(int &)) dlsym(commandLayerHandle, "MoveHome");
     if(MyMoveHome == NULL) {
         std::cout << "Cannot load MoveHome" << std::endl;
@@ -283,29 +222,14 @@ void Robot::initializeAPI() {
         std::cout << "Cannot load RestoreFactoryDefault" << std::endl;
     }
     
-    MyRunGravityZEstimationSequence = (int (*)(ROBOT_TYPE, double *)) dlsym(commandLayerHandle, "RunGravityZEstimationSequence");
-    if(MyRunGravityZEstimationSequence == NULL) {
-        std::cout << "Cannot load RunGravityZEstimationSequence" << std::endl;
-    }
-    
     MySendAdvanceTrajectory = (int (*)(TrajectoryPoint)) dlsym(commandLayerHandle, "SendAdvanceTrajectory");
     if(MySendAdvanceTrajectory == NULL) {
         std::cout << "Cannot load SendAdvanceTrajectory" << std::endl;
     }
     
-    MySendAngularTorqueCommand = (int (*)(float *)) dlsym(commandLayerHandle, "SendAngularTorqueCommand");
-    if(MySendAngularTorqueCommand == NULL) {
-        std::cout << "Cannot load SendAngularTorqueCommand" << std::endl;
-    }
-    
     MySendBasicTrajectory = (int (*)(TrajectoryPoint)) dlsym(commandLayerHandle, "SendBasicTrajectory");
     if(MySendBasicTrajectory == NULL) {
         std::cout << "Cannot load SendBasicTrajectory" << std::endl;
-    }
-    
-    MySendCartesianForceCommand = (int (*)(float *)) dlsym(commandLayerHandle, "SendCartesianForceCommand");
-    if(MySendCartesianForceCommand == NULL) {
-        std::cout << "Cannot load SendCartesianForceCommand" << std::endl;
     }
     
     MySendJoystickCommand = (int (*)(JoystickCommand)) dlsym(commandLayerHandle, "SendJoystickCommand");
@@ -316,6 +240,11 @@ void Robot::initializeAPI() {
     MySetActiveDevice = (int (*)(KinovaDevice)) dlsym(commandLayerHandle, "SetActiveDevice");
     if(MySetActiveDevice == NULL) {
         std::cout << "Cannot load SetActiveDevice" << std::endl;
+    }
+    
+    MySetActuatorAdress = (int (*)(int, int)) dlsym(commandLayerHandle, "SetActuatorAdress");
+    if(MySetActuatorAdress == NULL) {
+        std::cout << "Cannot load SetActuatorAdress" << std::endl;
     }
     
     MySetActuatorPID = (int (*)(unsigned int, float,
@@ -334,29 +263,9 @@ void Robot::initializeAPI() {
         std::cout << "Cannot load SetAngularControl" << std::endl;
     }
     
-    MySetAngularInertiaDamping = (int (*)(AngularInfo, AngularInfo)) dlsym(commandLayerHandle, "SetAngularInertiaDamping");
-    if(MySetAngularInertiaDamping == NULL) {
-        std::cout << "Cannot load SetAngularInertiaDamping" << std::endl;
-    }
-    
-    MySetAngularTorqueMinMax = (int (*)(AngularInfo, AngularInfo)) dlsym(commandLayerHandle, "SetAngularTorqueMinMax");
-    if(MySetAngularTorqueMinMax == NULL) {
-        std::cout << "Cannot load SetAngularTorqueMinMax" << std::endl;
-    }
-    
     MySetCartesianControl = (int (*)()) dlsym(commandLayerHandle, "SetCartesianControl");
     if(MySetCartesianControl == NULL) {
         std::cout << "Cannot load SetCartesianControl" << std::endl;
-    }
-    
-    MySetCartesianForceMinMax = (int (*)(CartesianInfo, CartesianInfo)) dlsym(commandLayerHandle, "SetCartesianForceMinMax");
-    if(MySetCartesianForceMinMax == NULL) {
-        std::cout << "Cannot load SetCartesianForceMinMax" << std::endl;
-    }
-    
-    MySetCartesianInertiaDamping = (int (*)(CartesianInfo, CartesianInfo)) dlsym(commandLayerHandle, "SetCartesianInertiaDamping");
-    if(MySetCartesianInertiaDamping == NULL) {
-        std::cout << "Cannot load SetCartesianInertiaDamping" << std::endl;
     }
     
     MySetClientConfigurations = (int (*)(ClientConfigurations)) dlsym(commandLayerHandle, "SetClientConfigurations");
@@ -369,64 +278,9 @@ void Robot::initializeAPI() {
         std::cout << "Cannot load SetControlMapping" << std::endl;
     }
     
-    MySetEndEffectorOffset = (int (*)(unsigned int, float, float, float)) dlsym(commandLayerHandle, "SetEndEffectorOffset");
-    if(MySetEndEffectorOffset == NULL) {
-        std::cout << "Cannot load SetEndEffectorOffset" << std::endl;
-    }
-    
-    MySetEthernetConfiguration = (int (*)(EthernetConfiguration *)) dlsym(commandLayerHandle, "SetEthernetConfiguration");
-    if(MySetEthernetConfiguration == NULL) {
-        std::cout << "Cannot load SetEthernetConfiguration" << std::endl;
-    }
-    
-    MySetFrameType = (int (*)(int)) dlsym(commandLayerHandle, "SetFrameType");
-    if(MySetFrameType == NULL) {
-        std::cout << "Cannot load SetFrameType" << std::endl;
-    }
-    
-    MySetGravityManualInputParam = (int (*)(float *)) dlsym(commandLayerHandle, "SetGravityManualInputParam");
-    if(MySetGravityManualInputParam == NULL) {
-        std::cout << "Cannot load SetGravityManualInputParam" << std::endl;
-    }
-    
-    MySetGravityOptimalZParam = (int (*)(float *)) dlsym(commandLayerHandle, "SetGravityOptimalZParam");
-    if(MySetGravityOptimalZParam == NULL) {
-        std::cout << "Cannot load SetGravityOptimalZParam" << std::endl;
-    }
-    
-    MySetGravityPayload = (int (*)(float *)) dlsym(commandLayerHandle, "SetGravityPayload");
-    if(MySetGravityPayload == NULL) {
-        std::cout << "Cannot load SetGravityPayload" << std::endl;
-    }
-    
-    MySetGravityType = (int (*)(GRAVITY_TYPE)) dlsym(commandLayerHandle, "SetGravityType");
-    if(MySetGravityType == NULL) {
-        std::cout << "Cannot load SetGravityType" << std::endl;
-    }
-    
-    MySetGravityVector = (int (*)(float *)) dlsym(commandLayerHandle, "SetGravityVector");
-    if(MySetGravityVector == NULL) {
-        std::cout << "Cannot load SetGravityVector" << std::endl;
-    }
-    
     MySetJointZero = (int (*)(int)) dlsym(commandLayerHandle, "SetJointZero");
     if(MySetJointZero == NULL) {
         std::cout << "Cannot load SetJointZero" << std::endl;
-    }
-    
-    MySetLocalMACAddress = (int (*)(unsigned char *, char *)) dlsym(commandLayerHandle, "SetLocalMACAddress");
-    if(MySetLocalMACAddress == NULL) {
-        std::cout << "Cannot load SetLocalMACAddress" << std::endl;
-    }
-    
-    MySetModel = (int (*)(char *, char *)) dlsym(commandLayerHandle, "SetModel");
-    if(MySetModel == NULL) {
-        std::cout << "Cannot load SetModel" << std::endl;
-    }
-    
-    MySetPositionLimitDistance = (int (*)(float *)) dlsym(commandLayerHandle, "SetPositionLimitDistance");
-    if(MySetPositionLimitDistance == NULL) {
-        std::cout << "Cannot load SetPositionLimitDistance" << std::endl;
     }
     
     MySetProtectionZone = (int (*)(ZoneList)) dlsym(commandLayerHandle, "SetProtectionZone");
@@ -444,176 +298,6 @@ void Robot::initializeAPI() {
         std::cout << "Cannot load SetSpasmFilterValues" << std::endl;
     }
     
-    MySetSwitchThreshold = (int (*)(float *)) dlsym(commandLayerHandle, "SetSwitchThreshold");
-    if(MySetSwitchThreshold == NULL) {
-        std::cout << "Cannot load SetSwitchThreshold" << std::endl;
-    }
-    
-    MySetTorqueActuatorDamping = (int (*)(float *)) dlsym(commandLayerHandle, "SetTorqueActuatorDamping");
-    if(MySetActuatorPIDFilter == NULL) {
-        std::cout << "Cannot load SetTorqueActuatorDamping" << std::endl;
-    }
-    
-    MySetTorqueActuatorGain = (int (*)(float *)) dlsym(commandLayerHandle, "SetTorqueActuatorGain");
-    if(MySetTorqueActuatorGain == NULL) {
-        std::cout << "Cannot load SetTorqueActuatorGain" << std::endl;
-    }
-    
-    MySetTorqueBrake = (int (*)(float *)) dlsym(commandLayerHandle, "SetTorqueBrake");
-    if(MySetTorqueBrake == NULL) {
-        std::cout << "Cannot load SetTorqueBrake" << std::endl;
-    }
-    
-    MySetTorqueCommandMax = (int (*)(float *)) dlsym(commandLayerHandle, "SetTorqueCommandMax");
-    if(MySetTorqueCommandMax == NULL) {
-        std::cout << "Cannot load SetTorqueCommandMax" << std::endl;
-    }
-    
-    MySetTorqueControlType = (int (*)(TORQUECONTROL_TYPE)) dlsym(commandLayerHandle, "SetTorqueControlType");
-    if(MySetTorqueControlType == NULL) {
-        std::cout << "Cannot load SetTorqueControlType" << std::endl;
-    }
-    
-    MySetTorqueDampingMax = (int (*)(float *)) dlsym(commandLayerHandle, "SetTorqueDampingMax");
-    if(MySetTorqueDampingMax == NULL) {
-        std::cout << "Cannot load SetTorqueDampingMax" << std::endl;
-    }
-    
-    MySetTorqueErrorDeadband = (int (*)(float *)) dlsym(commandLayerHandle, "SetTorqueErrorDeadband");
-    if(MySetTorqueErrorDeadband == NULL) {
-        std::cout << "Cannot load SetTorqueErrorDeadband" << std::endl;
-    }
-    
-    MySetTorqueErrorResend = (int (*)(float *)) dlsym(commandLayerHandle, "SetTorqueErrorResend");
-    if(MySetTorqueErrorResend == NULL) {
-        std::cout << "Cannot load SetTorqueErrorResend" << std::endl;
-    }
-    
-    MySetTorqueFeedCurrent = (int (*)(float *)) dlsym(commandLayerHandle, "SetTorqueFeedCurrent");
-    if(MySetTorqueFeedCurrent == NULL) {
-        std::cout << "Cannot load SetTorqueFeedCurrent" << std::endl;
-    }
-    
-    MySetTorqueFeedCurrentVoltage = (int (*)(float *)) dlsym(commandLayerHandle, "SetTorqueFeedCurrentVoltage");
-    if(MySetTorqueFeedCurrentVoltage == NULL) {
-        std::cout << "Cannot load SetTorqueFeedCurrentVoltage" << std::endl;
-    }
-    
-    MySetTorqueFeedFilter = (int (*)(float *)) dlsym(commandLayerHandle, "SetTorqueFeedFilter");
-    if(MySetTorqueFeedFilter == NULL) {
-        std::cout << "Cannot load SetTorqueFeedFilter" << std::endl;
-    }
-    
-    MySetTorqueFeedVelocity = (int (*)(float *)) dlsym(commandLayerHandle, "SetTorqueFeedVelocity");
-    if(MySetTorqueFeedVelocity == NULL) {
-        std::cout << "Cannot load SetTorqueFeedVelocity" << std::endl;
-    }
-    
-    MySetTorqueFeedVelocityUnderGain = (int (*)(float *)) dlsym(commandLayerHandle, "SetTorqueFeedVelocityUnderGain");
-    if(MySetTorqueFeedVelocityUnderGain == NULL) {
-        std::cout << "Cannot load SetTorqueFeedVelocityUnderGain" << std::endl;
-    }
-    
-    MySetTorqueFilterControlEffort = (int (*)(float *)) dlsym(commandLayerHandle, "SetTorqueFilterControlEffort");
-    if(MySetTorqueFilterControlEffort == NULL) {
-        std::cout << "Cannot load SetTorqueFilterControlEffort" << std::endl;
-    }
-    
-    MySetTorqueFilterError = (int (*)(float *)) dlsym(commandLayerHandle, "SetTorqueFilterError");
-    if(MySetTorqueFilterError == NULL) {
-        std::cout << "Cannot load SetTorqueFilterError" << std::endl;
-    }
-    
-    MySetTorqueFilterMeasuredTorque = (int (*)(float *)) dlsym(commandLayerHandle, "SetTorqueFilterMeasuredTorque");
-    if(MySetTorqueFilterMeasuredTorque == NULL) {
-        std::cout << "Cannot load SetTorqueFilterMeasuredTorque" << std::endl;
-    }
-    
-    MySetTorqueFilterVelocity = (int (*)(float *)) dlsym(commandLayerHandle, "SetTorqueFilterVelocity");
-    if(MySetTorqueFilterVelocity == NULL) {
-        std::cout << "Cannot load SetTorqueFilterVelocity" << std::endl;
-    }
-    
-    MySetTorqueGainMax = (int (*)(float *)) dlsym(commandLayerHandle, "SetTorqueGainMax");
-    if(MySetTorqueGainMax == NULL) {
-        std::cout << "Cannot load SetTorqueGainMax" << std::endl;
-    }
-    
-    MySetTorqueInactivityTimeActuator = (int (*)(float *)) dlsym(commandLayerHandle, "SetTorqueInactivityTimeActuator");
-    if(MySetTorqueInactivityTimeActuator == NULL) {
-        std::cout << "Cannot load SetTorqueInactivityTimeActuator" << std::endl;
-    }
-    
-    MySetTorqueInactivityTimeMainController = (int (*)(int)) dlsym(commandLayerHandle, "SetTorqueInactivityTimeMainController");
-    if(MySetTorqueInactivityTimeMainController == NULL) {
-        std::cout << "Cannot load SetTorqueInactivityTimeMainController" << std::endl;
-    }
-    
-    MySetTorqueInactivityType = (int (*)(int)) dlsym(commandLayerHandle, "SetTorqueInactivityType");
-    if(MySetTorqueInactivityType == NULL) {
-        std::cout << "Cannot load SetTorqueInactivityType" << std::endl;
-    }
-    
-    MySetTorquePositionLimitDampingGain = (int (*)(float *)) dlsym(commandLayerHandle, "SetTorquePositionLimitDampingGain");
-    if(MySetTorquePositionLimitDampingGain == NULL) {
-        std::cout << "Cannot load SetTorquePositionLimitDampingGain" << std::endl;
-    }
-    
-    MySetTorquePositionLimitDampingMax = (int (*)(float *)) dlsym(commandLayerHandle, "SetTorquePositionLimitDampingMax");
-    if(MySetTorquePositionLimitDampingMax == NULL) {
-        std::cout << "Cannot load SetTorquePositionLimitDampingMax" << std::endl;
-    }
-    
-    MySetTorquePositionLimitRepulsGain = (int (*)(float *)) dlsym(commandLayerHandle, "SetTorquePositionLimitRepulsGain");
-    if(MySetTorquePositionLimitRepulsGain == NULL) {
-        std::cout << "Cannot load SetTorquePositionLimitRepulsGain" << std::endl;
-    }
-    
-    MySetTorquePositionLimitRepulsMax = (int (*)(float *)) dlsym(commandLayerHandle, "SetTorquePositionLimitRepulsMax");
-    if(MySetTorquePositionLimitRepulsMax == NULL) {
-        std::cout << "Cannot load SetTorquePositionLimitRepulsMax" << std::endl;
-    }
-    
-    MySetTorqueRateLimiter = (int (*)(float *)) dlsym(commandLayerHandle, "SetTorqueRateLimiter");
-    if(MySetTorqueRateLimiter == NULL) {
-        std::cout << "Cannot load SetTorqueRateLimiter" << std::endl;
-    }
-    
-    MySetTorqueRobotProtection = (int (*)(int)) dlsym(commandLayerHandle, "SetTorqueRobotProtection");
-    if(MySetTorqueRobotProtection == NULL) {
-        std::cout << "Cannot load SetTorqueRobotProtection" << std::endl;
-    }
-    
-    MySetTorqueSafetyFactor = (int (*)(float)) dlsym(commandLayerHandle, "SetTorqueSafetyFactor");
-    if(MySetTorqueSafetyFactor == NULL) {
-        std::cout << "Cannot load SetTorqueSafetyFactor" << std::endl;
-    }
-    
-    MySetTorqueStaticFriction = (int (*)(float *)) dlsym(commandLayerHandle, "SetTorqueStaticFriction");
-    if(MySetTorqueStaticFriction == NULL) {
-        std::cout << "Cannot load SetTorqueStaticFriction" << std::endl;
-    }
-    
-    MySetTorqueStaticFrictionMax = (int (*)(float *)) dlsym(commandLayerHandle, "SetTorqueStaticFrictionMax");
-    if(MySetTorqueStaticFrictionMax == NULL) {
-        std::cout << "Cannot load SetTorqueStaticFrictionMax" << std::endl;
-    }
-    
-    MySetTorqueVelocityLimitFilter = (int (*)(float *)) dlsym(commandLayerHandle, "SetTorqueVelocityLimitFilter");
-    if(MySetTorqueVelocityLimitFilter == NULL) {
-        std::cout << "Cannot load SetTorqueVelocityLimitFilter" << std::endl;
-    }
-    
-    MySetTorqueVibrationController = (int (*)(float)) dlsym(commandLayerHandle, "SetTorqueVibrationController");
-    if(MySetTorqueVibrationController == NULL) {
-        std::cout << "Cannot load SetTorqueVibrationController" << std::endl;
-    }
-    
-    MySetTorqueZero = (int (*)(int)) dlsym(commandLayerHandle, "SetTorqueZero");
-    if(MySetTorqueZero == NULL) {
-        std::cout << "Cannot load SetTorqueZero" << std::endl;
-    }
-    
     MyStartControlAPI = (int (*)()) dlsym(commandLayerHandle, "StartControlAPI");
     if(MyStartControlAPI == NULL) {
         std::cout << "Cannot load StartControlAPI" << std::endl;
@@ -622,16 +306,6 @@ void Robot::initializeAPI() {
     MyStartCurrentLimitation = (int (*)()) dlsym(commandLayerHandle, "StartCurrentLimitation");
     if(MyStartCurrentLimitation == NULL) {
         std::cout << "Cannot load StartCurrentLimitation" << std::endl;
-    }
-    
-    MyStartForceControl = (int (*)()) dlsym(commandLayerHandle, "StartForceControl");
-    if(MyStartForceControl == NULL) {
-        std::cout << "Cannot load StartForceControl" << std::endl;
-    }
-    
-    MyStartRedundantJointNullSpaceMotion = (int (*)()) dlsym(commandLayerHandle, "StartRedundantJointNullSpaceMotion");
-    if(MyStartRedundantJointNullSpaceMotion == NULL) {
-        std::cout << "Cannot load StartRedundantJointNullSpaceMotion" << std::endl;
     }
     
     MyStopControlAPI = (int (*)()) dlsym(commandLayerHandle, "StopControlAPI");
@@ -644,30 +318,14 @@ void Robot::initializeAPI() {
         std::cout << "Cannot load StopCurrentLimitation" << std::endl;
     }
     
-    MyStopForceControl = (int (*)()) dlsym(commandLayerHandle, "StopForceControl");
-    if(MyStopForceControl == NULL) {
-        std::cout << "Cannot load StopForceControl" << std::endl;
-    }
-    
     MyStartControlAPI = (int (*)()) dlsym(commandLayerHandle, "StartControlAPI");
     if(MyStartControlAPI == NULL) {
         std::cout << "Cannot load StartControlAPI" << std::endl;
     }
     
-    MyStopRedundantJointNullSpaceMotion = (int (*)()) dlsym(commandLayerHandle, "StopRedundantJointNullSpaceMotion");
-    if(MyStopRedundantJointNullSpaceMotion == NULL) {
-        std::cout << "Cannot load StopRedundantJointNullSpaceMotion" << std::endl;
-    }
-    
-    MySwitchTrajectoryTorque = (int (*)(GENERALCONTROL_TYPE)) dlsym(commandLayerHandle, "SwitchTrajectoryTorque");
-    if(MySwitchTrajectoryTorque == NULL) {
-        std::cout << "Cannot load SwitchTrajectoryTorque" << std::endl;
-    }
-    
     for (int i = 0; i < ACTUATORS_COUNT; i++)
     {
         CartForceCommand[i] = 0;
-        TorqueCommand[i] = 0;
     }
     
     
@@ -682,13 +340,6 @@ void Robot::initializeAPI() {
     }
     (*MyInitFingers)();
     std::cout << "API Initialized" << std::endl;
-}
-
-EthernetConfiguration* Robot::getEthernetConfiguration()
-{
-    EthernetConfiguration* eConfig;
-    (*MyGetEthernetConfiguration)(eConfig);
-    return eConfig;
 }
 
 /**
@@ -784,35 +435,6 @@ void Robot::setActiveDevice(KinovaDevice device)
 void Robot::setClientConfigurations(ClientConfigurations clientConfigurations)
 {
     (*MySetClientConfigurations)(clientConfigurations);
-}
-
-void Robot::setEthernetConfiguration(EthernetConfiguration *config)
-{
-    (*MySetEthernetConfiguration)(config);
-}
-
-/**
- * This function sets the MAC address of the robot.
- * @param mac New MAC address
- * @param temp Password
- */
-void Robot::setLocalMACAddress(unsigned char* mac, std::string& temp)
-{
-    char *t = new char[temp.length() + 1];
-    strcpy(t, temp.c_str());
-    (*MySetLocalMACAddress)(mac, t);
-}
-
-/**
- * Internal use only.
- */
-void Robot::setModel(const std::string& command, const std::string& temp)
-{
-    char *t = new char[temp.length() + 1];
-    strcpy(t, temp.c_str());
-    char *c = new char[command.length() + 1];
-    strcpy(c, command.c_str());
-    (*MySetModel)(c, t);
 }
 
 /**

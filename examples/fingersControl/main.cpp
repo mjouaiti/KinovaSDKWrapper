@@ -26,7 +26,7 @@
 
 int main(int argv, char** argc)
 {
-    Robot* robot = new Robot("/opt/MICO2SDK/API/Kinova.API.USBCommandLayerUbuntu.so");
+    Robot* robot = new Robot("/opt/kinova/API/Kinova.API.USBCommandLayerUbuntu.so");
     
     robot->setFingerVelocity(1, 0.4);
     robot->setFingerPosition(2, 45);

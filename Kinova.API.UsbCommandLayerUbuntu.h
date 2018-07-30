@@ -15,8 +15,7 @@
 #include <stdio.h>
 
 //This defines the the location of the communication layer.(Kinova.API.CommLayerUbuntu.so)
-#define COMM_LAYER_PATH "USBCommLayerUbuntu.so"
-#define COMM_LAYER_ETHERNET_PATH "Kinova.API.EthCommLayerUbuntu.so"
+#define COMM_LAYER_PATH "Kinova.API.CommLayerUbuntu.so"
 
 // ***** E R R O R   C O D E S ******
 #define ERROR_INIT_API 2001      // Error while initializing the API
@@ -54,9 +53,6 @@
 //Unable to load the GetActiveDevice function from the communication layer.
 #define ERROR_GET_ACTIVE_DEVICE_METHOD 2014
 
-//Unable to load the OpenRS485_Activate() function from the communication layer.
-#define ERROR_OPEN_RS485_ACTIVATE 2015
-
 //A function's parameter is not valid.
 #define ERROR_INVALID_PARAM 2100
 
@@ -68,18 +64,17 @@
 
 // ***** E N D  O F  E R R O R   C O D E S ******
 
-
 //This represents the size of an array containing Cartesian values.
 #define CARTESIAN_SIZE 6
 
 //This represents the max actuator count in our context.
-#define MAX_ACTUATORS 7
+#define MAX_ACTUATORS 6
 
 //This represents the max actuator count in our context.
 #define MAX_INVENTORY 15
 
 //This represents the size of the array returned by the function GetCodeVersion.
-#define CODE_VERSION_COUNT 42
+#define CODE_VERSION_COUNT 37
 
 //This represents the size of the array returned by the function GetAPIVersion.
 #define API_VERSION_COUNT 3
@@ -87,29 +82,12 @@
 //This represents the size of the array returned by the function GetPositionCurrentActuators.
 #define POSITION_CURRENT_COUNT 12
 
-#define POSITION_CURRENT_COUNT_7DOF 14
-
 //This represents the size of the array returned by the function GetSpasmFilterValues and sent to SetSpasmFilterValues.
 #define SPASM_FILTER_COUNT 1
 
-//Version of the API 5.03.00
-#define COMMAND_LAYER_VERSION 50300
+//Version of the API 5.02.00
+#define COMMAND_LAYER_VERSION 50200
 
-#define COMMAND_SIZE 70
-
-#define OPTIMAL_Z_PARAM_SIZE 16
-
-#define OPTIMAL_Z_PARAM_SIZE_7DOF 19
-
-#define GRAVITY_VECTOR_SIZE 3
-
-#define GRAVITY_PARAM_SIZE 42
-
-#define GRAVITY_PAYLOAD_SIZE 4
-
-//This represents the size of the buffer for the IP address.
-#define IP_ADDRESS_LENGTH 4
-#define MAC_ADDRESS_LENGTH 6
 
 // ***** API'S FUNCTIONAL CORE *****
 
@@ -117,12 +95,9 @@ extern "C" KINOVAAPIUSBCOMMANDLAYER_API int GetDevices(KinovaDevice devices[MAX_
 
 extern "C" KINOVAAPIUSBCOMMANDLAYER_API int SetActiveDevice(KinovaDevice device);
 
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API int SetActiveDeviceEthernet(KinovaDevice device, unsigned long ipAddress);
 extern "C" KINOVAAPIUSBCOMMANDLAYER_API int RefresDevicesList(void);
 
 extern "C" KINOVAAPIUSBCOMMANDLAYER_API int InitAPI(void);
-
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API int InitEthernetAPI(EthernetCommConfig & config);
 
 extern "C" KINOVAAPIUSBCOMMANDLAYER_API int CloseAPI(void);
 
@@ -166,10 +141,6 @@ extern "C" KINOVAAPIUSBCOMMANDLAYER_API int SendBasicTrajectory(TrajectoryPoint 
 
 extern "C" KINOVAAPIUSBCOMMANDLAYER_API int GetClientConfigurations(ClientConfigurations &config);
 
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API  int GetAllRobotIdentity(RobotIdentity robotIdentity[MAX_KINOVA_DEVICE], int & count);
-
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API  int GetRobotIdentity(RobotIdentity &robotIdentity);
-
 extern "C" KINOVAAPIUSBCOMMANDLAYER_API int SetClientConfigurations(ClientConfigurations config);
 
 extern "C" KINOVAAPIUSBCOMMANDLAYER_API int EraseAllTrajectories();
@@ -192,18 +163,6 @@ extern "C" KINOVAAPIUSBCOMMANDLAYER_API int StartForceControl();
 
 extern "C" KINOVAAPIUSBCOMMANDLAYER_API int StopForceControl();
 
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API int StartRedundantJointNullSpaceMotion();
-
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API int StopRedundantJointNullSpaceMotion();
-
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API int ActivateExtraProtectionPinchingWrist(int state);
-
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API int ActivateCollisionAutomaticAvoidance(int state); //not available on Jaco, Jaco Spherical 6 DOF and Mico models. 
-
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API int ActivateSingularityAutomaticAvoidance(int state); //not available on Jaco, Jaco Spherical 6 DOF and Mico models. 
-
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API int ActivateAutoNullSpaceMotionCartesian(int state);
-
 extern "C" KINOVAAPIUSBCOMMANDLAYER_API int StartCurrentLimitation();
 
 extern "C" KINOVAAPIUSBCOMMANDLAYER_API int StopCurrentLimitation();
@@ -218,8 +177,6 @@ extern "C" KINOVAAPIUSBCOMMANDLAYER_API int EraseAllProtectionZones();
 
 //Internal use only
 extern "C" KINOVAAPIUSBCOMMANDLAYER_API int SetSerialNumber(char Command[STRING_LENGTH], char temp[STRING_LENGTH]);
-
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API int SetDefaultGravityParam(float Command[GRAVITY_PARAM_SIZE]);
 
 extern "C" KINOVAAPIUSBCOMMANDLAYER_API int GetControlMapping(ControlMappingCharts &Response);
 
@@ -239,31 +196,11 @@ extern "C" KINOVAAPIUSBCOMMANDLAYER_API int ProgramFlash(const char * filename);
 
 extern "C" KINOVAAPIUSBCOMMANDLAYER_API int SetJointZero(int ActuatorAdress);
 
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API int SetTorqueZero(int ActuatorAdress);
-
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API int SetTorqueGain(int ActuatorAdress, int Gain);
-
 extern "C" KINOVAAPIUSBCOMMANDLAYER_API int SetActuatorPIDFilter(int ActuatorAdress, float filterP, float filterI, float filterD);
 
 extern "C" KINOVAAPIUSBCOMMANDLAYER_API int SetActuatorAddress(int ActuatorAdress, int newAddress);
 
 extern "C" KINOVAAPIUSBCOMMANDLAYER_API int GetGeneralInformations(GeneralInformations &Response);
-
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API int SetFrameType(int frameType);
-
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API int SetCartesianForceMinMax(CartesianInfo min, CartesianInfo max);
-
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API int SetCartesianInertiaDamping(CartesianInfo inertia, CartesianInfo damping);
-
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API int SetAngularTorqueMinMax(AngularInfo min, AngularInfo max);
-
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API int SetAngularInertiaDamping(AngularInfo inertia, AngularInfo damping);
-
-//Internal use only
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API int SetDevValue(std::vector<float> command);
-
-//Internal use only
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API int GetDevValue(std::vector<float> &Response);
 
 extern "C" KINOVAAPIUSBCOMMANDLAYER_API int SetSpasmFilterValues(float Command[SPASM_FILTER_COUNT], int activationStatus);
 
@@ -271,20 +208,11 @@ extern "C" KINOVAAPIUSBCOMMANDLAYER_API int GetSpasmFilterValues(float Response[
 
 extern "C" KINOVAAPIUSBCOMMANDLAYER_API int MoveHome();
 
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API int GetAngularForceGravityFree(AngularPosition &Response);
-
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API int GetActuatorAcceleration(AngularAcceleration &Response);
-
 extern "C" KINOVAAPIUSBCOMMANDLAYER_API int InitFingers();
 
 extern "C" KINOVAAPIUSBCOMMANDLAYER_API int GetPeripheralInventory(PeripheralInfo list[MAX_INVENTORY] );
 
-//Internal use only
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API int SetModel(char Command[STRING_LENGTH], char temp[STRING_LENGTH]);
-
 extern "C" KINOVAAPIUSBCOMMANDLAYER_API int GetJoystickValue(JoystickCommand &joystickCommand);
-
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API int SetRobotConfiguration(int ConfigID);
 
 extern "C" KINOVAAPIUSBCOMMANDLAYER_API int GetCommandVelocity(float cartesianVelocity[CARTESIAN_SIZE], float angularVelocity[MAX_ACTUATORS]);
 
@@ -292,120 +220,4 @@ extern "C" KINOVAAPIUSBCOMMANDLAYER_API int GetEndEffectorOffset(unsigned int &s
 
 extern "C" KINOVAAPIUSBCOMMANDLAYER_API int SetEndEffectorOffset(unsigned int status, float x, float y, float z);
 
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API int SendAngularTorqueCommand(float Command[COMMAND_SIZE]);
 
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API int SendCartesianForceCommand(float Command[COMMAND_SIZE]);
-
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API int SetTorqueActuatorGain(float Command[COMMAND_SIZE]);
-
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API int SetTorqueActuatorDamping(float Command[COMMAND_SIZE]);
-
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API int SwitchTrajectoryTorque(GENERALCONTROL_TYPE type);
-
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API int SetTorqueCommandMax(float Command[COMMAND_SIZE]);
-
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API int SetTorqueSafetyFactor(float factor);
-
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API int SetTorqueGainMax(float Command[COMMAND_SIZE]);
-
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API int SetTorqueRateLimiter(float Command[COMMAND_SIZE]);
-
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API int SetTorqueFeedCurrent(float Command[COMMAND_SIZE]);
-
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API int SetTorqueFeedVelocity(float Command[COMMAND_SIZE]);
-
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API int SetTorquePositionLimitDampingGain(float Command[COMMAND_SIZE]);
-
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API int SetTorquePositionLimitDampingMax(float Command[COMMAND_SIZE]);
-
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API int SetTorquePositionLimitRepulsGain(float Command[COMMAND_SIZE]);
-
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API int SetTorquePositionLimitRepulsMax(float Command[COMMAND_SIZE]);
-
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API int SetTorqueFilterVelocity(float Command[COMMAND_SIZE]);
-
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API int SetTorqueFilterMeasuredTorque(float Command[COMMAND_SIZE]);
-
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API int SetTorqueFilterError(float Command[COMMAND_SIZE]);
-
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API int SetTorqueFilterControlEffort(float Command[COMMAND_SIZE]);
-
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API int SetGravityType(GRAVITY_TYPE type);
-
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API int SetGravityVector(float gravityVector[GRAVITY_VECTOR_SIZE]);
-
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API int SetGravityOptimalZParam(float Command[GRAVITY_PARAM_SIZE]);
-
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API int SetGravityManualInputParam(float Command[GRAVITY_PARAM_SIZE]);
-
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API int GetAngularTorqueCommand(float Command[COMMAND_SIZE]);
-
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API int GetAngularTorqueGravityEstimation(float Command[COMMAND_SIZE]);
-
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API int SetActuatorMaxVelocity(float Command[COMMAND_SIZE]);
-
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API int SetSwitchThreshold(float Command[COMMAND_SIZE]);
-
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API int SetPositionLimitDistance(float Command[COMMAND_SIZE]);
-
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API int SetTorqueControlType(TORQUECONTROL_TYPE type);
-
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API int SetGravityPayload(float Command[GRAVITY_PAYLOAD_SIZE]);
-
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API int SetTorqueVibrationController(float activationStatus);
-
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API int SetTorqueRobotProtection(int protectionLevel);
-
-//Internal use only
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API int SetTorqueVelocityLimitFilter(float Command[COMMAND_SIZE]);
-
-//Internal use only
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API int SetTorqueFeedFilter(float Command[COMMAND_SIZE]);
-
-//Internal use only
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API int SetTorqueStaticFriction(float Command[COMMAND_SIZE]);
-
-//Internal use only
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API int SetTorqueErrorDeadband(float Command[COMMAND_SIZE]);
-
-//Internal use only
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API int SetTorqueBrake(float Command[COMMAND_SIZE]);
-
-//Internal use only
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API int SetTorqueInactivityTimeActuator(float Command[COMMAND_SIZE]);
-
-//Internal use only
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API int SetTorqueInactivityTimeMainController(int time);
-
-//Internal use only
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API int SetTorqueDampingMax(float Command[COMMAND_SIZE]);
-
-//Internal use only
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API int SetTorqueFeedVelocityUnderGain(float Command[COMMAND_SIZE]);
-
-//Internal use only
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API int SetTorqueFeedCurrentVoltage(float Command[COMMAND_SIZE]);
-
-//Internal use only
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API int SetTorqueStaticFrictionMax(float Command[COMMAND_SIZE]);
-
-//Internal use only
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API int SetTorqueErrorResend(float Command[COMMAND_SIZE]);
-
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API int RunGravityZEstimationSequence(ROBOT_TYPE type, double OptimalzParam[OPTIMAL_Z_PARAM_SIZE]);
-
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API int RunGravityZEstimationSequence7DOF(ROBOT_TYPE type, float OptimalzParam[OPTIMAL_Z_PARAM_SIZE_7DOF]);
-
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API int GetTrajectoryTorqueMode(int&);
-
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API int SetTorqueInactivityType(int);
-
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API  int GetActuatorsPosition(float *positionList);
-
-//NEW ETHERNET EXPORTED FUNCTIONS
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API int SetEthernetConfiguration(EthernetConfiguration * config);
-
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API int GetEthernetConfiguration(EthernetConfiguration * config);
-
-//DO NOT USE only for Kinova
-extern "C" KINOVAAPIUSBCOMMANDLAYER_API int SetLocalMACAddress(unsigned char mac[MAC_ADDRESS_LENGTH], char temp[STRING_LENGTH]);
