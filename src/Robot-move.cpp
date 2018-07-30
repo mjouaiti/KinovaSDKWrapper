@@ -172,79 +172,7 @@ void Robot::setPositionTrajectoryLimitations(double maxSpeed1, double maxSpeed2)
     positionTrajectory.Limitations.speedParameter2 = (float)maxSpeed2;
 }
 
-/*--------------- Torque/Force ------------*/
-
-/**
- * This function sends torque commands to the actuators. The torque command must be sent at least every 250 ms (this value can be configured). Otherwise the command will be set to zero (as a safety feature).
- * @param actuator joint number
- * @param newTorque torqueCommand
- */
-void Robot::setTorque(int actuator, double newTorque)
-{
-    TorqueCommand[actuator] = newTorque;
-    (*MySendAngularTorqueCommand)(TorqueCommand);
-}
-
-/**
- * This function sends torque commands to the actuators. The torque command must be sent at least every 250 ms (this value can be configured). Otherwise the command will be set to zero (as a safety feature).
- * @param newTorque torqueCommand
- */
-void Robot::setTorque(std::vector<float> newTorque)
-{
-    for (int i = 0; i < ACTUATORS_COUNT; i++)
-    {
-        TorqueCommand[i] = newTorque[i];
-    }
-    (*MySendAngularTorqueCommand)(TorqueCommand);
-}
-
-/**
- * This function sends cartesian force commands to the robot for one actuator. The force command must be sent at least every 250 ms (this value can be configured). Otherwise the command will be set to zero (as a safety feauture). In this first implementation, the force command is in an open loop: the torque is inserted into the following equation and the resulting torque is sent to the actuators.
- $ @param actuator joint number
- * @param newForce The force command.
- */
-void Robot::setCartesianForce(int actuator, double newForce)
-{
-    CartForceCommand[actuator] = newForce;
-    
-    (*MySendCartesianForceCommand)(CartForceCommand);
-}
-
-/**
- * This function sends cartesian force commands to the robot. The force command must be sent at least every 250 ms (this value can be configured). Otherwise the command will be set to zero (as a safety feauture). In this first implementation, the force command is in an open loop: the torque is inserted into the following equation and the resulting torque is sent to the actuators.
- * @param newForce The force command.
- */
-void Robot::setCartesianForce(std::vector<float> newForce)
-{
-    (*MySendCartesianForceCommand)(&newForce[0]);
-}
-
-/**
- * This function sets the actuators damping gain. This can be used to stabilize the system in some situations. The values must be over or equal to zero and are typically within 0-2. The maximum allowed damping can be set with the function SetTorqueDampingMax(). Default parameters can be found in the torque control documentation page under the section “Default parameters”. The parameters will reset to default values every time the robotic arm is rebooted.
- * @param damping The damping for each actuator.
- */
-void Robot::setTorqueDamping(std::vector<float> damping)
-{
-    float dampingCommand[ACTUATORS_COUNT];
-    for (int i = 0; i < ACTUATORS_COUNT; i++)
-    {
-        dampingCommand[i] = damping[i];
-    }
-    (*MySetTorqueActuatorDamping)(dampingCommand);
-}
-
-
 /*----------------------*/
-/**
- * This function sets the end effector offset's parameters. The end effector's offset is a translation offset, in meters, applied to the end effector of the robotic arm.
- * @param applied indicates if the offset is applied or not (0 = not applied, 1 = applied)
- * @param offset end effector's offset
- */
-void Robot::setEndEffectorOffset(bool applied, std::vector<float> offset)
-{
-    (*MySetEndEffectorOffset)(applied, offset[0], offset[1], offset[2]);
-}
-
 /**
  * This function sets the current position of a specific actuator at a zero. Mainly used for calibration.
  * @param actuatorNumber joint number
