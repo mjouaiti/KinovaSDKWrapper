@@ -27,7 +27,7 @@
 int main(int argv, char** argc)
 {
     Robot* robot = new Robot("/opt/kinova/API/Kinova.API.USBCommandLayerUbuntu.so");
-    
-    robot->setFingerVelocity(1, 0.4);
-    robot->setFingerPosition(2, 45);
+    std::cout << robot->getGripperStatus();
+    //robot->setFingerVelocity(1, 0.4);
+    //robot->setFingerPosition(2, 45);
 }

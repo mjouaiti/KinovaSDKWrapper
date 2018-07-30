@@ -204,11 +204,10 @@ std::string Robot::getGripperStatus()
     int result = (*MyGetGripperStatus)(gripper);
     std::string str = "Gripper's model : ";
     str += std::string(gripper.Model);
-    for(int i = 0; i < 2; i++)
+    for(int i = 0; i < 3; i++)
     {
         str += "\nFinger #" + std::to_string(i + 1);
         str += "\nFinger #" + std::to_string(i + 1) + "'s actual acceleration : " + std::to_string(gripper.Fingers[i].ActualAcceleration);
-        str += "\nFinger #" + std::to_string(i + 1) + "'s actual average current : " + std::to_string(gripper.Fingers[i].ActualAverageCurrent);
         str += "\nFinger #" + std::to_string(i + 1) + "'s actual command : " + std::to_string(gripper.Fingers[i].ActualCommand);
         str += "\nFinger #" + std::to_string(i + 1) + "'s actual current : " + std::to_string(gripper.Fingers[i].ActualCurrent);
         str += "\nFinger #" + std::to_string(i + 1) + "'s actual force : " + std::to_string(gripper.Fingers[i].ActualForce);
@@ -216,9 +215,6 @@ std::string Robot::getGripperStatus()
         str += "\nFinger #" + std::to_string(i + 1) + "'s actual speed : " + std::to_string(gripper.Fingers[i].ActualSpeed);
         str += "\nFinger #" + std::to_string(i + 1) + "'s actual temperature : " + std::to_string(gripper.Fingers[i].ActualTemperature);
         str += "\nFinger #" + std::to_string(i + 1) + "'s code version : " + std::to_string(gripper.Fingers[i].CodeVersion);
-        str += "\nFinger #" + std::to_string(i + 1) + "'s communication errors : " + std::to_string(gripper.Fingers[i].CommunicationErrors);
-        str += "\nFinger #" + std::to_string(i + 1) + "'s cycle count : " + std::to_string(gripper.Fingers[i].CycleCount);
-        str += "\nFinger #" + std::to_string(i + 1) + "'s device ID : " + std::to_string(gripper.Fingers[i].DeviceID);
         str += "\nFinger #" + std::to_string(i + 1) + "'s finger address : " + std::to_string(gripper.Fingers[i].FingerAddress);
         str += "\nFinger #" + std::to_string(i + 1) + "'s ID : " + std::string(gripper.Fingers[i].ID);
         str += "\nFinger #" + std::to_string(i + 1) + "'s index : " + std::to_string(gripper.Fingers[i].Index);
@@ -230,11 +226,6 @@ std::string Robot::getGripperStatus()
         str += "\nFinger #" + std::to_string(i + 1) + "'s max force : " + std::to_string(gripper.Fingers[i].MaxForce);
         str += "\nFinger #" + std::to_string(i + 1) + "'s max speed : " + std::to_string(gripper.Fingers[i].MaxSpeed);
         str += "\nFinger #" + std::to_string(i + 1) + "'s min angle : " + std::to_string(gripper.Fingers[i].MinAngle);
-        str += "\nFinger #" + std::to_string(i + 1) + "'s oscillator tuning value : " + std::to_string(gripper.Fingers[i].OscillatorTuningValue);
-        str += "\nFinger #" + std::to_string(i + 1) + "'s peak current : " + std::to_string(gripper.Fingers[i].PeakCurrent);
-        str += "\nFinger #" + std::to_string(i + 1) + "'s peak max temp : " + std::to_string(gripper.Fingers[i].PeakMaxTemp);
-        str += "\nFinger #" + std::to_string(i + 1) + "'s peak min temp : " + std::to_string(gripper.Fingers[i].PeakMinTemp);
-        str += "\nFinger #" + std::to_string(i + 1) + "'s run time : " + std::to_string(gripper.Fingers[i].RunTime);
     }
     return str;
 }
