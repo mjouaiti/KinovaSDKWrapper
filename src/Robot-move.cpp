@@ -66,7 +66,7 @@ void Robot::setFingerVelocity(int fingerNumber, double newVelocity)
 	    velocityTrajectory.Position.Fingers.Finger3 = newVelocity;
 	    break;
     }
-    (*MySendBasicTrajectory)(velocityTrajectory);
+    (*MySendAdvanceTrajectory)(velocityTrajectory);
 }
 
 /**
